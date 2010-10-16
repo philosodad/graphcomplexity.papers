@@ -1,0 +1,501 @@
+%% This BibTeX bibliography file was created using BibDesk.
+%% http://bibdesk.sourceforge.net/
+
+
+%% Created for John Daigle at 2010-10-08 04:41:42 -0400 
+
+
+%% Saved with string encoding Unicode (UTF-8) 
+
+
+
+@inproceedings{4697802,
+	Abstract = {The nodes of wireless sensor networks (WSNs) have the dual function of gathering information and relaying it to a central collection point, the sink. For the latter function the key is connectivity involving paths over which data is passed from node to node to the sink. We derive connectivity, as expressed by the probability that a node lies on a path to the sink, as a function of the probability that adjacent cells in a grid are connected. This result is then applied to the typical scenario where nodes are randomly scattered throughout the area being monitored. Useful upper and lower bounds for the probability of adjacent cells being connected are derived as a function of the node density in a cell. For battery powered nodes, lifetime is an important factor. The effect of the demise of nodes on the nodal density and, in turn, on network connectivity is quantified.},
+	Annote = {Continuous equations for lifetime analysis. The network structure seems somewhat arbitrary, but overall, the relationship between network density and network connectivity lifetime is fleshed out. },
+	Author = {Legakis, H. and Mehmet-Ali, M. and Hayes, J.F.},
+	Bdsk-Color = {3439290111},
+	Booktitle = {Global Telecommunications Conference, 2008. IEEE GLOBECOM 2008. IEEE},
+	Date-Added = {2010-10-02 22:50:34 -0400},
+	Date-Modified = {2010-10-02 22:50:34 -0400},
+	Doi = {10.1109/GLOCOM.2008.ECP.27},
+	Issn = {1930-529X},
+	Keywords = {WSN nodes;battery powered nodes;information gathering;lifetime analysis;network connectivity;nodal density;probability;wireless sensor networks;probability;telecommunication network reliability;wireless sensor networks;},
+	Month = {nov.},
+	Pages = {1 -6},
+	Title = {Lifetime Analysis for Wireless Sensor Networks},
+	Year = {2008},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAXoAAAAAAXoAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQs0Njk3ODAyLnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAa2hvyF9XJgAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAyF+PZgAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA0TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzo0Njk3ODAyLnBkZgAOABgACwA0ADYAOQA3ADgAMAAyAC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgAnVXNlcnMvcGF1bC9Eb2N1bWVudHMvQmlibGlvLzQ2OTc4MDIucGRmAAATAAEvAAAVAAIAC///AACABdIcHR4fWCRjbGFzc2VzWiRjbGFzc25hbWWjHyAhXU5TTXV0YWJsZURhdGFWTlNEYXRhWE5TT2JqZWN0XxAoLi4vLi4vLi4vLi4vRG9jdW1lbnRzL0JpYmxpby80Njk3ODAyLnBkZtIcHSQloiUhXE5TRGljdGlvbmFyeRIAAYagXxAPTlNLZXllZEFyY2hpdmVyAAgAEQAWAB8AKAAyADUAOgA8AEUASwBSAF0AZQBsAG8AcQBzAHYAeAB6AHwAhgCTAJgAoAIeAiACJQIuAjkCPQJLAlICWwKGAosCjgKbAqAAAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAACsg==},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1109/GLOCOM.2008.ECP.27}}
+
+@inproceedings{1498475,
+	Abstract = { A critical aspect of applications with wireless sensor networks is network lifetime. Power-constrained wireless sensor networks are usable as long as they can communicate sensed data to a processing node. Sensing and communications consume energy, therefore judicious power management and sensor scheduling can effectively extend network lifetime. To cover a set of targets with known locations when ground access in the remote area is prohibited, one solution is to deploy the sensors remotely, from an aircraft. The lack of precise sensor placement is compensated by a large sensor population deployed in the drop zone, that would improve the probability of target coverage. The data collected from the sensors is sent to a central node (e.g. cluster head) for processing. In this paper we propose un efficient method to extend the sensor network life time by organizing the sensors into a maximal number of set covers that are activated successively. Only the sensors from the current active set are responsible for monitoring all targets and for transmitting the collected data, while all other nodes are in a low-energy sleep mode. By allowing sensors to participate in multiple sets, our problem formulation increases the network lifetime compared with related work [M. Cardei et al], that has the additional requirements of sensor sets being disjoint and operating equal time intervals. In this paper we model the solution as the maximum set covers problem and design two heuristics that efficiently compute the sets, using linear programming and a greedy approach. Simulation results are presented to verify our approaches.},
+	Annote = {Foundational paper in sensor network lifetimes. Introduces the idea of dividing the network into non-disjoint sets and shows that this is a more effective way to observe the network. The paper proposes the Maximum Set Covers (MSC) problem as an abstraction of the target coverage problem in Sensor Networks. 
+
+The authors demonstrate that MSC is NP-Complete and that non-disjoint set covers, as used in MSC, are superior to disjoint set covers as in previous work. They produce an optimization version of the problem and a LP to solve it. They also present a much simpler greedy heuristic. Greedy performance versus LP degrades as the number of targets increases. 
+
+Both Greedy and LP approaches are sequential algorithms, run from a central location.},
+	Author = {Cardei, M. and Thai, M.T. and Yingshu Li and Weili Wu},
+	Bdsk-Color = {3439290111},
+	Booktitle = {INFOCOM 2005. 24th Annual Joint Conference of the IEEE Computer and Communications Societies. Proceedings IEEE},
+	Date-Added = {2010-10-02 22:50:13 -0400},
+	Date-Modified = {2010-10-02 22:50:13 -0400},
+	Doi = {10.1109/INFCOM.2005.1498475},
+	Issn = {0743-166X},
+	Keywords = {energy consumption; greedy approach; heuristics design; linear programming; network lifetime; power management; power-constrained wireless sensor networks; sensor scheduling; greedy algorithms; linear programming; wireless sensor networks;},
+	Month = {13-17},
+	Pages = {1976 - 1984 vol. 3},
+	Title = {Energy-efficient target coverage in wireless sensor networks},
+	Volume = {3},
+	Year = {2005},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAXoAAAAAAXoAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQsxNDk4NDc1LnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbADwyF9cvVBERiAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAyF+U/QAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA0TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzoxNDk4NDc1LnBkZgAOABgACwAxADQAOQA4ADQANwA1AC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgAnVXNlcnMvcGF1bC9Eb2N1bWVudHMvQmlibGlvLzE0OTg0NzUucGRmAAATAAEvAAAVAAIAC///AACABdIcHR4fWCRjbGFzc2VzWiRjbGFzc25hbWWjHyAhXU5TTXV0YWJsZURhdGFWTlNEYXRhWE5TT2JqZWN0XxAoLi4vLi4vLi4vLi4vRG9jdW1lbnRzL0JpYmxpby8xNDk4NDc1LnBkZtIcHSQloiUhXE5TRGljdGlvbmFyeRIAAYagXxAPTlNLZXllZEFyY2hpdmVyAAgAEQAWAB8AKAAyADUAOgA8AEUASwBSAF0AZQBsAG8AcQBzAHYAeAB6AHwAhgCTAJgAoAIeAiACJQIuAjkCPQJLAlICWwKGAosCjgKbAqAAAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAACsg==},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1109/INFCOM.2005.1498475}}
+
+@article{Bar-Yehuda:1981lr,
+	Author = {Bar-Yehuda, R., and Even, S.},
+	Date-Added = {2010-10-01 23:50:55 -0400},
+	Date-Modified = {2010-10-01 23:50:55 -0400},
+	Journal = {J. of Algorithms},
+	Pages = {198-203},
+	Title = {A Linear-Time Approximation Algorithm for the Weighted Vertex Cover Problems},
+	Volume = {2},
+	Year = {1981}}
+
+@article{:fk,
+	Date-Added = {2010-10-01 23:50:55 -0400},
+	Date-Modified = {2010-10-01 23:50:55 -0400}}
+
+@inproceedings{1640702,
+	Abstract = {Energy consumption in monitoring and communication protocols for wireless sensor networks became one of the most important performance objective. We assume a commonly accepted sensor network model in which sensors can interchange idle and active modes both for monitoring and communicating. We introduce a reliability requirement for distributed target-monitoring protocols and prove that previously considered protocols (P. Berman et al., 2004) are reliable. In this paper we propose a new deterministic energy-efficient protocol for sensor networks (DEEPS) aimed at prolonging the lifetime. We prove that DEEPS is reliable and compare DEEPS with several known target-monitoring protocols in NS2 environment using LEACH (W. Heizelman et al., 2002) protocol for data delivery to the base. We implemented the full-fledged simulation of the monitoring protocols on NS2 combined with LEACH as a communication protocol, and performed extensive experimental study of several protocols showing almost 2 times increase in the lifetime for DEEPS over known protocols},
+	Annote = {Brinza and Zelikovsky present a simple protocol (DEEPS) for extending network lifetime in a sensor network while maintaining target coverage. They show that the protocal is reliable, in that while it is possible to maintain coverage, the network will maintain coverage. They also compare their algorithm to previous work with simulation using NS2.
+
+DEEPS essentially uses 1 set up rule and two behavior rules. The setup rule places a sensor in charge of each target. The first behavior rule is that a sensor that is the only sensor covering a target will always switch itself on, the second is that a sensor that is in charge of a target will remain on until some other sensor covers its target. In simulation DEEPS outperforms a prior protocol (LBP).},
+	Author = {Brinza, D. and Zelikovsky, A.},
+	Bdsk-Color = {3439290111},
+	Date-Added = {2010-10-01 23:14:08 -0400},
+	Date-Modified = {2010-10-01 23:14:08 -0400},
+	Doi = {10.1109/SNPD-SAWN.2006.31},
+	Journal = {Software Engineering, Artificial Intelligence, Networking, and Parallel/Distributed Computing, 2006. SNPD 2006. Seventh ACIS International Conference on},
+	Keywords = {LEACH protocol;NS2 environment;communication protocols;data delivery;deterministic energy-efficient protocol;distributed target-monitoring protocols;energy consumption;monitoring protocols;reliability requirement;wireless sensor networks;protocols;wireless sensor networks;},
+	Month = {june},
+	Pages = {261 -266},
+	Title = {DEEPS: Deterministic Energy-Efficient Protocol for Sensor networks},
+	Year = {2006},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAXoAAAAAAXoAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQsxNjQwNzAyLnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM2b6x9wMCQAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAx9xESQAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA0TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzoxNjQwNzAyLnBkZgAOABgACwAxADYANAAwADcAMAAyAC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgAnVXNlcnMvcGF1bC9Eb2N1bWVudHMvQmlibGlvLzE2NDA3MDIucGRmAAATAAEvAAAVAAIAC///AACABdIcHR4fWCRjbGFzc2VzWiRjbGFzc25hbWWjHyAhXU5TTXV0YWJsZURhdGFWTlNEYXRhWE5TT2JqZWN0XxAoLi4vLi4vLi4vLi4vRG9jdW1lbnRzL0JpYmxpby8xNjQwNzAyLnBkZtIcHSQloiUhXE5TRGljdGlvbmFyeRIAAYagXxAPTlNLZXllZEFyY2hpdmVyAAgAEQAWAB8AKAAyADUAOgA8AEUASwBSAF0AZQBsAG8AcQBzAHYAeAB6AHwAhgCTAJgAoAIeAiACJQIuAjkCPQJLAlICWwKGAosCjgKbAqAAAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAACsg==},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1109/SNPD-SAWN.2006.31}}
+
+@conference{Dhawan:hipc-09,
+	Abstract = {A key problem in Wireless Sensor Networks is that of scheduling sensors into sleep-sense cycles that maximize the lifetime of the network while ensuring coverage of a set of targets. This is a known NP-complete problem, due to the exponential number of possible ways to select a subset of sensors to turn on. Our earlier work had presented a unique model for this problem by introducing a lifetime dependency (LD) graph in which these possible cover sets are nodes and edges represent shared sensors between them. Using the graph properties, we presented a range of effective distributed heuristics. Even though the local subgraphs are practically tractable, their theoretically exponential growth has remained a persistent issue. In this paper, we present a theoretical model for representing this exponential space of possible cover sets that groups related covers together, thereby reducing this exponential space virtually to a linear one. We then present an equivalence class (EC) graph as a model for this reduction. We use these underlying theoretical properties to develop a smart linear time sampling algorithm of this exponential space. To demonstrate the effectiveness of our sampling technique, we employ the sampled localized LD subgraph as input to our previous heuristics. Simulation studies show about twofold speedup while reducing solution quality (network lifetime) only by under 10% when compared to our previous heuristics that operate on the exponential space. We also compare our algorithms to two other state-of-art greedy algorithms and show that ours still manage to achieve improvements of around 8-10% over them.},
+	Author = {Dhawan, A. and Prasad, S.K.},
+	Booktitle = {High Performance Computing (HiPC), 2009 International Conference on},
+	Date-Added = {2010-09-21 23:49:36 -0400},
+	Date-Modified = {2010-09-21 23:49:36 -0400},
+	Doi = {10.1109/HIPC.2009.5433213},
+	Keywords = {NP-complete problem;equivalence class graph;exponential state space;maximum lifetime sensor cover problem;smart linear time sampling algorithm;wireless sensor networks;equivalence classes;greedy algorithms;optimisation;wireless sensor networks;},
+	Month = {December},
+	Pages = {170 -178},
+	Title = {Taming the exponential state space of the maximum lifetime sensor cover problem},
+	Year = {2009},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAXoAAAAAAXoAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQs1NDMzMjEzLnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbJfqyGK3wgAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAyGLwAgAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA0TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzo1NDMzMjEzLnBkZgAOABgACwA1ADQAMwAzADIAMQAzAC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgAnVXNlcnMvcGF1bC9Eb2N1bWVudHMvQmlibGlvLzU0MzMyMTMucGRmAAATAAEvAAAVAAIAC///AACABdIcHR4fWCRjbGFzc2VzWiRjbGFzc25hbWWjHyAhXU5TTXV0YWJsZURhdGFWTlNEYXRhWE5TT2JqZWN0XxAoLi4vLi4vLi4vLi4vRG9jdW1lbnRzL0JpYmxpby81NDMzMjEzLnBkZtIcHSQloiUhXE5TRGljdGlvbmFyeRIAAYagXxAPTlNLZXllZEFyY2hpdmVyAAgAEQAWAB8AKAAyADUAOgA8AEUASwBSAF0AZQBsAG8AcQBzAHYAeAB6AHwAhgCTAJgAoAIeAiACJQIuAjkCPQJLAlICWwKGAosCjgKbAqAAAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAACsg==},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1109/HIPC.2009.5433213}}
+
+@book{574848,
+	Address = {New York, NY, USA},
+	Author = {Garey, Michael R. and Johnson, David S.},
+	Date-Added = {2010-05-23 18:52:49 -0400},
+	Date-Modified = {2010-05-23 18:52:49 -0400},
+	Isbn = {0716710455},
+	Keywords = {Algorithms, Documentation, Theory},
+	Publisher = {W. H. Freeman \& Co.},
+	Title = {Computers and Intractability; A Guide to the Theory of NP-Completeness},
+	Year = {1990}}
+
+@inproceedings{1378540,
+	Abstract = {Whether local algorithms can compute constant approximations of NP-hard problems is of both practical and theoretical interest. So far, no algorithms achieving this goal are known, as either the approximation ratio or the running time exceed O(1), or the nodes are provided with non-trivial additional information. In this paper, we present the first distributed algorithm approximating a minimum dominating set on a planar graph within a constant factor in constant time. Moreover, the nodes do not need any additional information.},
+	Address = {New York, NY, USA},
+	Annote = {Lenzen, Oswald, and Wattenhofer present a local algorithm that solves the Minimum Dominating Set problem on planar graphs. The Approximation ratio given for the algorithm is 74. However, no other constant local approximation of this problem for planar graphs had been found at the time of publication.
+
+The proof of correctness and locality is quite rigorous and makes up the bulk of the paper. The algorithm as presented is linear but is trivially distributable. Essentially, each node elects a neighbor to join the DS, then if some node has more than a constant number of neighbors in the DS, it joins the DS and tells its neighbors to leave the set. These steps are repeated once, and then any uncovered nodes choose a neighbor to join the set.
+
+Open questions are whether this algorithm could be improved upon in planar graphs or modified for another class of graphs. Some limitations on local approximation are discussed.},
+	Author = {Lenzen, Christoph and Oswald, Yvonne Anne and Wattenhofer, Roger},
+	Booktitle = {SPAA '08: Proceedings of the twentieth annual symposium on Parallelism in algorithms and architectures},
+	Date-Added = {2010-05-22 23:15:43 -0400},
+	Date-Modified = {2010-05-22 23:15:43 -0400},
+	Doi = {http://doi.acm.org/10.1145/1378533.1378540},
+	Isbn = {978-1-59593-973-9},
+	Keywords = {approximation, distributed algorithms, dominating sets, local algorithms, planar graphs},
+	Location = {Munich, Germany},
+	Pages = {46--54},
+	Publisher = {ACM},
+	Title = {What can be approximated locally?: case study: dominating sets in planar graphs},
+	Year = {2008},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAYYAAAAAAYYAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQ5wNDYtbGVuemVuLnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM2+vxv0s+lBERiAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAxv1lOgAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA3TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpwNDYtbGVuemVuLnBkZgAADgAeAA4AcAA0ADYALQBsAGUAbgB6AGUAbgAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIAKlVzZXJzL3BhdWwvRG9jdW1lbnRzL0JpYmxpby9wNDYtbGVuemVuLnBkZgATAAEvAAAVAAIAC///AACABdIcHR4fWCRjbGFzc2VzWiRjbGFzc25hbWWjHyAhXU5TTXV0YWJsZURhdGFWTlNEYXRhWE5TT2JqZWN0XxArLi4vLi4vLi4vLi4vRG9jdW1lbnRzL0JpYmxpby9wNDYtbGVuemVuLnBkZtIcHSQloiUhXE5TRGljdGlvbmFyeRIAAYagXxAPTlNLZXllZEFyY2hpdmVyAAgAEQAWAB8AKAAyADUAOgA8AEUASwBSAF0AZQBsAG8AcQBzAHYAeAB6AHwAhgCTAJgAoAIqAiwCMQI6AkUCSQJXAl4CZwKVApoCnQKqAq8AAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAACwQ==},
+	Bdsk-Url-1 = {http://doi.acm.org/10.1145/1378533.1378540}}
+
+@article{1514028,
+	Abstract = {In this paper, we consider the connected target coverage (CTC) problem with the objective of maximizing the network lifetime by scheduling sensors into multiple sets, each of which can maintain both target coverage and connectivity among all the active sensors and the sink.We model the CTC problem as a maximum cover tree (MCT) problem and prove that the MCT problem is NP-Complete. We determine an upper bound on the network lifetime for the MCT problem and then develop a (1+w) H (M) approximation algorithm to solve it, where is an arbitrarily small number, H(M) = Σ1≤i≤M (1/i) and M is the maximum number of targets in the sensing area of any sensor. As the protocol cost of the approximation algorithm may be high in practice, we develop a faster heuristic algorithm based on the approximation algorithm called Communication Weighted Greedy Cover (CWGC) algorithm and present a distributed implementation of the heuristic algorithm. We study the performance of the approximation algorithm and CWGC algorithm by comparing them with the lifetime upper bound and other basic algorithms that consider the coverage and connectivity problems independently. Simulation results show that the approximation algorithm and CWGC algorithm perform much better than others in terms of the network lifetime and the performance improvement can be up to 45% than the best-known basic algorithm. The lifetime obtained by our algorithms is close to the upper bound. Compared with the approximation algorithm, the CWGC algorithm can achieve a similar performance in terms of the network lifetime with a lower protocol cost.},
+	Address = {Piscataway, NJ, USA},
+	Author = {Zhao, Qun and Gurusamy, Mohan},
+	Date-Added = {2010-05-22 20:06:34 -0400},
+	Date-Modified = {2010-05-22 20:06:34 -0400},
+	Doi = {http://dx.doi.org/10.1109/TNET.2007.911432},
+	Issn = {1063-6692},
+	Journal = {IEEE/ACM Trans. Netw.},
+	Keywords = {NP-complete, approximation algorithms, coverage, network lifetime, sensor activity scheduling, wireless sensor networkss},
+	Number = {6},
+	Pages = {1378--1391},
+	Publisher = {IEEE Press},
+	Title = {Lifetime maximization for connected target coverage in wireless sensor networks},
+	Volume = {16},
+	Year = {2008},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAYYAAAAAAYYAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQ5wMTM3OC16aGFvLnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARKzYyBbwxwAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAyBcpBwAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA3TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpwMTM3OC16aGFvLnBkZgAADgAeAA4AcAAxADMANwA4AC0AegBoAGEAbwAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIAKlVzZXJzL3BhdWwvRG9jdW1lbnRzL0JpYmxpby9wMTM3OC16aGFvLnBkZgATAAEvAAAVAAIAC///AACABdIcHR4fWCRjbGFzc2VzWiRjbGFzc25hbWWjHyAhXU5TTXV0YWJsZURhdGFWTlNEYXRhWE5TT2JqZWN0XxArLi4vLi4vLi4vLi4vRG9jdW1lbnRzL0JpYmxpby9wMTM3OC16aGFvLnBkZtIcHSQloiUhXE5TRGljdGlvbmFyeRIAAYagXxAPTlNLZXllZEFyY2hpdmVyAAgAEQAWAB8AKAAyADUAOgA8AEUASwBSAF0AZQBsAG8AcQBzAHYAeAB6AHwAhgCTAJgAoAIqAiwCMQI6AkUCSQJXAl4CZwKVApoCnQKqAq8AAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAACwQ==},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1109/TNET.2007.911432}}
+
+@article{990703,
+	Abstract = {Thousands of tiny low-power devices spread over large physical spaces collaboratively monitor the environment, guide vehicles, and predict potential faults in buildings, bridges, roads, and rails.},
+	Address = {New York, NY, USA},
+	Author = {Culler, David E. and Hong, Wei},
+	Date-Added = {2010-05-17 13:50:23 -0400},
+	Date-Modified = {2010-05-17 13:50:43 -0400},
+	Doi = {http://doi.acm.org/10.1145/990680.990703},
+	Issn = {0001-0782},
+	Journal = {Commun. ACM},
+	Number = {6},
+	Pages = {30--33},
+	Publisher = {ACM},
+	Title = {Introduction},
+	Volume = {47},
+	Year = {2004},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAYYAAAAAAYYAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQ5wMzAtY3VsbGVyLnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARLFWyBb50AAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAyBcyEAAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA3TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpwMzAtY3VsbGVyLnBkZgAADgAeAA4AcAAzADAALQBjAHUAbABsAGUAcgAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIAKlVzZXJzL3BhdWwvRG9jdW1lbnRzL0JpYmxpby9wMzAtY3VsbGVyLnBkZgATAAEvAAAVAAIAC///AACABdIcHR4fWCRjbGFzc2VzWiRjbGFzc25hbWWjHyAhXU5TTXV0YWJsZURhdGFWTlNEYXRhWE5TT2JqZWN0XxArLi4vLi4vLi4vLi4vRG9jdW1lbnRzL0JpYmxpby9wMzAtY3VsbGVyLnBkZtIcHSQloiUhXE5TRGljdGlvbmFyeRIAAYagXxAPTlNLZXllZEFyY2hpdmVyAAgAEQAWAB8AKAAyADUAOgA8AEUASwBSAF0AZQBsAG8AcQBzAHYAeAB6AHwAhgCTAJgAoAIqAiwCMQI6AkUCSQJXAl4CZwKVApoCnQKqAq8AAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAACwQ==},
+	Bdsk-Url-1 = {http://doi.acm.org/10.1145/990680.990703}}
+
+@inproceedings{1098925,
+	Abstract = {The wireless sensor network "macroscope" offers the potential to advance science by enabling dense temporal and spatial monitoring of large physical volumes. This paper presents a case study of a wireless sensor network that recorded 44 days in the life of a 70-meter tall redwood tree, at a density of every 5 minutes in time and every 2 meters in space. Each node measured air temperature, relative humidity, and photosynthetically active solar radiation. The network captured a detailed picture of the complex spatial variation and temporal dynamics of the microclimate surrounding a coastal redwood tree. This paper describes the deployed network and then employs a multi-dimensional analysis methodology to reveal trends and gradients in this large and previously-unobtainable dataset. An analysis of system performance data is then performed, suggesting lessons for future deployments.},
+	Address = {New York, NY, USA},
+	Author = {Tolle, Gilman and Polastre, Joseph and Szewczyk, Robert and Culler, David and Turner, Neil and Tu, Kevin and Burgess, Stephen and Dawson, Todd and Buonadonna, Phil and Gay, David and Hong, Wei},
+	Booktitle = {SenSys '05: Proceedings of the 3rd international conference on Embedded networked sensor systems},
+	Date-Added = {2010-05-17 13:46:22 -0400},
+	Date-Modified = {2010-05-17 13:46:22 -0400},
+	Doi = {http://doi.acm.org/10.1145/1098918.1098925},
+	Isbn = {1-59593-054-X},
+	Keywords = {application analysis, macroscope, microclimate monitoring, wireless sensor networks},
+	Location = {San Diego, California, USA},
+	Pages = {51--63},
+	Publisher = {ACM},
+	Title = {A macroscope in the redwoods},
+	Year = {2005},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAYIAAAAAAYIAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQ1wNTEtdG9sbGUucGRmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARLBcyBb4JwAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAyBcwZwAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA2TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpwNTEtdG9sbGUucGRmAA4AHAANAHAANQAxAC0AdABvAGwAbABlAC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgApVXNlcnMvcGF1bC9Eb2N1bWVudHMvQmlibGlvL3A1MS10b2xsZS5wZGYAABMAAS8AABUAAgAL//8AAIAF0hwdHh9YJGNsYXNzZXNaJGNsYXNzbmFtZaMfICFdTlNNdXRhYmxlRGF0YVZOU0RhdGFYTlNPYmplY3RfECouLi8uLi8uLi8uLi9Eb2N1bWVudHMvQmlibGlvL3A1MS10b2xsZS5wZGbSHB0kJaIlIVxOU0RpY3Rpb25hcnkSAAGGoF8QD05TS2V5ZWRBcmNoaXZlcgAIABEAFgAfACgAMgA1ADoAPABFAEsAUgBdAGUAbABvAHEAcwB2AHgAegB8AIYAkwCYAKACJgIoAi0CNgJBAkUCUwJaAmMCkAKVApgCpQKqAAAAAAAAAgEAAAAAAAAAKAAAAAAAAAAAAAAAAAAAArw=},
+	Bdsk-Url-1 = {http://doi.acm.org/10.1145/1098918.1098925}}
+
+@article{Gonzalez1995129,
+	Abstract = {We present a simple LP-free (i.e., not requiring linear programming) approximation algorithm for the minimum weight vertex cover problem. Our new approximation algorithm does not need to solve a linear programming problem, nor such a formulation is needed to establish its approximation bound. The algorithm takes linear time with respect to the number of nodes and edges in the graph, and generates solutions that are within twice the weight of a minimum weight vertex cover. Both the algorithm and its proof of correctness are elegant and simple.},
+	Author = {Teofilo F. Gonzalez},
+	Date-Added = {2010-01-23 22:29:56 -0500},
+	Date-Modified = {2010-01-23 22:29:56 -0500},
+	Doi = {DOI: 10.1016/0020-0190(95)00022-5},
+	Issn = {0020-0190},
+	Journal = {Information Processing Letters},
+	Keywords = {Analysis of algorithms, vertex cover},
+	Number = {3},
+	Pages = {129 - 131},
+	Title = {A simple LP-free approximation algorithm for the minimum weight vertex cover problem},
+	Url = {http://www.sciencedirect.com/science/article/B6V0F-3YYMRW7-1/2/f962550d6386e0771c6f68006ef0868f},
+	Volume = {54},
+	Year = {1995},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAa4AAAAAAa4AAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oRgwMDIwLTAxOTAoOTUpMDAwMjItNS5wZGYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACXqrx2VSlgAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAx2WY5gAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgBBTWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzowMDIwLTAxOTAoOTUpMDAwMjItNS5wZGYAAA4AMgAYADAAMAAyADAALQAwADEAOQAwACgAOQA1ACkAMAAwADAAMgAyAC0ANQAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIANFVzZXJzL3BhdWwvRG9jdW1lbnRzL0JpYmxpby8wMDIwLTAxOTAoOTUpMDAwMjItNS5wZGYAEwABLwAAFQACAAv//wAAgAXSHB0eH1gkY2xhc3Nlc1okY2xhc3NuYW1lox8gIV1OU011dGFibGVEYXRhVk5TRGF0YVhOU09iamVjdF8QNS4uLy4uLy4uLy4uL0RvY3VtZW50cy9CaWJsaW8vMDAyMC0wMTkwKDk1KTAwMDIyLTUucGRm0hwdJCWiJSFcTlNEaWN0aW9uYXJ5EgABhqBfEA9OU0tleWVkQXJjaGl2ZXIACAARABYAHwAoADIANQA6ADwARQBLAFIAXQBlAGwAbwBxAHMAdgB4AHoAfACGAJMAmACgAlICVAJZAmICbQJxAn8ChgKPAscCzALPAtwC4QAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAALz},
+	Bdsk-Url-1 = {http://www.sciencedirect.com/science/article/B6V0F-3YYMRW7-1/2/f962550d6386e0771c6f68006ef0868f},
+	Bdsk-Url-2 = {http://dx.doi.org/10.1016/0020-0190(95)00022-5}}
+
+@article{4053985,
+	Abstract = {We introduce a medium access control protocol for ad hoc networks. The new protocol, which we call ORMA (opportunistic reservation multiple access) is aimed at providing both high throughput and bounded channel access delays, which are critical for supporting integrated voice and data services over ad hoc networks. In ORMA, the channel is divided into a random access section and a scheduled access section. The first is used to exchange neighborhood information, the latter is used for data transmissions over time slots organized in frames, with each time slot being accessed through reservations or probabilistic elections. To attain high throughput, nodes access data slots based on a fair election in which they win with a certain probability. To attain bounded channel access delays, nodes reserve time slots by using a novel opportunistic reservation. The performance of ORMA is studied by both analysis and simulations. It is also compared against the performance of schemes based entirely on probabilistic or fixed conflict-free slot assignment},
+	Annote = {* Text Note, page 1
+TDMA, Node Based
+
+* Anchored Note, page 10
+First Pass
+
+Category: simulation and analysis of a new protocol
+Context: Time Division Multiple Access scheme, node based
+Correctness: strong paper, problem well defined
+Contributions: the simulations show some improvement for the new protocol, however, there is an issue with mobility in the network. Does not seem to take advantage of any orthoganility in channel selection.
+Clarity: Discussion section, related work section, Pseudo-code and graphs provided
+
+
+* Highlight, page 10
+[9] L.Bao and J.J.Garcia-Luna-Aceves. Hybrid channel access
+
+},
+	Author = {Xiaoqiao Meng and J.J. Garcia-Luna-Aceves},
+	Date-Added = {2010-01-23 22:28:54 -0500},
+	Date-Modified = {2010-01-23 22:28:54 -0500},
+	Doi = {10.1109/MOBHOC.2006.278639},
+	Journal = {Mobile Adhoc and Sensor Systems (MASS), 2006 IEEE International Conference on},
+	Keywords = {ad hoc networks, channel allocation, integrated voice/data communication, probability, scheduling, time division multiple access, wireless channelsORMA, ad hoc network, channel access delay, integrated voice-data service, medium access control protocol, opportunistic reservation multiple access, probability, random access section, scheduled access section},
+	Month = {Oct.},
+	Pages = {71-80},
+	Title = {Channel Access Using Opportunistic Reservations in Ad Hoc Networks},
+	Year = {2006},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAaYAAAAAAaYAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oRZNT0JIT0MuMjAwNi4yNzg2MzkucGRmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACXtgxf04PlBERiAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAxf1wfgAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA/TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpNT0JIT0MuMjAwNi4yNzg2MzkucGRmAAAOAC4AFgBNAE8AQgBIAE8AQwAuADIAMAAwADYALgAyADcAOAA2ADMAOQAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIAMlVzZXJzL3BhdWwvRG9jdW1lbnRzL0JpYmxpby9NT0JIT0MuMjAwNi4yNzg2MzkucGRmABMAAS8AABUAAgAL//8AAIAF0hwdHh9YJGNsYXNzZXNaJGNsYXNzbmFtZaMfICFdTlNNdXRhYmxlRGF0YVZOU0RhdGFYTlNPYmplY3RfEDMuLi8uLi8uLi8uLi9Eb2N1bWVudHMvQmlibGlvL01PQkhPQy4yMDA2LjI3ODYzOS5wZGbSHB0kJaIlIVxOU0RpY3Rpb25hcnkSAAGGoF8QD05TS2V5ZWRBcmNoaXZlcgAIABEAFgAfACgAMgA1ADoAPABFAEsAUgBdAGUAbABvAHEAcwB2AHgAegB8AIYAkwCYAKACSgJMAlECWgJlAmkCdwJ+AocCvQLCAsUC0gLXAAAAAAAAAgEAAAAAAAAAKAAAAAAAAAAAAAAAAAAAAuk=},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1109/MOBHOC.2006.278639}}
+
+@book{500824,
+	Address = {Cambridge, MA, USA},
+	Author = {Cormen, Thomas and Leiserson, Charles and Rivest, Ronald and Stein, Clifford},
+	Date-Added = {2009-12-28 03:31:51 -0500},
+	Date-Modified = {2009-12-28 03:31:51 -0500},
+	Isbn = {0-262-03293-7},
+	Publisher = {MIT Press},
+	Title = {Introduction to algorithms},
+	Year = {2001}}
+
+@inproceedings{978-3-540-77220-0_36,
+	Abstract = {We present a new set of distributed algorithms for scheduling sensors to enhance the total lifetime of a wireless sensor network. These algorithms are based on constructing minimal cover sets each consisting of one or more sensors which can collectively cover the local targets.  Some of the covers are heuristically better than others for a sensor trying to decide its own sense-sleep status.  This leads to various ways to assign priorities to the covers. The algorithms work by having each sensor transition through these possible prioritized cover sets, settling for the best cover it can negotiate with its neighbors.   A local lifetime dependency graph consisting of the cover sets as nodes with any two nodes connected if the corresponding covers intersect captures the interdependencies among the covers. We present several variations of the basic algorithmic framework.  The priority function of a cover is derived from its degree or connectedness in the dependency graph - usually lower the better.  Lifetime improvement is 10% to 20% over the existing algorithms, while maintaining comparable communication overheads.   We also show how previous algorithms can be formulated within our framework. },
+	Author = {Sushil K. Prasad and Akshaye Dhawan},
+	Booktitle = {Procs. Intl High Performance Computing (HiPC)},
+	Date-Added = {2009-12-28 03:16:56 -0500},
+	Date-Modified = {2009-12-28 03:16:56 -0500},
+	Organization = {HiPC},
+	Pages = {381-392},
+	Series = {LNCS},
+	Title = {Distributed Algorithms for Lifetime of Wireless Sensor Networks based on Dependency Structure among Cover Sets},
+	Volume = {4873},
+	Year = {2007},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAYIAAAAAAYIAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQ0xNjExLTMzNDkucGRmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM10Jxr43NVBERiAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAxr5vdQAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA2TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzoxNjExLTMzNDkucGRmAA4AHAANADEANgAxADEALQAzADMANAA5AC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgApVXNlcnMvcGF1bC9Eb2N1bWVudHMvQmlibGlvLzE2MTEtMzM0OS5wZGYAABMAAS8AABUAAgAL//8AAIAF0hwdHh9YJGNsYXNzZXNaJGNsYXNzbmFtZaMfICFdTlNNdXRhYmxlRGF0YVZOU0RhdGFYTlNPYmplY3RfECouLi8uLi8uLi8uLi9Eb2N1bWVudHMvQmlibGlvLzE2MTEtMzM0OS5wZGbSHB0kJaIlIVxOU0RpY3Rpb25hcnkSAAGGoF8QD05TS2V5ZWRBcmNoaXZlcgAIABEAFgAfACgAMgA1ADoAPABFAEsAUgBdAGUAbABvAHEAcwB2AHgAegB8AIYAkwCYAKACJgIoAi0CNgJBAkUCUwJaAmMCkAKVApgCpQKqAAAAAAAAAgEAAAAAAAAAKAAAAAAAAAAAAAAAAAAAArw=}}
+
+@inproceedings{1409974,
+	Abstract = {We consider the problem of efficient MAC design for long-distance WiFi-based mesh networks. In such networks it is common to find long propagation delays, the use of directional antennas, and the presence of inter-link interference. Prior work has shown that these characteristics make traditional CSMA-based MACs a poor choice for long-distance mesh networks and this finding has led to several recent research efforts exploring the use of TDMA-based approaches to media access. In this paper we first identify, and then address, several shortcomings of current TDMA-based proposals. First, because they use fixed-length transmission slots, current TDMA-based solutions do not adapt to dynamic variations in traffic load leading to inefficiencies in both throughput and delay. As we show in this paper, the throughput achieved by existing solutions falls far short of the optimal achievable network throughput. Finally, due to the scheduling constraints imposed by inter-link interference, current TDMA-based solutions only apply to bipartite network topologies.
+
+In this paper, we present JazzyMac, a simple, practical and efficient MAC protocol that addresses the above limitations. JazzyMac achieves efficiency by allowing variable-length link transmissions slots and then defining a distributed protocol by which nodes adapt the length of their transmission slots to changing traffic demands. JazzyMac is practical in that the adaptation at each node uses purely local information and that our protocol applies to arbitrary network topologies. Finally, the use of dynamic slot sizes allows JazzyMac to achieve better tradeoffs between throughput and delay.
+
+We evaluate JazzyMac using detailed simulation over a range of traffic patterns and realistic topologies. Our results show that JazzyMac improves throughput in all considered scenarios. This improvement is often substantial (e.g.,in 50% of our scenarios, throughput improves by over 40%) and is particularly pronounced for the common case of asymmetric traffic (e.g.,leading to almost 100% improvements). Furthermore, compared to current solutions, JazzyMac can achieve much better average delay for the same throughput.},
+	Address = {New York, NY, USA},
+	Author = {Nedevschi, Sergiu and Patra, Rabin K. and Surana, Sonesh and Ratnasamy, Sylvia and Subramanian, Lakshminarayanan and Brewer, Eric},
+	Booktitle = {MobiCom '08: Proceedings of the 14th ACM international conference on Mobile computing and networking},
+	Date-Added = {2009-12-28 03:16:56 -0500},
+	Date-Modified = {2009-12-28 03:16:56 -0500},
+	Doi = {http://doi.acm.org/10.1145/1409944.1409974},
+	Isbn = {978-1-60558-096-8},
+	Keywords = {simulation},
+	Location = {San Francisco, California, USA},
+	Pages = {259--270},
+	Publisher = {ACM},
+	Title = {An adaptive, high performance {MAC} for long-distance multihop wireless networks},
+	Year = {2008},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAZYAAAAAAZYAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oRJwMjU5LW5lZGV2c2NoaS5wZGYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACXv/xfsJfgAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAxftBvgAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA7TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpwMjU5LW5lZGV2c2NoaS5wZGYAAA4AJgASAHAAMgA1ADkALQBuAGUAZABlAHYAcwBjAGgAaQAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIALlVzZXJzL3BhdWwvRG9jdW1lbnRzL0JpYmxpby9wMjU5LW5lZGV2c2NoaS5wZGYAEwABLwAAFQACAAv//wAAgAXSHB0eH1gkY2xhc3Nlc1okY2xhc3NuYW1lox8gIV1OU011dGFibGVEYXRhVk5TRGF0YVhOU09iamVjdF8QLy4uLy4uLy4uLy4uL0RvY3VtZW50cy9CaWJsaW8vcDI1OS1uZWRldnNjaGkucGRm0hwdJCWiJSFcTlNEaWN0aW9uYXJ5EgABhqBfEA9OU0tleWVkQXJjaGl2ZXIACAARABYAHwAoADIANQA6ADwARQBLAFIAXQBlAGwAbwBxAHMAdgB4AHoAfACGAJMAmACgAjoCPAJBAkoCVQJZAmcCbgJ3AqkCrgKxAr4CwwAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAALV},
+	Bdsk-Url-1 = {http://doi.acm.org/10.1145/1409944.1409974}}
+
+@inproceedings{978-3-540-89894-8_26,
+	Author = {Akshaye Dhawan and Sushil K. Prasad},
+	Booktitle = {HiPC},
+	Date = {2008-12-19},
+	Date-Added = {2009-12-28 03:16:56 -0500},
+	Date-Modified = {2009-12-28 03:16:56 -0500},
+	Editor = {P. Sadayappan and Manish Parashar and Ramamurthy Badrinath and Viktor K. Prasanna},
+	Ee = {http://dx.doi.org/10.1007/978-3-540-89894-8_26},
+	Interhash = {d28bb3a6af0cca0e5f2151f2a1dd2c84},
+	Intrahash = {98bed9a1c3811f602dcb7948435ea5d8},
+	Isbn = {978-3-540-89893-1},
+	Pages = {269-281},
+	Publisher = {Springer},
+	Series = {Lecture Notes in Computer Science},
+	Title = {Energy Efficient Distributed Algorithms for Sensor Target Coverage Based on Properties of an Optimal Schedule.},
+	Volume = {5374},
+	Year = {2008},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAa4AAAAAAa4AAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oRg5NzgtMy01NDAtODk4OTQtOF8yNi5wZGYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACXsrxr47RAAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAxr5zhAAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgBBTWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzo5NzgtMy01NDAtODk4OTQtOF8yNi5wZGYAAA4AMgAYADkANwA4AC0AMwAtADUANAAwAC0AOAA5ADgAOQA0AC0AOABfADIANgAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIANFVzZXJzL3BhdWwvRG9jdW1lbnRzL0JpYmxpby85NzgtMy01NDAtODk4OTQtOF8yNi5wZGYAEwABLwAAFQACAAv//wAAgAXSHB0eH1gkY2xhc3Nlc1okY2xhc3NuYW1lox8gIV1OU011dGFibGVEYXRhVk5TRGF0YVhOU09iamVjdF8QNS4uLy4uLy4uLy4uL0RvY3VtZW50cy9CaWJsaW8vOTc4LTMtNTQwLTg5ODk0LThfMjYucGRm0hwdJCWiJSFcTlNEaWN0aW9uYXJ5EgABhqBfEA9OU0tleWVkQXJjaGl2ZXIACAARABYAHwAoADIANQA6ADwARQBLAFIAXQBlAGwAbwBxAHMAdgB4AHoAfACGAJMAmACgAlICVAJZAmICbQJxAn8ChgKPAscCzALPAtwC4QAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAALz},
+	Bdsk-Url-1 = {http://dblp.uni-trier.de/db/conf/hipc/hipc2008.html#DhawanP08}}
+
+@conference{IPDPS.2008.45361,
+	Address = {Miami},
+	Author = {Akshaye Dhawan and Sushil K. Prasad},
+	Booktitle = {Workshop on Advances in Parallel and Distributed Computing Models},
+	Date-Added = {2009-12-28 03:16:56 -0500},
+	Date-Modified = {2009-12-28 03:16:56 -0500},
+	Month = {April},
+	Organization = {IPDPS},
+	Title = {A Distributed Algorithmic Framework for Coverage Problems in Wireless Sensor Networks},
+	Year = {2008},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAZ4AAAAAAZ4AAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oRRJUERQUy4yMDA4LjQ1MzYxLnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAM2X9xr453lBERiAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAxr5yHgAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA9TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpJUERQUy4yMDA4LjQ1MzYxLnBkZgAADgAqABQASQBQAEQAUABTAC4AMgAwADAAOAAuADQANQAzADYAMQAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIAMFVzZXJzL3BhdWwvRG9jdW1lbnRzL0JpYmxpby9JUERQUy4yMDA4LjQ1MzYxLnBkZgATAAEvAAAVAAIAC///AACABdIcHR4fWCRjbGFzc2VzWiRjbGFzc25hbWWjHyAhXU5TTXV0YWJsZURhdGFWTlNEYXRhWE5TT2JqZWN0XxAxLi4vLi4vLi4vLi4vRG9jdW1lbnRzL0JpYmxpby9JUERQUy4yMDA4LjQ1MzYxLnBkZtIcHSQloiUhXE5TRGljdGlvbmFyeRIAAYagXxAPTlNLZXllZEFyY2hpdmVyAAgAEQAWAB8AKAAyADUAOgA8AEUASwBSAF0AZQBsAG8AcQBzAHYAeAB6AHwAhgCTAJgAoAJCAkQCSQJSAl0CYQJvAnYCfwKzArgCuwLIAs0AAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAAC3w==}}
+
+@article{254190,
+	Abstract = { We survey approximation algorithms for some well-known and very natural combinatorial optimization problems, the minimum set covering, the minimum vertex covering, the maximum set packing, and maximum independent set problems; we discuss their approximation performance and their complexity. For already known results, any time we have conceived simpler proofs than those already published, we give these proofs, and, for the rest, we cite the simpler published ones. Finally, we discuss how one can relate the approximability behavior (from both a positive and a negative point of view) of vertex covering to the approximability behavior of a restricted class of independent set problems.  },
+	Address = {New York, NY, USA},
+	Author = {Paschos, Vangelis T.},
+	Date-Added = {2009-12-28 03:15:48 -0500},
+	Date-Modified = {2009-12-28 03:15:48 -0500},
+	Doi = {http://doi.acm.org/10.1145/254180.254190},
+	Issn = {0360-0300},
+	Journal = {ACM Comput. Surv.},
+	Keywords = {algorithm analysis, approximation algorithms, combinatorial algorithms, constrained optimization, problem complexity},
+	Number = {2},
+	Pages = {171--209},
+	Publisher = {ACM},
+	Title = {A survey of approximately optimal solutions to some covering and packing problems},
+	Volume = {29},
+	Year = {1997},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAY4AAAAAAY4AAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oRBwMTcxLXBhc2Nob3MucGRmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACXvNx1R0QQAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAx1S6kQAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA5TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpwMTcxLXBhc2Nob3MucGRmAAAOACIAEABwADEANwAxAC0AcABhAHMAYwBoAG8AcwAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIALFVzZXJzL3BhdWwvRG9jdW1lbnRzL0JpYmxpby9wMTcxLXBhc2Nob3MucGRmABMAAS8AABUAAgAL//8AAIAF0hwdHh9YJGNsYXNzZXNaJGNsYXNzbmFtZaMfICFdTlNNdXRhYmxlRGF0YVZOU0RhdGFYTlNPYmplY3RfEC0uLi8uLi8uLi8uLi9Eb2N1bWVudHMvQmlibGlvL3AxNzEtcGFzY2hvcy5wZGbSHB0kJaIlIVxOU0RpY3Rpb25hcnkSAAGGoF8QD05TS2V5ZWRBcmNoaXZlcgAIABEAFgAfACgAMgA1ADoAPABFAEsAUgBdAGUAbABvAHEAcwB2AHgAegB8AIYAkwCYAKACMgI0AjkCQgJNAlECXwJmAm8CnwKkAqcCtAK5AAAAAAAAAgEAAAAAAAAAKAAAAAAAAAAAAAAAAAAAAss=},
+	Bdsk-Url-1 = {http://doi.acm.org/10.1145/254180.254190}}
+
+@inproceedings{338269,
+	Address = {Philadelphia, PA, USA},
+	Author = {Halperin, Eran},
+	Booktitle = {SODA '00: Proceedings of the eleventh annual ACM-SIAM symposium on Discrete algorithms},
+	Date-Added = {2009-12-28 03:15:48 -0500},
+	Date-Modified = {2009-12-28 03:15:48 -0500},
+	Isbn = {0-89871-453-2},
+	Keywords = {Algorithms, Design, Theory, Verification, vertex cover},
+	Location = {San Francisco, California, United States},
+	Pages = {329--337},
+	Publisher = {Society for Industrial and Applied Mathematics},
+	Title = {Improved approximation algorithms for the vertex cover problem in graphs and hypergraphs},
+	Year = {2000},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAZIAAAAAAZIAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oRFwMzI5LWhhbHBlcmluLnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACXw1x1R2hgAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAx1S81gAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA6TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpwMzI5LWhhbHBlcmluLnBkZgAOACQAEQBwADMAMgA5AC0AaABhAGwAcABlAHIAaQBuAC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgAtVXNlcnMvcGF1bC9Eb2N1bWVudHMvQmlibGlvL3AzMjktaGFscGVyaW4ucGRmAAATAAEvAAAVAAIAC///AACABdIcHR4fWCRjbGFzc2VzWiRjbGFzc25hbWWjHyAhXU5TTXV0YWJsZURhdGFWTlNEYXRhWE5TT2JqZWN0XxAuLi4vLi4vLi4vLi4vRG9jdW1lbnRzL0JpYmxpby9wMzI5LWhhbHBlcmluLnBkZtIcHSQloiUhXE5TRGljdGlvbmFyeRIAAYagXxAPTlNLZXllZEFyY2hpdmVyAAgAEQAWAB8AKAAyADUAOgA8AEUASwBSAF0AZQBsAG8AcQBzAHYAeAB6AHwAhgCTAJgAoAI2AjgCPQJGAlECVQJjAmoCcwKkAqkCrAK5Ar4AAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAAC0A==}}
+
+@article{564598,
+	Address = {New York, NY, USA},
+	Author = {Khuller, Samir},
+	Date-Added = {2009-12-28 03:15:48 -0500},
+	Date-Modified = {2009-12-28 03:15:48 -0500},
+	Doi = {http://doi.acm.org/10.1145/564585.564598},
+	Issn = {0163-5700},
+	Journal = {SIGACT News},
+	Keywords = {Algorithms, vertex cover},
+	Number = {2},
+	Pages = {31--33},
+	Publisher = {ACM},
+	Title = {Algorithms column: the vertex cover problem},
+	Volume = {33},
+	Year = {2002},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAYoAAAAAAYoAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQ9wMzEta2h1bGxlci5wZGYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACXwpx1ZMnAAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAx1aS7AAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA4TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpwMzEta2h1bGxlci5wZGYADgAgAA8AcAAzADEALQBrAGgAdQBsAGwAZQByAC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgArVXNlcnMvcGF1bC9Eb2N1bWVudHMvQmlibGlvL3AzMS1raHVsbGVyLnBkZgAAEwABLwAAFQACAAv//wAAgAXSHB0eH1gkY2xhc3Nlc1okY2xhc3NuYW1lox8gIV1OU011dGFibGVEYXRhVk5TRGF0YVhOU09iamVjdF8QLC4uLy4uLy4uLy4uL0RvY3VtZW50cy9CaWJsaW8vcDMxLWtodWxsZXIucGRm0hwdJCWiJSFcTlNEaWN0aW9uYXJ5EgABhqBfEA9OU0tleWVkQXJjaGl2ZXIACAARABYAHwAoADIANQA6ADwARQBLAFIAXQBlAGwAbwBxAHMAdgB4AHoAfACGAJMAmACgAi4CMAI1Aj4CSQJNAlsCYgJrApoCnwKiAq8CtAAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAALG},
+	Bdsk-Url-1 = {http://doi.acm.org/10.1145/564585.564598}}
+
+@article{861166,
+	Abstract = { We investigate the fixed-parameter complexity of WEIGHTED VERTEX COVER. Given a graph G = (V, E), a weight function ω: V → R+, and k ∈ R+, WEIGHTED VERTEX COVER (WVC for short) asks for a vertex subset C ⊆ V of total weight at most k such that every edge of G has at least one endpoint in C. WVC and its natural variants are NP-complete. We observe that, when restricting the range of ω to positive integers, the so-called INTEGER-WVC can be solved as fast as unweighted VERTEX COVER. Our main result is that if the range of ω is restricted to positive reals ≥ 1, then so-called REAL-WVC can be solved in time O(1.3954k + k|V|). By way of contrast, unless P = NP, the problem is not fixed-parameter tractable if arbitrary weights > 0 are allowed. Using dynamic programming, at the expense of exponential memory use, we can improve the running time of REALWVC to O(1.3788k + k|V|). The same technique applied to a known algorithm yields the so far fastest algorithm for unweighted VERTEX COVER, running in time O(1.2832kk + k|V|). },
+	Address = {Duluth, MN, USA},
+	Author = {Niedermeier, Rolf and Rossmanith, Peter},
+	Date-Added = {2009-12-28 03:15:48 -0500},
+	Date-Modified = {2009-12-28 03:15:48 -0500},
+	Doi = {http://dx.doi.org/10.1016/S0196-6774(03)00005-1},
+	Issn = {0196-6774},
+	Journal = {J. Algorithms},
+	Keywords = {Algorithms, Theory, vertex cover},
+	Number = {2},
+	Pages = {63--77},
+	Publisher = {Academic Press, Inc.},
+	Title = {On efficient fixed-parameter algorithms for weighted vertex cover},
+	Volume = {47},
+	Year = {2003},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAZYAAAAAAZYAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oRIxMC4xLjEuMTIuNzI3OS5wZGYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACXrux1R1YAAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAx1S7sAAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA7TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzoxMC4xLjEuMTIuNzI3OS5wZGYAAA4AJgASADEAMAAuADEALgAxAC4AMQAyAC4ANwAyADcAOQAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIALlVzZXJzL3BhdWwvRG9jdW1lbnRzL0JpYmxpby8xMC4xLjEuMTIuNzI3OS5wZGYAEwABLwAAFQACAAv//wAAgAXSHB0eH1gkY2xhc3Nlc1okY2xhc3NuYW1lox8gIV1OU011dGFibGVEYXRhVk5TRGF0YVhOU09iamVjdF8QLy4uLy4uLy4uLy4uL0RvY3VtZW50cy9CaWJsaW8vMTAuMS4xLjEyLjcyNzkucGRm0hwdJCWiJSFcTlNEaWN0aW9uYXJ5EgABhqBfEA9OU0tleWVkQXJjaGl2ZXIACAARABYAHwAoADIANQA6ADwARQBLAFIAXQBlAGwAbwBxAHMAdgB4AHoAfACGAJMAmACgAjoCPAJBAkoCVQJZAmcCbgJ3AqkCrgKxAr4CwwAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAALV},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1016/S0196-6774(03)00005-1}}
+
+@inproceedings{1011811,
+	Abstract = { We give time lower bounds for the distributed approximation of minimum vertex cover (MVC) and related problems such as minimum dominating set (MDS). In k communication rounds, MVC and MDS can only be approximated by factors Ω(nc/k2/k) and Ω(Δ>1/k/k) for some constant c, where n and Δ denote the number of nodes and the largest degree in the graph. The number of rounds required in order to achieve a constant or even only a polylogarithmic approximation ratio is at least Ω(√log n/log log n) and Ω(logΔ/ log log Δ). By a simple reduction, the latter lower bounds also hold for the construction of maximal matchings and maximal independent sets. },
+	Address = {New York, NY, USA},
+	Author = {Kuhn, Fabian and Moscibroda, Thomas and Wattenhofer, Roger},
+	Booktitle = {PODC '04: Proceedings of the twenty-third annual ACM symposium on Principles of distributed computing},
+	Date-Added = {2009-12-28 03:15:48 -0500},
+	Date-Modified = {2009-12-28 03:15:48 -0500},
+	Doi = {http://doi.acm.org/10.1145/1011767.1011811},
+	Isbn = {1-58113-802-4},
+	Keywords = {approximation hardness, distributed algorithms, dominating set, locality, lower bounds, maximal independent set, maximal matching, vertex cover},
+	Location = {St. John's, Newfoundland, Canada},
+	Pages = {300--309},
+	Publisher = {ACM},
+	Title = {What cannot be computed locally!},
+	Year = {2004},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAYIAAAAAAYIAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQ1wMzAwLWt1aG4ucGRmAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAActtqxv0ozFBERiAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAxv1hDAAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA2TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpwMzAwLWt1aG4ucGRmAA4AHAANAHAAMwAwADAALQBrAHUAaABuAC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgApVXNlcnMvcGF1bC9Eb2N1bWVudHMvQmlibGlvL3AzMDAta3Vobi5wZGYAABMAAS8AABUAAgAL//8AAIAF0hwdHh9YJGNsYXNzZXNaJGNsYXNzbmFtZaMfICFdTlNNdXRhYmxlRGF0YVZOU0RhdGFYTlNPYmplY3RfECouLi8uLi8uLi8uLi9Eb2N1bWVudHMvQmlibGlvL3AzMDAta3Vobi5wZGbSHB0kJaIlIVxOU0RpY3Rpb25hcnkSAAGGoF8QD05TS2V5ZWRBcmNoaXZlcgAIABEAFgAfACgAMgA1ADoAPABFAEsAUgBdAGUAbABvAHEAcwB2AHgAegB8AIYAkwCYAKACJgIoAi0CNgJBAkUCUwJaAmMCkAKVApgCpQKqAAAAAAAAAgEAAAAAAAAAKAAAAAAAAAAAAAAAAAAAArw=},
+	Bdsk-Url-1 = {http://doi.acm.org/10.1145/1011767.1011811}}
+
+@article{1125998,
+	Abstract = { Let G &equals; (V, E) be an undirected graph, with three numbers d0(e) ≥ d1(e) ≥ d2(e) ≥ 0 for each edge e ∈ E. A solution is a subset U ⊆ V and di(e) represents the cost contributed to the solution by the edge e if exactly i of its endpoints are in the solution. The cost of including a vertex v in the solution is c(v). A solution has cost that is equal to the sum of the vertex costs and the edge costs. The minimum generalized vertex cover problem is to compute a minimum cost set of vertices. We study the complexity of the problem with the costs d0(e) &equals; 1, d1(e) &equals; α and d2(e) &equals; 0 ∀e ∈ E and c(v) &equals; β∀v ∈ V, for all possible values of α and β. We also provide 2-approximation algorithms for the general case. },
+	Address = {New York, NY, USA},
+	Author = {Hassin, Refael and Levin, Asaf},
+	Date-Added = {2009-12-28 03:15:48 -0500},
+	Date-Modified = {2009-12-28 03:15:48 -0500},
+	Doi = {http://doi.acm.org/10.1145/1125994.1125998},
+	Issn = {1549-6325},
+	Journal = {ACM Trans. Algorithms},
+	Keywords = {Vertex cover, complexity classification, local-ratio},
+	Number = {1},
+	Pages = {66--78},
+	Publisher = {ACM},
+	Title = {The minimum generalized vertex cover problem},
+	Volume = {2},
+	Year = {2006},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAYYAAAAAAYYAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQ5wNjYtaGFzc2luLnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACXy0x1ZTcQAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAx1aZwQAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA3TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpwNjYtaGFzc2luLnBkZgAADgAeAA4AcAA2ADYALQBoAGEAcwBzAGkAbgAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIAKlVzZXJzL3BhdWwvRG9jdW1lbnRzL0JpYmxpby9wNjYtaGFzc2luLnBkZgATAAEvAAAVAAIAC///AACABdIcHR4fWCRjbGFzc2VzWiRjbGFzc25hbWWjHyAhXU5TTXV0YWJsZURhdGFWTlNEYXRhWE5TT2JqZWN0XxArLi4vLi4vLi4vLi4vRG9jdW1lbnRzL0JpYmxpby9wNjYtaGFzc2luLnBkZtIcHSQloiUhXE5TRGljdGlvbmFyeRIAAYagXxAPTlNLZXllZEFyY2hpdmVyAAgAEQAWAB8AKAAyADUAOgA8AEUASwBSAF0AZQBsAG8AcQBzAHYAeAB6AHwAhgCTAJgAoAIqAiwCMQI6AkUCSQJXAl4CZwKVApoCnQKqAq8AAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAACwQ==},
+	Bdsk-Url-1 = {http://doi.acm.org/10.1145/1125994.1125998}}
+
+@article{1435381,
+	Address = {New York, NY, USA},
+	Author = {Grandoni, Fabrizio and K\"{o}nemann, Jochen and Panconesi, Alessandro},
+	Date-Added = {2009-12-28 03:15:48 -0500},
+	Date-Modified = {2009-12-28 03:15:48 -0500},
+	Doi = {http://doi.acm.org/10.1145/1435375.1435381},
+	Issn = {1549-6325},
+	Journal = {ACM Trans. Algorithms},
+	Keywords = {Approximation algorithms, distributed algorithms, maximal matching, vertex cover},
+	Number = {1},
+	Pages = {1--12},
+	Publisher = {ACM},
+	Title = {Distributed weighted vertex cover via maximal matchings},
+	Volume = {5},
+	Year = {2008},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAYoAAAAAAYoAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQ9hNi1ncmFuZG9uaS5wZGYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPQKex1ZNcFBERiAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAx1aTwAAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA4TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzphNi1ncmFuZG9uaS5wZGYADgAgAA8AYQA2AC0AZwByAGEAbgBkAG8AbgBpAC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgArVXNlcnMvcGF1bC9Eb2N1bWVudHMvQmlibGlvL2E2LWdyYW5kb25pLnBkZgAAEwABLwAAFQACAAv//wAAgAXSHB0eH1gkY2xhc3Nlc1okY2xhc3NuYW1lox8gIV1OU011dGFibGVEYXRhVk5TRGF0YVhOU09iamVjdF8QLC4uLy4uLy4uLy4uL0RvY3VtZW50cy9CaWJsaW8vYTYtZ3JhbmRvbmkucGRm0hwdJCWiJSFcTlNEaWN0aW9uYXJ5EgABhqBfEA9OU0tleWVkQXJjaGl2ZXIACAARABYAHwAoADIANQA6ADwARQBLAFIAXQBlAGwAbwBxAHMAdgB4AHoAfACGAJMAmACgAi4CMAI1Aj4CSQJNAlsCYgJrApoCnwKiAq8CtAAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAALG},
+	Bdsk-Url-1 = {http://doi.acm.org/10.1145/1435375.1435381}}
+
+@inproceedings{DBLP:conf/wdag/AstrandFPRSU09,
+	Author = {Matti {\AA}strand and Patrik Flor{\'e}en and Valentin Polishchuk and Joel Rybicki and Jukka Suomela and Jara Uitto},
+	Bibsource = {DBLP, http://dblp.uni-trier.de},
+	Booktitle = {DISC},
+	Crossref = {DBLP:conf/wdag/2009},
+	Date-Added = {2009-12-28 03:15:48 -0500},
+	Date-Modified = {2009-12-28 03:15:48 -0500},
+	Ee = {http://dx.doi.org/10.1007/978-3-642-04355-0_21},
+	Keywords = {vertex cover},
+	Pages = {191-205},
+	Title = {A Local 2-Approximation Algorithm for the Vertex Cover Problem},
+	Year = {2009},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAa4AAAAAAa4AAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oRg5NzgtMy02NDItMDQzNTUtMF8yMS5wZGYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOweHx04gKFBERiAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAx05meAAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgBBTWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzo5NzgtMy02NDItMDQzNTUtMF8yMS5wZGYAAA4AMgAYADkANwA4AC0AMwAtADYANAAyAC0AMAA0ADMANQA1AC0AMABfADIAMQAuAHAAZABmAA8AGgAMAE0AYQBjAGkAbgB0AG8AcwBoACAASABEABIANFVzZXJzL3BhdWwvRG9jdW1lbnRzL0JpYmxpby85NzgtMy02NDItMDQzNTUtMF8yMS5wZGYAEwABLwAAFQACAAv//wAAgAXSHB0eH1gkY2xhc3Nlc1okY2xhc3NuYW1lox8gIV1OU011dGFibGVEYXRhVk5TRGF0YVhOU09iamVjdF8QNS4uLy4uLy4uLy4uL0RvY3VtZW50cy9CaWJsaW8vOTc4LTMtNjQyLTA0MzU1LTBfMjEucGRm0hwdJCWiJSFcTlNEaWN0aW9uYXJ5EgABhqBfEA9OU0tleWVkQXJjaGl2ZXIACAARABYAHwAoADIANQA6ADwARQBLAFIAXQBlAGwAbwBxAHMAdgB4AHoAfACGAJMAmACgAlICVAJZAmICbQJxAn8ChgKPAscCzALPAtwC4QAAAAAAAAIBAAAAAAAAACgAAAAAAAAAAAAAAAAAAALz}}
+
+@inproceedings{1582746,
+	Abstract = {The paper presents distributed and parallel δ-approximation algorithms for covering problems, where δ is the maximum number of variables on which any constraint depends (for example, δ = 2 for VERTEX COVER).
+
+Specific results include the following.
+
+For WEIGHTED VERTEX COVER, the first distributed 2-approximation algorithm taking O(log n) rounds and the first parallel 2-approximation algorithm in RNC. The algorithms generalize to covering mixed integer linear programs (CMIP) with two variables per constraint (δ = 2).
+
+For any covering problem with monotone constraints and submodular cost, a distributed δ-approximation algorithm taking O(log2 |C|) rounds, where |C| is the number of constraints. (Special cases include CMIP, facility location, and probabilistic (two-stage) variants of these problems.)},
+	Address = {New York, NY, USA},
+	Author = {Koufogiannakis, Christos and Young, Neal E.},
+	Booktitle = {PODC '09: Proceedings of the 28th ACM symposium on Principles of distributed computing},
+	Date-Added = {2009-12-28 03:15:48 -0500},
+	Date-Modified = {2009-12-28 03:15:48 -0500},
+	Doi = {http://doi.acm.org/10.1145/1582716.1582746},
+	Isbn = {978-1-60558-396-9},
+	Keywords = {distributed covering, distributed vertex cover},
+	Location = {Calgary, AB, Canada},
+	Pages = {171--179},
+	Publisher = {ACM},
+	Title = {Distributed and parallel algorithms for weighted vertex cover and other covering problems},
+	Year = {2009},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAaoAAAAAAaoAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oRdwMTcxLWtvdWZvZ2lhbm5ha2lzLnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYxGFxxWHHlBERiAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAxxXNbgAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgBATWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzpwMTcxLWtvdWZvZ2lhbm5ha2lzLnBkZgAOADAAFwBwADEANwAxAC0AawBvAHUAZgBvAGcAaQBhAG4AbgBhAGsAaQBzAC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgAzVXNlcnMvcGF1bC9Eb2N1bWVudHMvQmlibGlvL3AxNzEta291Zm9naWFubmFraXMucGRmAAATAAEvAAAVAAIAC///AACABdIcHR4fWCRjbGFzc2VzWiRjbGFzc25hbWWjHyAhXU5TTXV0YWJsZURhdGFWTlNEYXRhWE5TT2JqZWN0XxA0Li4vLi4vLi4vLi4vRG9jdW1lbnRzL0JpYmxpby9wMTcxLWtvdWZvZ2lhbm5ha2lzLnBkZtIcHSQloiUhXE5TRGljdGlvbmFyeRIAAYagXxAPTlNLZXllZEFyY2hpdmVyAAgAEQAWAB8AKAAyADUAOgA8AEUASwBSAF0AZQBsAG8AcQBzAHYAeAB6AHwAhgCTAJgAoAJOAlACVQJeAmkCbQJ7AoICiwLCAscCygLXAtwAAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAAC7g==},
+	Bdsk-Url-1 = {http://doi.acm.org/10.1145/1582716.1582746}}
+
+@inproceedings{1577454,
+	Abstract = {This paper describes a greedy {\ensuremath{\Delta}}-approximation algorithm for monotone covering, a generalization of many fundamental NP-hard covering problems. The approximation ratio {\ensuremath{\Delta}} is the maximum number of variables on which any constraint depends. (For example, for vertex cover, {\ensuremath{\Delta}} is 2.) The algorithm unifies, generalizes, and improves many previous algorithms for fundamental covering problems such as vertex cover, set cover, facilities location, and integer and mixed-integer covering linear programs with upper bound on the variables.
+
+The algorithm is also the first {\ensuremath{\Delta}}-competitive algorithm for online monotone covering, which generalizes online versions of the above-mentioned covering problems as well as many fundamental online paging and caching problems. As such it also generalizes many classical online algorithms, including lru, fifo, fwf, balance, greedy-dual, greedy-dual size (a.k.a. landlord), and algorithms for connection caching, where {\ensuremath{\Delta}} is the cache size. It also gives new {\ensuremath{\Delta}}-competitive algorithms for upgradable variants of these problems, which model choosing the caching strategy and an appropriate hardware configuration (cache size, CPU, bus, network, etc.).},
+	Address = {Berlin, Heidelberg},
+	Author = {Koufogiannakis, Christos and Young, Neal E.},
+	Booktitle = {ICALP '09: Proceedings of the 36th International Colloquium on Automata, Languages and Programming},
+	Date-Added = {2009-12-28 03:15:48 -0500},
+	Date-Modified = {2009-12-28 03:15:48 -0500},
+	Doi = {http://dx.doi.org/10.1007/978-3-642-02927-1_53},
+	Isbn = {978-3-642-02926-4},
+	Keywords = {vertex cover},
+	Location = {Rhodes, Greece},
+	Pages = {634--652},
+	Publisher = {Springer-Verlag},
+	Title = {Greedy {\ensuremath{\Delta}}-Approximation Algorithm for Covering with Arbitrary Constraints and Submodular Cost},
+	Year = {2009},
+	Bdsk-File-1 = {YnBsaXN0MDDUAQIDBAUIJidUJHRvcFgkb2JqZWN0c1gkdmVyc2lvblkkYXJjaGl2ZXLRBgdUcm9vdIABqAkKFRYXGyIjVSRudWxs0wsMDQ4RFFpOUy5vYmplY3RzV05TLmtleXNWJGNsYXNzog8QgASABqISE4ACgAOAB1lhbGlhc0RhdGFccmVsYXRpdmVQYXRo0hgNGRpXTlMuZGF0YU8RAXoAAAAAAXoAAgAADE1hY2ludG9zaCBIRAAAAAAAAAAAAAAAAAAAAMarQ7ZIKwAAAAl6oQsxNTc3NDU0LnBkZgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACXr4x09MxAAAAAAAAAAAAAQAAwAACSAAAAAAAAAAAAAAAAAAAAAGQmlibGlvABAACAAAxqt79gAAABEACAAAx0+TFAAAAAEAEAAJeqEACXoTAAiZSgAAkOcAAgA0TWFjaW50b3NoIEhEOlVzZXJzOnBhdWw6RG9jdW1lbnRzOkJpYmxpbzoxNTc3NDU0LnBkZgAOABgACwAxADUANwA3ADQANQA0AC4AcABkAGYADwAaAAwATQBhAGMAaQBuAHQAbwBzAGgAIABIAEQAEgAnVXNlcnMvcGF1bC9Eb2N1bWVudHMvQmlibGlvLzE1Nzc0NTQucGRmAAATAAEvAAAVAAIAC///AACABdIcHR4fWCRjbGFzc2VzWiRjbGFzc25hbWWjHyAhXU5TTXV0YWJsZURhdGFWTlNEYXRhWE5TT2JqZWN0XxAoLi4vLi4vLi4vLi4vRG9jdW1lbnRzL0JpYmxpby8xNTc3NDU0LnBkZtIcHSQloiUhXE5TRGljdGlvbmFyeRIAAYagXxAPTlNLZXllZEFyY2hpdmVyAAgAEQAWAB8AKAAyADUAOgA8AEUASwBSAF0AZQBsAG8AcQBzAHYAeAB6AHwAhgCTAJgAoAIeAiACJQIuAjkCPQJLAlICWwKGAosCjgKbAqAAAAAAAAACAQAAAAAAAAAoAAAAAAAAAAAAAAAAAAACsg==},
+	Bdsk-Url-1 = {http://dx.doi.org/10.1007/978-3-642-02927-1_53}}

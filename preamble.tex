@@ -1,0 +1,125 @@
+\documentclass[conference, 11pt]{IEEEtran} 
+\usepackage{verbatim}
+\usepackage{multirow} \usepackage{enumerate}
+\usepackage{amsmath,enumerate} \usepackage{amsthm}
+\usepackage{algcompatible}
+\usepackage{algpseudocode}
+\usepackage{algorithm}
+%\usepackage{algorithmic}
+\usepackage{pstricks}
+\usepackage{amssymb, latexsym}
+\usepackage{mathtools}
+\usepackage{graphicx}
+\usepackage{subfig}
+\DeclareGraphicsRule{*}{mps}{*}{}
+
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotstableread{plts/experiment8b1_av.tab}\averageone
+\pgfplotstableread{plts/experiment8b2_av.tab}\averagetwo
+\pgfplotstableread{plts/experiment8b3_av.tab}\averagethree
+\pgfplotstableread{plts/experiment8b4_av.tab}\averagefour
+\pgfplotstableread{plts/experiment9a_av.tab}\stepping
+\pgfplotstableread{plts/experiment9a1_av.tab}\steppingone
+\pgfplotstableread{plts/experiment9a2_av.tab}\steppingtwo
+\pgfplotstableread{plts/experiment9a3_av.tab}\steppingthree
+\pgfplotstableread{plts/experiment9a4_av.tab}\steppingfour
+\pgfplotstableread{plts/experiment9b1_av.tab}\runningone
+\pgfplotstableread{plts/experiment9b2_av.tab}\runningtwo
+\pgfplotstableread{plts/experiment9b3_av.tab}\runningthree
+\pgfplotstableread{plts/experiment9b4_av.tab}\runningfour
+\pgfplotstableread{plts/experiment9b_av.tab}\running
+\pgfplotstableread{plts/experiment9c_av.tab}\costcomp
+\pgfplotstableread{plts/experiment9c1_av.tab}\costcompone
+\pgfplotstableread{plts/experiment9c2_av.tab}\costcomptwo
+\pgfplotstableread{plts/experiment9c3_av.tab}\costcompthree
+\pgfplotstableread{plts/experiment8b1_rn.tab}\runsone
+\pgfplotstableread{plts/experiment8b2_rn.tab}\runstwo
+\pgfplotstableread{plts/experiment8b3_rn.tab}\runsthree
+\pgfplotstableread{plts/experiment8b4_rn.tab}\runsfour
+\pgfplotstableset{
+  create on use/density/.style={
+    create col/expr={\thisrow{nodes}+\thisrow{links}}}
+    }
+\pgfplotstableset{
+  create on use/delta/.style={
+    create col/expr={\thisrow{links}*2}}
+    }
+\pgfplotstableset{
+  create on use/nodebylinks/.style={
+    create col/expr={(\thisrow{nodes}*\thisrow{links})}}
+    }
+\pgfplotscreateplotcyclelist{three}{% 
+  every mark/.append style={fill=teal}\\% 
+  every mark/.append style={fill=green}\\% 
+  every mark/.append style={fill=orange}\\% 
+}
+\pgfplotscreateplotcyclelist{four}{%
+  every mark/.append style={fill=teal}\\%
+  every mark/.append style={fill=green}\\%
+  every mark/.append style={fill=orange}\\%
+  every mark/.append style={fill=pink}\\%
+}
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{decorations.pathmorphing} % LATEX and plain TEX when using Tik Z
+\usetikzlibrary{positioning}
+\usetikzlibrary{er}
+\usetikzlibrary{automata}
+\usetikzlibrary{shapes.geometric}
+\tikzstyle{vx}=[draw,circle,fill=white,minimum size=2pt, inner sep=1pt, node distance=15mm]
+\tikzstyle{ex}=[draw,rectangle,fill=white,minimum size=2pt, inner sep=3pt, node distance=15mm]
+\tikzstyle{bup}=[semithick, decoration={bent, aspect=.3, amplitude=4}, decorate, ->, >=stealth]
+\tikzstyle{bdn}=[semithick, decoration={bent, aspect=.3, amplitude=-4}, decorate, ->, >=stealth]
+\tikzstyle{BUP}=[thick, decoration={bent, aspect=.3, amplitude=8}, decorate, ->, >=stealth]
+\tikzstyle{BDN}=[thick, decoration={bent, aspect=.3, amplitude=-8}, decorate, ->, >=stealth]
+\tikzstyle{MUP}=[thick, decoration={bent, aspect=.3, amplitude=16}, decorate, ->, >=stealth]
+\tikzstyle{MDN}=[thick, decoration={bent, aspect=.3, amplitude=-16}, decorate, ->, >=stealth]
+\tikzstyle{str}=[semithick, decorate, ->, >=stealth]
+\tikzstyle{cr}=[draw, circle, fill=black!25,minimum size=150pt]
+
+%styles for plots?
+\tikzstyle{bls}=[blue, solid, mark=square*]
+\tikzstyle{grt}=[red, solid, mark=*]
+% \paperheight=11in \paperwidth=8.5in \textheight=9.0in
+% \textwidth=6.5in \voffset=-.875in \hoffset=-.875in
+\newenvironment{code} {\begin {quote}\begin{footnotesize}}
+    {\end{footnotesize}\end{quote}}
+
+% \oddsidemargin 0.0 in \evensidemargin 0.0 in
+\newenvironment{enumeratealpha}
+{\begin{enumerate}[(a{\textup{)}}]}{\end{enumerate}}
+
+\theoremstyle{plain}
+\newtheorem{lem-rule}{Rule}
+\newtheorem{thm}{Theorem}
+\newtheorem{lem}{Lemma}[thm]
+\newtheorem{prop}{Proposition}[thm]
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[thm]
+\newtheorem{dfn}{Definitions}[thm]
+\theoremstyle{remark}
+\newtheorem{smy}{Summary}
+\newtheorem{note}{Note}
+
+% text macros
+\def\cI{{\mathcal I}} \def\cR{{\mathcal R}} \def\cE{{\mathcal E}}
+\def\cC{{\mathcal C}} \def\cF{{\mathcal F}} \def\cU{{\mathcal U}}
+\def\cH{{\mathcal H}} \def\cD{{\mathcal D}} \def\cB{{\mathcal B}}
+\def\cQ{{\mathcal Q}} \def\cV{{\mathcal V}} \def\cS{{\mathcal S}}
+\def\cG{{\mathcal G}} \def\cA{{\mathcal A}} \def\cO{{\mathcal O}}
+\def\cW{{\mathcal W}} \def\cL{{\mathcal L}} 
+
+\def\bI{{\mathbb I}} \def\bO{{\mathbb O}}
+\def\bC{{\mathbb C}}
+\def\bId{{$\mathbb I$}} \def\bOd{{$\mathbb O$}}
+\def\bCd{{$\mathbb C$}}
+
+\def\cId{{$\mathcal I$}} \def\cRd{{$\mathcal R$}} \def\cEd{{$\mathcal E$}} 
+\def\cCd{{$\mathcal C$}} \def\cFd{{$\mathcal F$}} \def\cUd{{$\mathcal U$}} 
+\def\cHd{{$\mathcal H$}} \def\cDd{{$\mathcal D$}} \def\cBd{{$\mathcal B$}} 
+\def\cQd{{$\mathcal Q$}} \def\cVd{{$\mathcal V$}} \def\cSd{{$\mathcal S$}} 
+\def\cGd{{$\mathcal G$}} \def\cAd{{$\mathcal A$}} \def\cOd{{$\mathcal O$}}
+\def\cWd{{$\mathcal W$}} \def\cLd{{$\mathcal L$}}
+
+\bibliographystyle {IEEEtranS}
