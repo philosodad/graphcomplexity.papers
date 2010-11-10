@@ -1,0 +1,250 @@
+\input{preamble.tex}
+\begin{document}
+\title{Distributed Vertex Cover in Network Graphs} 
+
+\author{\IEEEauthorblockN{J. Paul Daigle and Sushil K. Prasad}
+\IEEEauthorblockA{Department of Computer Science\\
+Georgia State University\\
+Atlanta, Georgia 30303, USA\\}
+}
+
+\maketitle
+
+\begin{abstract}
+ Vertex cover, a minimal set of nodes to cover all edges in a graph, is an abstraction of coverage problems in sensor networks, transportation networks, etc, and is a well-konwn NP-hard problem.  Minimum weighted vertex cover (MWVC) problem asks for further minimizing the cumulative weight of a vertex cover.  We present new distributed k-hop algorithms for MWVC problem with theoretical and practical values.  Our first 1-hop approximation algorithm, based on matching a maximal set of non-adjacent edges, is provably 2-optimal with a communication complexity of $O(\Delta)$.   It compares very well with the current state-of-art in quality while significantly reducing communication cost.
+
+We also explore an important variant, the problem of finding a series of vertex covers to maximize network lifetime.  Our second algorithm, based on a key insight into the vertex cover problem of collecting partial covers from 2-hop neighbors, is an excellent practical algorithm.  It is representative of a problem-structure based efficient sampling algorithm in the exponential size local solution space.   We show that a partial cover based algorithm can be enhanced further to compete very well and exceed the lifetime obtained with state-of-the-art algorithms. 
+\end{abstract}
+\section{Introduction}
+The Minimum Vertex Cover problem and its weighted variant are NP-Complete problems with several known linear time sequential algorithms that provide constant approximations. The existence of such algorithms suggests that there is a constant time distributed algorithm that would provide a constant approximation for MVC or MWVC, but it has been shown that a constant approximation of MWVC cannot be found by a distributed algorithm in a constant number of rounds\cite{1011811}. 
+
+Here we present a distributed 2-optimal algorithm to solve MWVC in an expected running time of $O(logn)$, based on the linear time sequential algorithm of Gonzalez\cite{Gonzalez1995129}. This is not the first such algorithm to appear in the literature, but there are implementation advantages to our approach. In addition, we present an interesting subroutine that runs in constant time and improves the quality of solutions for both our algorithm and the prior algorithm of Koufogiannakis and Young\cite{1582746}. This subroutine turns out to have practical value when applied to the related problem of sensor network lifetime.
+
+Definitions and descriptions of prior work is presented in Section~\ref{sec:background}. In Section~\ref{sec:algorithms} we describe our own distributed algorithms for both network lifetime and MWVC. Section~\ref{sec:simulator} contains the description of our simulation software design, which provides the engine for the experiments that are described in Section~\ref{sec:experiments}.
+
+\section{Background}
+\label{sec:background}
+\subsection{Definitions}
+The coverage problems in this paper are common coverage problems which are known to be NP-Complete. For convenience, the problem definitions are provided here.
+
+\input{defs/vertex-cover-def.tex}
+\input{defs/def-netlife.tex}
+
+\subsubsection{Model}
+\label{ssb:com-model}
+
+All of the distributed algorithms described are assumed to be running on a {\em message passing model}, the compute nodes are mapped to the vertices of the graph, and the edges of the graph represent viable paths for communication between nodes. 
+
+\subsection{Prior Work}
+
+Sequential Linear time algorithms for covering problems are surveyed in detail in \cite{254190}. The seminal paper on Linear Programming techniques for constant ratio approximation of MWVC was published by Bar-Yehuda and Even in 1981 \cite{Bar-Yehuda:1981lr}. Gonzalez created a 2-optimal LP-Free linear time algorithm based on Maximal Matching in 1995 which is the basis of our distributed algorithm \cite{Gonzalez1995129}. 
+
+We are aware of two distributed algorithms for minimum weighted vertex cover. A 2-optimal algorithm based on maximal matching was published in 2008 by Grandoni et. al \cite{1435381}. We implement a simpler algorithm presented by Koufaganis and Young in 2009 for performance comparison \cite{1582746}. The Koufaganis/Young algorithm is described in detail in Section~\ref{sec:k-y-alg}.
+
+The network lifetime problem is introduced in detail by Cardei et. al in \cite{1498475}. A mathematical analysis of the problem is provided by Legakis et all in \cite{4697802}. Brinza and Zelikovski's deterministic algorithm \cite{1640702}, detailed in Section~\ref{sec:deeps} is used in this paper as a point of comparison. The issue of communication costs is addressed by Zhao et. all, along with a formal definition for the {\em Connected Target Coverage Problem}\cite{1514028}. Dhawan and Prasad introduce the use of Dependency Graphs for the network lifetime problem in \cite{978-3-540-77220-0_36}, this work provides the jumping off point for the algorithm introduced in Section~\ref{sec:PCDG}. Dependency Graphs are explored further in Section~\ref{sec:dep-graphs}.
+
+\subsection{The Koufaganis/Young Algorithm}
+\label{sec:k-y-alg}
+
+The Koufaganis/Young Algorithm (K/Y) described in this paper is the $O(\log n)$ 2-optimal distributed algorithm for the Minimum Weighted Vertex Cover published by Koufaganis and Young in 2009\cite{1582746}. The algorithm improves on the previous best known distributed algorithm for MWVC, which runs in $O(\log n + \log W)$, where  $W$ is the average vertex weight\cite{1435381}.
+
+The K/Y algorithm uses a special variable, maintained by each vertex $v$, referred to as $x_v$ and initialized to 0. Each vertex decides whether or not to join the cover by calling a subroutine, {\ttfamily step}, which takes as inputs the current value of $x_v \text{ and } x_w$ and the weights $c_v \text{ and } c_w$. {\ttfamily step} updates the value of x by Equation~\ref{eqn:step}.
+
+\input{eqns/eqn-step.tex}
+
+If $x \equiv 1 $ for $v \text{ or } w$, that vertex is added to the cover.
+
+In each round, a node decides whether it will choose to be a {\em root} or a {\em leaf} node. If a node chooses to be a leaf node, it chooses among it's neighbors which are roots those which would {\em not} be added to the cover, if the {\ttfamily step} subroutine were run with the current value of x. From these, it chooses a random neighbor for this round, marking the appropriate edge as a {\em star edge}.
+
+Root nodes collect their star edges and then choose to do one of the following: either run {\ttfamily step} for all star edges in some sequence, or run {\ttfamily step} for only the last star edge in the sequence. 
+
+Each communication round is therefore made up of 3 communication steps. Each vertex must communicate to its neighbors whether it is a leaf or a root, then each leaf must communicate to the appropriate neighbor that they share a star edge, then each root must communicate the results of its choices to it's neighbors.
+
+
+\subsection{The DEEPS Algorithm}
+\label{sec:deeps}
+
+The Deterministic Energy-Efficient Protocol for Sensor networks (DEEPS) provides a distributed algorithm for extending the lifetime of wireless sensor networks\cite{1640702}. DEEPS works by maintaining information about the total battery life of all sensors covering a given target. Targets are divided into {\em sinks} and {\em hills}. 
+
+Sinks are defined as follows: if $b_t$ is the cumulative battery life of all sensors covering some target $t$, if for some sensor $s$ which covers $t$, $b_t$ is minimum for all targets covered by $s$, $t$ is a sink. Any target which is not a sink is a hill.
+
+In order to avoid having a target abandoned, one sensor that covers a given target is placed in charge of that target. Sensors that are in charge of targets will not turn off unless another sensor covering that target turns on. 
+
+The DEEPS protocol is a two-hop protocol, as each sensor needs to know not only the battery supplies of its own targets, but also the battery supply of all of its neighbors targets. It performs well against other scheduling protocols. 
+
+\subsection{Dependency Graphs}
+\label{sec:dep-graphs}
+
+ The solution space for both of the problems addressed in this work is exponential to the input. A {\em Dependency Graph} is a strategy based on the insight that, from a strictly local standpoint, the input size of a graph problem remains constant regardless of the problem size. For a distributed system such as a sensor network, the space of all local solutions is only dependent on the size of the local neighborhood, not the size of the graph overall\cite{978-3-540-77220-0_36}. Prasad and Dhawan develop a framework for using Dependency Graphs in \cite{IPDPS.2008.45361}.
+
+The framework applies to problems where local solutions can be combined to form a feasible global solution. The essential steps of the framework are as follows. 
+\begin{enumerate}
+\item Establish that combined local solutions lead to a feasible global solution.
+\item Model the state space of the local solutions. \label{en:frame-model}
+\item Determine a priority heuristic for local solutions.\label{en:frame-priority}
+\item Design a reasonable negotiating strategy between neighbors.
+\end{enumerate} 
+
+The definition of the dependency graph is captured by step~\ref{en:frame-model}. Each local solution is considered a node in the Graph, and edges are defined by dependencies between solutions. Solutions and relationships between solutions might be directed, undirected, weighted, unweighted, and so forth. In step~\ref{en:frame-priority}, these parameters are used to determine what solutions are preferred. 
+
+This framework has been applied to sensor network lifetime, and competes very well against other methods\cite{Dhawan:hipc-09}.
+
+\section{Algorithms}
+\label{sec:algorithms}
+
+\subsection{Distributed Generalized Maximal Matching Algorithm}
+\subsubsection{Description}
+Algorithm~\ref{alg:dgmm} is our distributed implementation of the 2-optimal minimum weighted vertex cover algorithm presented by Gonzalez.\cite{Gonzalez1995129} The Gonzalez algorithm proceeds by selecting each edge in turn and choosing one of the endpoints of that edge to add to the cover. The sequential algorithm goes through each edge in turn and assigns the edge a weight according to equation~\ref{eqn:gmm}. If the weight of a vertex is equal to the sum of it's incident edge weights, that vertex is added to the cover. 
+
+\input{eqns/eqn-gmm.tex}
+
+The distributed version of the algorithm chooses some disjoint set of edges and assigns weights as described. The precise method of choosing edges and updating weights is given in Algorithm~\ref{alg:dgmm}. The automaton capturing the state transitions of Algorithm~\ref{alg:dgmm} is given succinctly in Figure~\ref{fig:dgmm-auto}. Each vertex begins in the \cCd\ state, and chooses to either send invitations (\cId), or listen for invitation (\cLd). Vertices in the \cId\ state choose one neighbor to send an invitation to and transition to a waiting state (\cWd), and vertices in the \cLd\ state choose one invitation to accept. The acceptence message is sent during the response state \cRd. All vertices then update their status (\cUd). Vertices that have either chosen to join the cover or which have no undecided neighbors will transition to the done state, (\cDd), and other vertices return to state \cCd.  
+
+\input{figs/fig-dgmm.tex}
+
+During the \cUd\ state, vertex pairs formed during the invitation/acceptance phases are able to assign a weight to the edge between them independently using equation~\ref{eqn:gmm}, and therefore decide whether or not to join the cover. During the \cEd\ state neighboring vertices are able to update some of their own edge weights, by assigning a weight of zero to any edges incident to a vertex which has joined the cover.
+
+\input{alg/alg-dgmm.tex}
+
+\subsubsection{Performance}
+
+Our experiments show that DGMM finds covers that are equivalent to those found by other 2-optimal algorithms, in far fewer communication rounds. A formal proof supporting our experimental results follows.
+
+\input{proofs/prf-dgmm-term.tex}
+
+
+\subsection{Redundancy Checking}
+\label{sec:redundant}
+When vertices make local decisions to join a cover, it is difficult to judge whether any neighbor will also decide to join the cover. In some cases, this leads to vertices joining the cover which can be subsequently removed while still retaining full coverage. Removing these nodes will certainly reduce the total weight of the cover. We therefore implement a {\em redundancy checking} algorithm. Figure~\ref{fig:red} shows the progression of Algorithm~\ref{alg:red}.
+
+\input{figs/fig-red.tex} 
+
+\input{alg/alg-red.tex}
+
+The redundancy checking algorithm proceeds stepwise, similar to Algorithm~\ref{alg:dgmm}, and many of the same arguments apply. One difference is that redundancy checking is run a single time for each node, nodes check with their neighbors once and then decide to turn off only if they are the largest redundant node in their immediate neighborhood. Because no two neighboring nodes can both be the largest--assuming a tie breaking mechanism such as unique ids--such a decision cannot break the cover. Also, because nodes make the decision simultaneously and globally, the additional number or communication rounds required is constant.
+
+The concept behind Algorithm~\ref{alg:red} is simple: A vertex is redundant if all of its neighbors are in the cover. This simple idea provides some valuable results extending network lifetime without incurring large communication costs, as we see later in Section~\ref{sec:pcdg-alg}. When examining target coverage in a sensor network, most current algorithms ignore the communication cost of establishing the target cover\cite{1514028}. One reason for this is that the cost is generally considered to be a constant, that is, any algorithm that provides continuous coverage must perform a global reshuffle periodically in order to maximize network lifetime. 
+
+\subsection{Partial Cover Dependency Graph}
+\label{sec:life-depend}
+Network Lifetime and Minimum Weighted Vertex Cover are both NP-Complete problems. It has also been proved that MWVC cannot be approximated to a constant factor locally within any constant number of communication rounds~\cite{1011811}. This limitation must apply to target coverage as well. We developed our algorithm continuously covering the edges for extending total network lifetime based on the Dependency Graph which provides an algorithmic framework for target coverage and related problems~\cite{IPDPS.2008.45361}. 
+
+The application of the framework relies on dependencies between local solutions. In the case of the vertex cover problem, there are several approaches that can be taken to determine what a local solution is. The simplest approach is to have each vertex only consider edges incident to itself. Naively, each vertex would have exactly two local solutions, the cover containing itself and the cover containing all of its neighbors. These two covers are node disjoint and lack any dependencies to prioritize meaningfully.   Therefore, one may consider the vertex covers for edges incident to 1-hop neighbors as well. Now a large number of possible covers have to be considered. The number of possible local covers for a vertex of degree $\Delta$ is $\sum_{i=0}^\Delta \binom{\Delta}{i}$. 
+
+\label{sec:PCDG}
+The number of local covers increases as a function of the density of the local neighborhood. If $\Delta$ is small, this is not a problem, but as $\Delta$ increases the number of potential local covers increases rapidly. The Partial Cover Algorithm samples this exponential space and reduces the number of solutions to O($\Delta$). A given vertex can only see two covers for it's own edges: the cover containing itself, and the cover containing all of its neighbors. The partial cover algorithm samples the solution space based on what vertices would have to be on if either of these two covers were off. 
+
+\subsubsection{Construction of the  Partial Cover Dependency Graph (PCDG)}
+
+Given a graph $G(V,E)$, for each vertex in $V$ we can define a partial cover dependency graph consisting of the {\em partial cover pair} $\bC_v, \bC_{n(v)}$ for v, and the partial cover pair for each neighbor of v. Given a node $v \in V$, $\bC_v$ consists of v and its two-hop neighbors, while $\bC_{n(v)}$ consists of $v$'s one-hop neighbors. Two nodes are connected (dependent), if the covers are non-disjoint. For clarity, we define terms below.
+
+\begin{defn}
+$N_v$ : The set of one-hop neighbors of $v$
+\end{defn}
+\begin{defn}
+$N_v^2$ : The set of two-hop neighbors of $v$ 
+\end{defn}
+
+\begin{defn}
+$\bC_v$ : $\{v\} \cup N_v^2$
+\end{defn}
+
+\begin{defn}
+$\bC_{n(v)}$ : $N_v$
+\end{defn} 
+
+\begin{defn}
+Partial Cover Dependency Graph of $v$ : a graph $H(C,F)$ such that \begin{align*}& 1. C = \{\bC_v, \bC_{n(v)}\} \cup \{\bC_u, \bC_{n(u)}\} \forall u \in N_v\\ & 2. \exists f(c_1, c_2) \in F \iff \exists u \in V \mid u \in c_1 \land u \in c_2\end{align*}.
+\end{defn} 
+
+After constructing $H$, each cover is assigned a {\em weight} and a {\em degree}. The weight of a cover is defined as the sum of the weight of the vertices in that cover, and the degree is defined by the number of edges for that cover. Figure~\ref{fig:pcdg} shows a graph and the corresponding partial cover dependency graph of a vertex in that graph.
+
+\input{figs/fig-pcdg.tex}
+
+\subsubsection{PCDG Algorithm}
+\label{sec:pcdg-alg}
+
+The PCDG algorithm uses 2-hop information for immediate setup of the graph, as described in the previous section. After initial setup, the algorithm no longer updates any information beyond 1-hop. Figure~\ref{fig:pcdg-auto} shows the automaton for PCDG.
+
+\input{figs/fig-pcdg-alg.tex}
+
+The bulk of the computational work for PCDG is done in the \cAd\ (Analyze) state. We assume that the covers in the Partial Cover Dependency Graph have been sorted according to degree, weight, and some sort of tie breaker. For the Dependency graph used in this paper, the priority order prefers lower weights, then higher degrees, and finally the covers unique id, as set during construction of the covers.
+
+A node in the Analyze state will evaluate its highest priority cover. It can then turn on, turn off, or move onto the next priority cover. Algorithm~\ref{alg:pcdg} shows the general progress of the algorithm, and Algorithm~\ref{alg:pcdg-analyze} shows the specifics of this process.
+
+This version of PCDG does very little analysis: if all neighbors are on, a node will turn off, otherwise, if a node is in it's current cover, the node will turn on. This keeps the communication cost low but sacrifices the quality of the solution. In future work we intend to explore other strategies for traversing the Graph.
+
+In each communication round, each node sends it's current status to it's neighbors. Here another greedy choice is made, as shown in Algorithm~\ref{alg:pcdg-process}. If a neighbor turns on in a round, and that neighbor has the lowest battery of all neighbors which are on, then the node will attempt to find a cover containing itself and the neighbor node. In the next round this will be the highest priority cover. This strategy could also be modified. 
+
+Our one-hop Algorithm performed surprising well against two-hop DEEPS when combined with the Redundancy Checking Algorithm and accounting for communication costs, as shown in Section~\ref{sub:netlife-results}.
+
+
+\input{alg/alg-pcd.tex}
+
+\section{Simulation Software}
+\label{sec:simulator}
+
+We developed a discrete-event simulator in the Ruby programming language. Ruby was chosen primarily for its ''mix-in'' feature, weak typing, and simple unit-testing system. This allowed us to easily construct new families of nodes that used common simulation algorithms with very little code repetition.
+
+The source code for each algorithm and the simulation framework are open source and available for download.\footnote{Using the mercurial VCS, command hg clone https://rvertex.graphcomplexity.googlecode.com/hg/ graphcomplexity-rvertex will retrieve a copy of the code repository. This paper uses revision 67446e3ca7 of the code base} 
+
+The goal for this software package was to create a flexible, extensible platform for general simulation of distributed graph algorithms.Our approach for meeting this design goal was to attempt to modularize design as much as possible.
+
+\section{Experiments}
+\label{sec:experiments}
+Experiments were conducted to test algorithm performance and examine the relationship between maximizing network lifetime and minimizing vertex cover.
+\subsection{Minimum Weighted Vertex Cover}
+\label{sub:mwvc-exp}
+
+For the MWVC problem, we tested the DGMM algorithm against a similar algorithm developed in \cite{1582746}. The Koufogiannakis/Young algorithm uses a similar coin flipping mechanism between vertices, with each one choosing to be a 'root' or a 'leaf' node, and the algorithm proceeds in a way that guarantees that two adjacent nodes making independent decisions will reach the same conclusions. 
+
+\subsection{Network Lifetime}
+
+A key issue in developing algorithms in the Dependency Graph framework is the ranking of covers and the establishment of degrees. We chose a relatively simple method of ranking covers which has given good results. Most interesting, however, is that the initial ranking of covers seems to be superior to all subsequent rankings. This was determined during the experiment phase of our research, which is detailed in the next section.
+
+Redundancy removal provides a tool to circumvent this problem. As each sensor reaches the end of its battery life, it can tell its neighbors to turn on. These neighbors can then negotiate with their neighbors, with redundant sensors turning off. The advantage of this approach is two-fold. First, there are no global reshuffle rounds. Communication costs are only incurred when strictly necessary to maintain the network. Second, sensors which are not affected by a particular event--those that are three or more hops away from a dying sensor--do not incur any extra cost as a result of a specific event.
+
+Depending on the deployment details of a given network, communication costs may be much higher than sensing costs, so using redundancy checking as a means of network maintenance may extend network lifetimes. In Section~\ref{sub:netlife-results}, we explore this potential through simulation.
+
+We chose the DEEPS algorithm developed in \cite{1640702}for target coverage and modified it suitably for vertex cover. This is a state-of-the art two-hop algorithm which has been demonstrated through simulation and real-world experiments to improve network lifetimes. DEEPS insures network coverage by assigning targets to sensor nodes, preferring the strongest member of weakest sets to take charge. 
+
+DEEPS requires global reshuffles to maintain coverage, and those shuffles are proactive, they take place on a schedule rather than on an as needed basis.
+
+\subsection{Experimental Design}
+\label{sub:exp-design}
+Random connected graphs were constructed, with the number of nodes and edges as the inputs. Nodes received a random weight between 400 and 1000. Graph construction proceeded by a modification of Erlang's method: all possible edges were generated and then random edges were chosen until the desired number of edges had been added to the graph. In order to ensure connectivity, Spanning Trees were constructed for each graph and connected together until each graph was a connected graph. 
+
+For the MWVC problem, graphs were constructed with 120, 240, 480, and 960 vertices with average degrees of 3, 6, 12, 24, 48, and 96. 50 random graphs were generated at each size, and the Koufogiannakis/Young distributed algorithm\cite{1582746}, our distributed modification of the Gonzalez Generalized Maximal Matching Algorithm\cite{Gonzalez1995129}, and versions of each with the redundancy checking algorithm were run on each generated graph, with results being averaged.
+
+For the Network Lifetime problem, the difficulty was to capture the communication cost associated with running the covering algorithms. We assume that in every case, a constant amount of energy is required to maintain the sensing and information sharing functions of the network. In our simulation, this cost is only applied to sensors that are ``on'' in a given round. The cost of re-organizing the sensors is a global cost, as every sensor in the network is required to participate in establishing a new vertex cover. This is applied as a constant drain on all sensors in the network. We conservatively simulate this drain as being on a spectrum from free to being equal to the cost of the information sharing and sensing function of the network. 
+
+We tested PCDG and DEEPS in two scenarios: one where each algorithm performs a global reshuffle in each round, and one where each algorithm sets up an initial cover, and then uses redundancy checking to perform local maintenance on an as needed basis. Graphs were constructed with 20, 40, and 80 vertices and average degree of 3, 6, and 12. 25 experiments were run for each graph size.
+ 
+\subsection{Experimental Results}
+\label{sub:exp-results}
+\subsubsection{Minimum Weighted Vertex Cover}
+\label{sub:mwvc-results}
+As expected, the addition of the constant time redundancy check improved results for both the DGMM algorithm and the K/Y algorithm. Figures~\ref{plt:match} and~\ref{plt:star} show the improvement. In our experiments the affect was small on average, less than 10\%, but this could be viewed as significant given the low cost of the routine. 
+\input{plts/plt-match.tex}
+\input{plts/plt-star.tex}
+More surprising was the difference in communication rounds between K/Y and DGMM. DGMM consistently resolved in one-tenth to one-third the number of communication rounds required by K/Y. Figure~\ref{plt:mwvc-rn} shows the difference in communication rounds required. The main reason for the difference is that in every communication round, DGMM is guaranteed to resolve each edge connected to one of a given node-pair in each round. The number of unresolved edges in the graph therefore quickly dwindles.
+
+\input{plts/plt-mwvc-rn.tex}
+The quality of solutions produced by K/Y and DGMM are similar. Figure~\ref{plt:mwvc-av} shows the quality of solutions between the two algorithms. K/Y holds an edge but that edge is slight.
+  
+\input{plts/plt-mwvc-av.tex}
+
+\subsubsection{Network Lifetime}
+\label{sub:netlife-results}
+When communication cost for network maintenance is considered to be negligible (or ignored), DEEPS outperforms PCDG by about 10\% in our simulations. Figure~\ref{plt:deeps-good} shows the performance of both algorithms in a communication cost free setting. DEEPS with reshuffle also outperformed DEEPS with redundancy checking when maintenance costs were considered to be free.
+\input{plts/plt-deep-good.tex}
+
+PCDG using redundancy checking outperforms PCDG with global reshuffle regardless of the maintenance cost. Figure~\ref{plt:pcdg-comp} shows the performance of PCDG without maintenance costs.
+\input{plts/plt-pcdg-comp.tex}
+
+When communication costs are accounted for, the performance of DEEPS and PCDG improves when local reorganization using redundancy checking is used in place of global reshuffling. Figures~\ref{plt:deep-cost} and~\ref{plt:pcdg-cost} show how performance is affected by accounting for network maintenance.
+\input{plts/plt-deep-cost.tex}
+\input{plts/plt-pcdg-cost.tex}
+\bibliography{../IPDPS_2010/vertex_bib}
+\end{document}
+% LocalWords:  Koufaganis

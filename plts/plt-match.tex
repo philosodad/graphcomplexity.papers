@@ -1,0 +1,19 @@
+\begin{figure}[htp]
+\begin{center}
+\begin{tikzpicture}
+  \begin{axis}[xlabel=Average Degree, ylabel=Total Weight, legend style={at={(.95,0.75)}, anchor=north east}, cycle list name={four} ]
+    \addplot+[bls] table [x=links, y=mat-reg]{\averageone};
+    \addplot+[bls] table [x=links, y=mat-reg]{\averagetwo};
+    \addplot+[bls] table [x=links, y=mat-reg]{\averagethree};
+    \addplot+[bls] table [x=links, y=mat-reg]{\averagefour};
+    \addplot+[grt] table [x=links, y=mat-red]{\averageone};
+    \addplot+[grt] table [x=links, y=mat-red]{\averagetwo};
+    \addplot+[grt] table [x=links, y=mat-red]{\averagethree};
+    \addplot+[grt] table [x=links, y=mat-red]{\averagefour};
+    \legend{Match,,,, Match+R}
+  \end{axis}
+\end{tikzpicture}
+\caption{Redundancy Applied to DGMM}
+\label{plt:match}
+\end{center}
+\end{figure}
