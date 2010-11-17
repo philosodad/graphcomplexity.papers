@@ -1,9 +1,10 @@
 \begin{ldef}
-The active degree of a node $u$ is indicated by $\alpha(u)$.
+The active degree of a node $u$ is the number of unweighted edges of $u$ indicated by $\alpha(u)$. $\alpha(u)$ is either 0 for committed nodes or equal to the number of active neighbors of $u$ for active nodes.
 \end{ldef}
 \begin{ldef}
 $\delta$ is the largest active degree in the graph.
 \end{ldef}
 \begin{ldef}
-If $\alpha(u) = \delta$, each neighbor of $u$ has an active degree of $\gamma$. Formally, $\active(u) = \delta \implies \alpha (v) = \gamma \forall v | e(u,v) \in E$ for a graph G(V,E).
+If $\alpha(u) = \delta$, each neighbor of $u$ has an active degree of $\gamma \le \delta$. Formally, for a graph G(V,E) $\forall u,v \in V, \alpha(u) = \delta \implies  \forall  v \suchthat e(u,v) \in E, \alpha (v) = \gamma$.
 \end{ldef}
+

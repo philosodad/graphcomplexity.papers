@@ -11,12 +11,12 @@ Atlanta, Georgia 30303, USA\\}
 \maketitle
 
 \begin{abstract}
- Vertex cover, a minimal set of nodes to cover all edges in a graph, is an abstraction of coverage problems in sensor networks, transportation networks, etc, and is a well-konwn NP-hard problem.  Minimum weighted vertex cover (MWVC) problem asks for further minimizing the cumulative weight of a vertex cover.  We present new distributed k-hop algorithms for MWVC problem with theoretical and practical values.  Our first 1-hop approximation algorithm, based on matching a maximal set of non-adjacent edges, is provably 2-optimal with a communication complexity of $O(\Delta)$.   It compares very well with the current state-of-art in quality while significantly reducing communication cost.
+ Vertex cover, a minimal set of nodes to cover all edges in a graph, is an abstraction of coverage problems in sensor networks, transportation networks, etc, and is a well-known NP-hard problem.  Minimum weighted vertex cover (MWVC) problem asks for further minimizing the cumulative weight of a vertex cover.  We present new distributed k-hop algorithms for MWVC problem with theoretical and practical values.  Our first 1-hop approximation algorithm, based on matching a maximal set of non-adjacent edges, is provably 2-optimal with a communication complexity of $O(\Delta)$.   It compares very well with the current state-of-art in quality while significantly reducing communication cost.
 
 We also explore an important variant, the problem of finding a series of vertex covers to maximize network lifetime.  Our second algorithm, based on a key insight into the vertex cover problem of collecting partial covers from 2-hop neighbors, is an excellent practical algorithm.  It is representative of a problem-structure based efficient sampling algorithm in the exponential size local solution space.   We show that a partial cover based algorithm can be enhanced further to compete very well and exceed the lifetime obtained with state-of-the-art algorithms. 
 \end{abstract}
 \section{Introduction}
-The Minimum Vertex Cover problem and its weighted variant are NP-Complete problems with several known linear time sequential algorithms that provide constant approximations. The existence of such algorithms suggests that there is a constant time distributed algorithm that would provide a constant approximation for MVC or MWVC, but it has been shown that a constant approximation of MWVC cannot be found by a distributed algorithm in a constant number of rounds\cite{1011811}. 
+The Minimum Vertex Cover problem and its weighted variant are NP-Complete problems with several known linear time sequential algorithms that provide constant factor approximations. The existence of such algorithms suggests that there is a constant time distributed algorithm that would provide a constant factor approximation for MVC or MWVC, but it has been shown that a constant factor approximation of MWVC cannot be found by a distributed algorithm in a constant number of rounds\cite{1011811}. 
 
 Here we present a distributed 2-optimal algorithm to solve MWVC in an expected running time of $O(\Delta)$, based on the linear time sequential algorithm of Gonzalez\cite{Gonzalez1995129}. In addition, we present an interesting subroutine that runs in constant time and improves the quality of solutions for both our algorithm and the prior algorithm of Koufogiannakis and Young\cite{1582746}. This subroutine turns out to have practical value when applied to the related problem of sensor network lifetime.
 
@@ -39,14 +39,14 @@ All of the distributed algorithms described are assumed to be running on a {\em 
 
 Sequential Linear time algorithms for covering problems are surveyed in detail in \cite{254190}. The seminal paper on Linear Programming techniques for constant ratio approximation of MWVC was published by Bar-Yehuda and Even in 1981 \cite{Bar-Yehuda:1981lr}. Gonzalez created a 2-optimal LP-Free linear time algorithm based on Maximal Matching in 1995 which is the basis of our distributed algorithm \cite{Gonzalez1995129}. 
 
-We are aware of two distributed algorithms for minimum weighted vertex cover. A 2-optimal algorithm based on maximal matching was published in 2008 by Grandoni et. al \cite{1435381}. We implement a simpler algorithm presented by Koufaganis and Young in 2009 for performance comparison \cite{1582746}. The Koufaganis/Young algorithm is described in detail in Section~\ref{sec:k-y-alg}.
+We are aware of two distributed algorithms for minimum weighted vertex cover. A 2-optimal algorithm based on maximal matching was published in 2008 by Grandoni et. al \cite{1435381}. We implement a simpler algorithm presented by Koufogiannakis and Young in 2009 for performance comparison \cite{1582746}. The Koufogiannakis/Young algorithm is described in detail in Section~\ref{sec:k-y-alg}.
 
 The network lifetime problem is introduced in detail by Cardei et. al in \cite{1498475}. A mathematical analysis of the problem is provided by Legakis et all in \cite{4697802}. Brinza and Zelikovski's deterministic algorithm \cite{1640702}, detailed in Section~\ref{sec:deeps} is used in this paper as a point of comparison. The issue of communication costs is addressed by Zhao et. all, along with a formal definition for the {\em Connected Target Coverage Problem}\cite{1514028}. Dhawan and Prasad introduce the use of Dependency Graphs for the network lifetime problem in \cite{978-3-540-77220-0_36}, this work provides the jumping off point for the algorithm introduced in Section~\ref{sec:PCDG}. Dependency Graphs are explored further in Section~\ref{sec:dep-graphs}.
 
-\subsection{The Koufaganis/Young Algorithm}
+\subsection{The Koufogiannakis/Young Algorithm}
 \label{sec:k-y-alg}
 
-The Koufaganis/Young Algorithm (K/Y) described in this paper is the $O(\log n)$ 2-optimal distributed algorithm for the Minimum Weighted Vertex Cover published by Koufaganis and Young in 2009\cite{1582746}. The algorithm improves on the previous best known distributed algorithm for MWVC, which runs in $O(\log n + \log W)$, where  $W$ is the average vertex weight\cite{1435381}.
+The Koufogiannakis/Young Algorithm (K/Y) described in this paper is the $O(\log n)$ 2-optimal distributed algorithm for the Minimum Weighted Vertex Cover published by Koufogiannakis and Young in 2009\cite{1582746}. The algorithm improves on the previous best known distributed algorithm for MWVC, which runs in $O(\log n + \log W)$, where  $W$ is the average vertex weight\cite{1435381}.
 
 The K/Y algorithm uses a special variable, maintained by each vertex $v$, referred to as $x_v$ and initialized to 0. Each vertex decides whether or not to join the cover by calling a subroutine, {\ttfamily step}, which takes as inputs the current value of $x_v \text{ and } x_w$ and the weights $c_v \text{ and } c_w$. {\ttfamily step} updates the value of x by Equation~\ref{eqn:step}.
 
@@ -106,7 +106,7 @@ The concept behind Algorithm~\ref{alg:red} is simple: A vertex is redundant if a
 
 \subsection{Partial Cover Dependency Graph}
 \label{sec:life-depend}
-Network Lifetime and Minimum Weighted Vertex Cover are both NP-Complete problems. It has also been proved that MWVC cannot be approximated to a constant factor locally within any constant number of communication rounds~\cite{1011811}. This limitation must apply to target coverage as well. We developed our algorithm continuously covering the edges for extending total network lifetime based on the Dependency Graph which provides an algorithmic framework for target coverage and related problems~\cite{IPDPS.2008.45361}. 
+Network Lifetime and Minimum Weighted Vertex Cover are both NP-Complete problems. It has also been proven that MWVC cannot be approximated to a constant factor locally within any constant number of communication rounds~\cite{1011811}. This limitation must apply to target coverage as well. We developed our algorithm continuously covering the edges for extending total network lifetime based on the Dependency Graph which provides an algorithmic framework for target coverage and related problems~\cite{IPDPS.2008.45361}. 
 
 The application of the framework relies on dependencies between local solutions. In the case of the vertex cover problem, there are several approaches that can be taken to determine what a local solution is. The simplest approach is to have each vertex only consider edges incident to itself. Naively, each vertex would have exactly two local solutions, the cover containing itself and the cover containing all of its neighbors. These two covers are node disjoint and lack any dependencies to prioritize meaningfully.   Therefore, one may consider the vertex covers for edges incident to 1-hop neighbors as well. Now a large number of possible covers have to be considered. The number of possible local covers for a vertex of degree $\Delta$ is $\sum_{i=0}^\Delta \binom{\Delta}{i}$. 
 
@@ -115,7 +115,7 @@ The number of local covers increases as a function of the density of the local n
 
 \subsubsection{Construction of the  Partial Cover Dependency Graph (PCDG)}
 
-Given a graph $G(V,E)$, for each vertex in $V$ we can define a partial cover dependency graph consisting of the {\em partial cover pair} $\bC_v, \bC_{n(v)}$ for v, and the partial cover pair for each neighbor of v. Given a node $v \in V$, $\bC_v$ consists of v and its two-hop neighbors, while $\bC_{n(v)}$ consists of $v$'s one-hop neighbors. Two nodes are connected (dependent), if the covers are non-disjoint. For clarity, we define terms below.
+Given a graph $G(V,E)$, for each vertex in $V$ we can define a partial cover dependency graph consisting of the {\em partial cover pair} $\bC_v, \bC_{n(v)}$ for $v$, and the partial cover pair for each neighbor of $v$. Given a node $v \in V$, $\bC_v$ consists of $v$ and its two-hop neighbors, while $\bC_{n(v)}$ consists of $v$'s one-hop neighbors. Two nodes are connected (dependent), if the covers are non-disjoint. For clarity, we define terms below.
 
 \begin{defn}
 $N_v$ : The set of one-hop neighbors of $v$
@@ -203,6 +203,9 @@ We tested PCDG and DEEPS in two scenarios: one where each algorithm performs a g
 \label{sub:exp-results}
 \subsubsection{Minimum Weighted Vertex Cover}
 \label{sub:mwvc-results}
+
+Figures~\ref{plt:match}, \ref{plt:star}, \ref{plt:mwvc-rn}, and \ref{plt:mwvc-av} show the results for the K/Y algorithm and DGMM, with one line in each color for each of the four graph sizes, 120, 240, 480, and 960.
+
 As expected, the addition of the constant time redundancy check improved results for both the DGMM algorithm and the K/Y algorithm. Figures~\ref{plt:match} and~\ref{plt:star} show the improvement. In our experiments the affect was small on average, less than 10\%, but this could be viewed as significant given the low cost of the routine. 
 \input{plts/plt-match.tex}
 \input{plts/plt-star.tex}
@@ -215,6 +218,9 @@ The quality of solutions produced by K/Y and DGMM are similar. Figure~\ref{plt:m
 
 \subsubsection{Network Lifetime}
 \label{sub:netlife-results}
+
+Figures~\ref{plt:deeps-good}, \ref{plt:pcdg-comp}, \ref{plt:deep-cost} and \ref{plt:pcdg-cost} show comparisons for DEEPS and PCDG, with one line of each color for the three graph sizes, 20, 40, and 80.
+
 When communication cost for network maintenance is considered to be negligible (or ignored), DEEPS outperforms PCDG by about 10\% in our simulations. Figure~\ref{plt:deeps-good} shows the performance of both algorithms in a communication cost free setting. DEEPS with reshuffle also outperformed DEEPS with redundancy checking when maintenance costs were considered to be free.
 \input{plts/plt-deep-good.tex}
 
@@ -226,4 +232,4 @@ When communication costs are accounted for, the performance of DEEPS and PCDG im
 \input{plts/plt-pcdg-cost.tex}
 \bibliography{../IPDPS_2010/vertex_bib}
 \end{document}
-% LocalWords:  Koufaganis
+% LocalWords:  Koufogiannakis

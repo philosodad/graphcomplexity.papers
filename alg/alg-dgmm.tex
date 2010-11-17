@@ -28,7 +28,7 @@
 \State {Broadcast $R_u^v$} \Comment $u$ accepts $v's$ invitation
 \State {Update Weight $e_{u,v}$} \Comment by Equation~\ref{eqn:gmm} \label{alglin:dgmm-update-weight-R}
 
-\If {$\sum_{w(e(i,u))} = w(u)$}\label{alglin:dgmm-join-cover-R}
+\If {$\sum w(e(i,u)) = w(u)$}\label{alglin:dgmm-join-cover-R}
 \State {$S_u \gets true$} \Comment $u$ joins the cover
 \State {Set all unweighted edges to 0} 
 \State {state $\gets \cD$}
@@ -42,7 +42,7 @@
 \If {$y = u$} \Comment response is to $v_u$
 \State {Update Weight $e_{u,v}$}\label{alglin:dgmm-update-weight-W}
 
-\If {$\sum_{w(e(i,u))} = w(u)$}\label{alglin:dgmm-join-cover-W}
+\If {$\sum w(e(i,u)) = w(u)$}\label{alglin:dgmm-join-cover-W}
 \State $S_u \leftarrow true$ \Comment $u$ joins the cover
 \State {Set all unweighted edges to 0}
 \State {state $\leftarrow$ \cDd}
