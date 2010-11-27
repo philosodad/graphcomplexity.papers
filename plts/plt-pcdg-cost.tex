@@ -1,14 +1,23 @@
 \begin{figure}[htp]
 \begin{center}
 \begin{tikzpicture}
-  \begin{axis}[xlabel=Cost, ylabel=Lifetime, legend style={at={(0.95,0.65)}, anchor=north east}, cycle list name={three}]
+  \begin{axis}[xlabel=Cost, ylabel=Lifetime, legend style={at={(0.05,0.05)}, font=\footnotesize, label={[font=\footnotesize]above:PCDG}, anchor=south west}, cycle list name={three}]
     \addplot+[bls] table [x=cost, y=pcd_step]{\costcompone};
     \addplot+[bls] table [x=cost, y=pcd_step]{\costcomptwo};
     \addplot+[bls] table [x=cost, y=pcd_step]{\costcompthree};
+    \addplot+[inv] table [x=cost, y=pcd_run]{\costcompone};
+    \addplot+[inv] table [x=cost, y=pcd_run]{\costcomptwo};
+    \addplot+[inv] table [x=cost, y=pcd_run]{\costcompthree};
+    \legend{(20),(40),(80)}
+  \end{axis}
+  \begin{axis}[xlabel=Cost, ylabel=Lifetime, legend style={at={(0.95,0.65)}, font=\footnotesize, label={[font=\footnotesize]left:PCDG+R}, anchor=north east}, cycle list name={three}]
+    \addplot+[inv] table [x=cost, y=pcd_step]{\costcompone};
+    \addplot+[inv] table [x=cost, y=pcd_step]{\costcomptwo};
+    \addplot+[inv] table [x=cost, y=pcd_step]{\costcompthree};
     \addplot+[grt] table [x=cost, y=pcd_run]{\costcompone};
     \addplot+[grt] table [x=cost, y=pcd_run]{\costcomptwo};
     \addplot+[grt] table [x=cost, y=pcd_run]{\costcompthree};
-    \legend{PCDG,,, PCDG+R}
+    \legend{,,,(20),(40),(80)}
   \end{axis}
 \end{tikzpicture}
 \caption{PCDG with Communication Costs}

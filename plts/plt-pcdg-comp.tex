@@ -1,14 +1,14 @@
 \begin{figure}[htp]
 \begin{center}
 \begin{tikzpicture}
-  \begin{axis}[xlabel=Average Degree, ylabel=Total Lifetime, legend style={at={(0.95,0.95)}, anchor=north east}, cycle list name={three}]
+  \begin{axis}[xlabel=Average Degree, ylabel=Total Lifetime, legend style={at={(0.95,0.95)}, font=\footnotesize, anchor=north east}, cycle list name={three}]
     \addplot+[bls] table [x=links, y=pcd]{\steppingone};
     \addplot+[bls] table [x=links, y=pcd]{\steppingtwo};
     \addplot+[bls] table [x=links, y=pcd]{\steppingthree};
     \addplot+[grt] table [x=links, y=pcd]{\runningone};
     \addplot+[grt] table [x=links, y=pcd]{\runningtwo};
     \addplot+[grt] table [x=links, y=pcd]{\runningthree};
-    \legend{PCDG,,, PCDG+R}
+    \legend{PCDG (20),PCDG (40), PCDG (80), PCDG+R (20), PCDG+R (40), PCDG+R (80)}
   \end{axis}
 \end{tikzpicture}
 \caption{PCDG Without Communication Costs}

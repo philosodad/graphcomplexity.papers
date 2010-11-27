@@ -63,7 +63,42 @@
   every mark/.append style={fill=orange}\\%
   every mark/.append style={fill=pink}\\%
 }
-
+\pgfplotscreateplotcyclelist{three-1-0}{%
+  every mark/.append style={fill=teal}\\% 
+  every mark/.append style={fill=green}\\% 
+  every mark/.append style={fill=orange}\\%
+	every mark/.append style={fill=none}\\% 
+	every mark/.append style={fill=none}\\% 
+	every mark/.append style={fill=none}\\% 
+}
+\pgfplotscreateplotcyclelist{three-0-1}{%
+	every mark/.append style={fill=none}\\% 
+	every mark/.append style={fill=none}\\% 
+	every mark/.append style={fill=none}\\% 
+  every mark/.append style={fill=teal}\\% 
+  every mark/.append style={fill=green}\\% 
+  every mark/.append style={fill=orange}\\%
+}
+\pgfplotscreateplotcyclelist{four-1-0}{%
+  every mark/.append style={fill=teal}\\%
+  every mark/.append style={fill=green}\\%
+  every mark/.append style={fill=orange}\\%
+  every mark/.append style={fill=pink}\\%
+	every mark/.append style={fill=none}\\%
+	every mark/.append style={fill=none}\\%
+	every mark/.append style={fill=none}\\%
+	every mark/.append style={fill=none}\\%
+}
+\pgfplotscreateplotcyclelist{four-0-1}{%
+	every mark/.append style={fill=none}\\%
+	every mark/.append style={fill=none}\\%
+	every mark/.append style={fill=none}\\%
+	every mark/.append style={fill=none}\\%
+  every mark/.append style={fill=teal}\\%
+  every mark/.append style={fill=green}\\%
+  every mark/.append style={fill=orange}\\%
+  every mark/.append style={fill=pink}\\%
+}
 %%%%%%%%%%%%%
 
 \usepackage{pgf}
@@ -87,6 +122,7 @@
 %styles for plots?
 \tikzstyle{bls}=[blue, solid, mark=square*]
 \tikzstyle{grt}=[red, solid, mark=*]
+\tikzstyle{inv}=[draw=none]
 % \paperheight=11in \paperwidth=8.5in \textheight=9.0in
 % \textwidth=6.5in \voffset=-.875in \hoffset=-.875in
 \newenvironment{code} {\begin {quote}\begin{footnotesize}}

@@ -1,14 +1,23 @@
 \begin{figure}[htp]
 \begin{center}
 \begin{tikzpicture}
-  \begin{axis}[xlabel=Average Degree, ylabel=Lifetime, legend style={at={(0.95,0.95)}, anchor=north east}, cycle list name={three}]
-    \addplot+[bls] table [x=links, y=pcd]{\steppingone};
-    \addplot+[bls] table [x=links, y=pcd]{\steppingtwo};
-    \addplot+[bls] table [x=links, y=pcd]{\steppingthree};
+  \begin{axis}[xlabel=Average Degree, ylabel=Lifetime, legend style={at={(0.95,0.95)}, font=\footnotesize, label={[font=\footnotesize]left:DEEPS}, anchor=north east}, cycle list name={three}]
     \addplot+[grt] table [x=links, y=deeps]{\steppingone};
     \addplot+[grt] table [x=links, y=deeps]{\steppingtwo};
     \addplot+[grt] table [x=links, y=deeps]{\steppingthree};
-    \legend{PCDG,,, DEEPS};
+    \addplot+[inv] table [x=links, y=pcd]{\steppingone};
+    \addplot+[inv] table [x=links, y=pcd]{\steppingtwo};
+    \addplot+[inv] table [x=links, y=pcd]{\steppingthree};
+    \legend{(20),(40), (80)};
+  \end{axis}
+  \begin{axis}[axis x line=none,axis y line=none,  legend style={at={(0.95,0.45)}, font=\footnotesize, label={[font=\footnotesize]left:PCDG}, anchor=north east}, cycle list name={three}]
+    \addplot+[inv] table [x=links, y=deeps]{\steppingone};
+    \addplot+[inv] table [x=links, y=deeps]{\steppingtwo};
+    \addplot+[inv] table [x=links, y=deeps]{\steppingthree};
+    \addplot+[bls] table [x=links, y=pcd]{\steppingone};
+    \addplot+[bls] table [x=links, y=pcd]{\steppingtwo};
+    \addplot+[bls] table [x=links, y=pcd]{\steppingthree};
+    \legend{,,,(20),(40),(80)};
   \end{axis}
 \end{tikzpicture}
 \caption{Performance of Deeps}
