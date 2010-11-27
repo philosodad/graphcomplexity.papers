@@ -1,14 +1,23 @@
 \begin{figure}[htp]
 \begin{center}
 \begin{tikzpicture}
-  \begin{axis}[xlabel=Average Degree, ylabel=Total Lifetime, legend style={at={(0.95,0.95)}, anchor=north east}, legend columns=3, cycle list name={three}]
+  \begin{axis}[xlabel=Average Degree, ylabel=Total Lifetime, legend style={at={(0.95,0.95)}, font=\footnotesize, anchor=north east}, legend columns=1, cycle list name={three-vanish-1}]
     \addplot+[bls] table [x=links, y=deeps]{\steppingone};
     \addplot+[bls] table [x=links, y=deeps]{\steppingtwo};
     \addplot+[bls] table [x=links, y=deeps]{\steppingthree};
+    \addplot+[inv] table [x=links, y=deeps]{\runningone};
+    \addplot+[inv] table [x=links, y=deeps]{\runningtwo};
+    \addplot+[inv] table [x=links, y=deeps]{\runningthree};
+    \legend{DEEPS (20),DEEPS (40),DEEPS (80)}
+  \end{axis}
+  \begin{axis}[axis x line=none,axis y line=node,legend style={at={(0.95,0.475)}, font=\footnotesize, anchor=north east}, legend columns=1, cycle list name={three-vanish-2}]
+    \addplot+[inv] table [x=links, y=deeps]{\steppingone};
+    \addplot+[inv] table [x=links, y=deeps]{\steppingtwo};
+    \addplot+[inv] table [x=links, y=deeps]{\steppingthree};
     \addplot+[grt] table [x=links, y=deeps]{\runningone};
     \addplot+[grt] table [x=links, y=deeps]{\runningtwo};
     \addplot+[grt] table [x=links, y=deeps]{\runningthree};
-    \legend{DEEPS,,,DEEP+R}
+    \legend{,,,DEEPS+R (20),DEEPS+R (40),DEEPS+R (80)}
   \end{axis}
 \end{tikzpicture}
 \caption{DEEPS without Communication Costs}

@@ -1,16 +1,27 @@
 \begin{figure}[htp]
 \begin{center}
 \begin{tikzpicture}
-  \begin{axis}[xlabel=Average Degree, ylabel=Total Weight, legend style={at={(.95,0.75)}, anchor=north east}, cycle list name={four}]
+  \begin{axis}[xlabel=Average Degree, ylabel=Total Weight, legend style={at={(.95,0.69))}, font=\footnotesize, label={[font=\footnotesize]left:K/Y}, anchor=south east}, legend columns=2, cycle list name={four-1-0}]
     \addplot+[bls] table [x=links, y=star-reg]{\averageone};
     \addplot+[bls] table [x=links, y=star-reg]{\averagetwo};
     \addplot+[bls] table [x=links, y=star-reg]{\averagethree};
     \addplot+[bls] table [x=links, y=star-reg]{\averagefour};
+    \addplot+[inv] table [x=links, y=star-red]{\averageone};
+    \addplot+[inv] table [x=links, y=star-red]{\averagetwo};
+    \addplot+[inv] table [x=links, y=star-red]{\averagethree};
+    \addplot+[inv] table [x=links, y=star-red]{\averagefour};
+    \legend{(120),(240),(480),(960)};
+  \end{axis}
+  \begin{axis}[axis x line=none,axis y line=none,  legend style={at={(.95,0.68)}, font=\footnotesize, label={[font=\footnotesize]left:K/Y+R}, legend columns=2, anchor=north east}, cycle list name={four-0-1}]
+    \addplot+[inv] table [x=links, y=star-reg]{\averageone};
+    \addplot+[inv] table [x=links, y=star-reg]{\averagetwo};
+    \addplot+[inv] table [x=links, y=star-reg]{\averagethree};
+    \addplot+[inv] table [x=links, y=star-reg]{\averagefour};
     \addplot+[grt] table [x=links, y=star-red]{\averageone};
     \addplot+[grt] table [x=links, y=star-red]{\averagetwo};
     \addplot+[grt] table [x=links, y=star-red]{\averagethree};
     \addplot+[grt] table [x=links, y=star-red]{\averagefour};
-    \legend{K/Y,,,, K/Y+R}
+    \legend{,,,,(120),(240),(480),(960)}
   \end{axis}
 \end{tikzpicture}
 \caption{Redundancy Applied to Koufogiannakis/Young}
