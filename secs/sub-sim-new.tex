@@ -1,0 +1,48 @@
+
+\label{sec:sim-new}
+
+In this section, we create a new simulator to solve the Maximum Weighted Independent Set problem. It should be noted that as this is an example, we are not concerned about the quality of our algorithm as long as it produces an independent set. We will apply the dependency graph framework in our algorithm.
+
+\paragraph{Problem Definition}
+\input{defs/def-is.tex}
+
+\paragraph{Approach}
+
+We start by formulating an algorithm to solve the problem. In this case, we will use the Dependency Graph framework to solve the problem, passing over the question of whether this problem can be solved locally at all.
+
+The steps for Algorithm~\ref{alg:alg-isdg} are as follows.
+
+\begin{enumerate}
+\item Each node builds all possible independent sets out to its two hop neighbors.
+\item Each node ranks its independent sets, first on weight and then by shared nodes with other sets.
+\item Use the sets to determine whether to turn on and off according to these rules:
+\begin{enumerate}
+\item If a node is in the best possible set, it turns on.
+\item If a neighbor turns on, turn off.
+\end{enumerate}
+\item When all algorithms are decided, complete.
+\end{enumerate}
+
+In the end, we should end up with an independent set.
+
+\paragraph{Classes}
+
+To build this simulator we will need a minimum of~\ref{en:classlist-lastline} classes.
+\begin{enumerate}
+\item A Dependency Graph Node.
+\item A Dependency Graph.
+\item A Node.
+\item A Graph.
+\item A Simulator.\label{en:classlist-lastline}
+\end{enumerate}
+
+In this case, we will start in the middle and design the Node first. Looking at Figure~\ref{fig:node-class}, the {\bfseries BasicNode} has most of what we will need. We only need to add an attribute for building the Dependency Graph, and probably a method to do so. Looking through the types that we have, we realize that {\bfseries PCDRoot} (Figure~\ref{fig:pcd-node-class} is actually an appropriate starting point for our new node type. It has an appropriate constructor and appropriate attributes, even though the variable {\em covers} and the method {\em init\_covers} have names that are less generic than we might like. We can write a new Node type that inherits this in just a few lines by overloading {\em get\_dep\_graph\_type}. Example~\ref{exa:isdg-1} shows the new class definition.
+
+\input{exas/exa-isdg-1.tex}
+
+In order to build a dependency graph, we need to be able to create the solutions. We've decided that each node should consider its two-hop neighborhood. From prior testing, we know that in order to generate sets, the most efficient method is probably going to be to use the {\bfseries Combinator} module, which can take a set of nodes and edges are returns sets of Node ids that represent covers. For this problem, we want to use the module to take a set of nodes and edges and return ids that represent independent sets. Looking at the code in Example~\ref{exa:combinator-1}, we can see the flow of control in the Combinator Module. 
+
+The method {\ttfamily construct\_covers} serves as the interface for the other methods. The only method that is specific to returning covers is the method {\ttfamily test\_cover?}, which takes an array of edges and a combination of Node ids and tests whether the combination is a cover. The {\bfseries \&} operator is the set intersection operator, so the line {\ttfamily e.each\{|k| return false if (c\&k).empty?\}} translates as ''return false if one of these edges contains an id that is not in 'c'". For independent set, we want a test that returns false if the id combination (c) contains {\em both} of the ids in any edge. To accomplish this, we could use the array difference operator, and return false if the subtraction of c from any edge results in an empty array. The modified module with the new definition of {\ttfamily test\_cover?} is shown in Example~\ref{exa:is-combinator}.  
+
+The new module must be included into the definition of {\bf ISDGRoot} in order to be used.  
+
