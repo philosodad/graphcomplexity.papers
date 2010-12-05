@@ -1,0 +1,12 @@
+\begin{rubyblock}
+class ISDGRoot < PCDRoot
+  include IS_Combinator
+  def init_covers
+    return IS_Graph.new
+  end
+
+  def get_dep_node_type
+    return Object.const_get('IS_Graph')
+  end
+end
+\end{rubyblock}

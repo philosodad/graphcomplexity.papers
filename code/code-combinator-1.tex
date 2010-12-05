@@ -1,37 +1,55 @@
-\begin{LVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1,xleftmargin=7mm, fontsize=\small, boxwidth=3cm]
-\PY{k}{module} \PY{n+nn}{Combinator}
-  \PY{k}{def} \PY{n+nf}{construct\PYZus{}covers} \PY{n}{n}\PY{p}{,} \PY{n}{e}
-    \PY{n}{s} \PY{o}{=} \PY{n}{get\PYZus{}subsets} \PY{n}{n}\PY{o}{.}\PY{n}{collect}\PY{p}{\PYZob{}}\PY{o}{|}\PY{n}{k}\PY{o}{|} \PY{n}{k}\PY{o}{.}\PY{n}{id}\PY{p}{\PYZcb{}}
-    \PY{n}{s} \PY{o}{=} \PY{n}{test\PYZus{}covers}\PY{p}{(}\PY{n}{s}\PY{p}{,}\PY{n}{e}\PY{p}{)}
-    \PY{k}{return} \PY{n}{covers\PYZus{}to\PYZus{}set} \PY{n}{s}
-  \PY{k}{end}
+\begin{rubyblock}
+module Combinator
+  def set_covers
+    n = Set[]
+    @neighbors.each do |k|
+      k.neighbors.each do |j|
+        n.add(j)
+      end
+      n.add(k)
+    end
+    alledges = Set[]
+    @neighbors.each do |k|
+      k.edges.each{|l| alledges.add(l)}
+    end
+    c = construct_covers n, alledges
+    @covers = get_dep_graph_type.new c, n
+  end
 
-  \PY{k}{def} \PY{n+nf}{get\PYZus{}subsets} \PY{n}{n}
-    \PY{n}{subsets} \PY{o}{=} \PY{o}{[}\PY{o}{]}
-    \PY{n}{x} \PY{o}{=} \PY{n}{n}\PY{o}{.}\PY{n}{length} \PY{o}{-} \PY{l+m+mi}{1}
-    \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{.}\PY{n}{.}\PY{n}{x}\PY{p}{)}\PY{o}{.}\PY{n}{each} \PY{k}{do} \PY{o}{|}\PY{n}{k}\PY{o}{|}
-      \PY{n}{subsets} \PY{o}{=} \PY{n}{subsets}\PY{o}{+}\PY{p}{(}\PY{n}{n}\PY{o}{.}\PY{n}{combination}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}a}\PY{p}{)}
-    \PY{k}{end}
-    \PY{k}{return} \PY{n}{subsets}
-  \PY{k}{end}
+  def construct_covers n, e
+    s = get_subsets n.collect{|k| k.id}
+    s = test_covers(s,e)
+    return covers_to_set s
+  end
 
-  \PY{k}{def} \PY{n+nf}{test\PYZus{}covers}\PY{p}{(}\PY{n}{s}\PY{p}{,} \PY{n}{e}\PY{p}{)}
-    \PY{n}{e\PYZus{}array} \PY{o}{=} \PY{o}{[}\PY{o}{]}
-    \PY{n}{e}\PY{o}{.}\PY{n}{each}\PY{p}{\PYZob{}}\PY{o}{|}\PY{n}{k}\PY{o}{|} \PY{n}{e\PYZus{}array}\PY{o}{.}\PY{n}{push}\PY{p}{(}\PY{n}{k}\PY{o}{.}\PY{n}{to\PYZus{}a}\PY{p}{)}\PY{p}{\PYZcb{}}
-    \PY{n}{c} \PY{o}{=} \PY{o}{[}\PY{o}{]}
-    \PY{n}{s}\PY{o}{.}\PY{n}{each}\PY{p}{\PYZob{}}\PY{o}{|}\PY{n}{k}\PY{o}{|} \PY{n}{c}\PY{o}{.}\PY{n}{push}\PY{p}{(}\PY{n}{k}\PY{p}{)} \PY{k}{if} \PY{n}{test\PYZus{}cover?}\PY{p}{(}\PY{n}{k}\PY{p}{,}\PY{n}{e\PYZus{}array}\PY{p}{)}\PY{p}{\PYZcb{}}
-    \PY{k}{return} \PY{n}{c}
-  \PY{k}{end}
+  def get_subsets n
+    subsets = []
+    x = n.length - 1
+    (1..x).each do |k|
+      subsets = subsets+(n.combination(k).to_a)
+    end
+    return subsets
+  end
 
-  \PY{k}{def} \PY{n+nf}{test\PYZus{}cover?} \PY{n}{c}\PY{p}{,} \PY{n}{e}
-    \PY{n}{e}\PY{o}{.}\PY{n}{each}\PY{p}{\PYZob{}}\PY{o}{|}\PY{n}{k}\PY{o}{|} \PY{k}{return} \PY{k+kp}{false} \PY{k}{if} \PY{p}{(}\PY{n}{c}\PY{o}{&}\PY{n}{k}\PY{p}{)}\PY{o}{.}\PY{n}{empty?}\PY{p}{\PYZcb{}}
-    \PY{k}{return} \PY{k+kp}{true}
-  \PY{k}{end}    
+  def test_covers(s, e)
+    e_array = []
+    e.each{|k| e_array.push(k.to_a)}
+    c = []
+    s.each{|k| c.push(k) if test_cover?(k,e_array)} 
+    return c
+  end
 
-  \PY{k}{def} \PY{n+nf}{covers\PYZus{}to\PYZus{}set} \PY{n}{covers}
-    \PY{n}{l} \PY{o}{=} \PY{n+no}{Set}\PY{o}{[}\PY{o}{]}
-    \PY{n}{covers}\PY{o}{.}\PY{n}{each}\PY{p}{\PYZob{}}\PY{o}{|}\PY{n}{k}\PY{o}{|} \PY{n}{l}\PY{o}{.}\PY{n}{add}\PY{p}{(}\PY{n+no}{Set}\PY{o}{.}\PY{n}{new}\PY{p}{(}\PY{n}{k}\PY{p}{)}\PY{p}{)}\PY{p}{\PYZcb{}}
-    \PY{k}{return} \PY{n}{l}
-  \PY{k}{end}
-\PY{k}{end}
-\end{LVerbatim}
+  def test_cover? c, e
+    e.each{|k| return false if (c&k).empty?}
+    return true
+  end    
+
+  def covers_to_set covers
+    l = Set[]
+    covers.each{|k| l.add(Set.new(k))}
+    return l
+  end
+
+end
+
+\end{rubyblock}
