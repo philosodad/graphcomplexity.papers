@@ -20,7 +20,7 @@ AbstractClass.comparable("Comparable")()();
 
 Class.pcdroot("PCDRoot")
 ("Inherits BasicNode","-covers:PCD_Graph","-redundant:boolean")
-("+init_covers():PCD_Graph","burn_cover(Node):void", "get_dep_node_type:Const","<=>(Node):int");
+("+init_covers():PCD_Graph","burn_cover(Node):void", "get_dep_graph_type:Const","<=>(Node):int");
 
 classStereotypes.pcdroot("Comparable","PCD");
 
@@ -41,7 +41,7 @@ Interface.matchacts("Match_Acts")
 ("+do_next():void", "+send_status():boolean", "+recieve_status(int):boolean");
 
 Interface.combinator("Combinator")
-("+construct_covers(Node[],Set{}):Set{}","+get_subsets(Int[]):Int[]","+test_covers(Int[[]],Set(Int[])):Int[]","+test_cover?(Int[],Int[]):boolean","+covers_to_set(Int[[]]):Set");
+("+set_covers():dep_graph","+construct_covers(Node[],Set{}):Set{}","+get_subsets(Int[]):Int[]","+test_covers(Int[[]],Set(Int[])):Int[]","+test_cover?(Int[],Int[]):boolean","+covers_to_set(Int[[]]):Set");
 
 beginfig(2);
   drawObject(graph);

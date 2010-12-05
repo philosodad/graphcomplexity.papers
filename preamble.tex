@@ -1,4 +1,3 @@
-\documentclass[conference, 10pt]{IEEEtran} 
 \usepackage{verbatim}
 \usepackage{multirow} \usepackage{enumerate}
 \usepackage{amsmath,enumerate} \usepackage{amsthm}
@@ -185,7 +184,7 @@
 \floatname{codeblock}{Example}
 
 \lstnewenvironment{rubyblock} 
-{\lstset{language=Ruby, basicstyle=\small, xleftmargin=10pt, numbers=left, numberstyle=\tiny, stepnumber=2, numbersep=5pt}}
+{\lstset{language=Ruby, breaklines=true, basicstyle=\small, xleftmargin=10pt, numbers=left, numberstyle=\tiny, stepnumber=1, numbersep=5pt, escapeinside={|;}{;|}}}
 {}
 % text macros
 \def\cI{{\mathcal I}} \def\cR{{\mathcal R}} \def\cE{{\mathcal E}}
