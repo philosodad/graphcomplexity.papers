@@ -1,27 +1,11 @@
 \begin{rubyblock}
 module Combinator
-  def set_covers
-    n = Set[]
-    @neighbors.each do |k|
-      k.neighbors.each do |j|
-        n.add(j)
-      end
-      n.add(k)
-    end
-    alledges = Set[]
-    @neighbors.each do |k|
-      k.edges.each{|l| alledges.add(l)}
-    end
-    c = construct_covers n, alledges
-    @covers = get_dep_graph_type.new c, n
-  end
-
+  include Two_Hop_Star |; \label{line:two-star} ;|
   def construct_covers n, e
     s = get_subsets n.collect{|k| k.id}
     s = test_covers(s,e)
     return covers_to_set s
   end
-
   def get_subsets n
     subsets = []
     x = n.length - 1
@@ -30,26 +14,21 @@ module Combinator
     end
     return subsets
   end
-
   def test_covers(s, e)
     e_array = []
     e.each{|k| e_array.push(k.to_a)}
     c = []
-    s.each{|k| c.push(k) if test_cover?(k,e_array)} 
+    s.each{|k| c.push(k) if test_cover?(k,e_array)}
     return c
   end
-
   def test_cover? c, e
     e.each{|k| return false if (c&k).empty?}
     return true
   end    
-
   def covers_to_set covers
     l = Set[]
     covers.each{|k| l.add(Set.new(k))}
     return l
   end
-
 end
-
 \end{rubyblock}

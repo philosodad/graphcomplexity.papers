@@ -3,7 +3,6 @@ require 'dep_node'
 require 'helpers_netgen'
 require 'helpers_dep_node'
 require 'set'
-
 class Dep_Graph_Root
   include Neighborly |;\label{code:dep-graph-includes};|
   include Cleanable
@@ -15,7 +14,6 @@ class Dep_Graph_Root
     make_edges
     set_neighbors
   end
-  
   def make_nodes c,n
     if !c.empty? then
       c = kill_redundant c |;\label{code:dep-graph-kill};|
@@ -23,11 +21,9 @@ class Dep_Graph_Root
       @nodes.sort!
     end
   end
-
   def get_node_type
     return Object.const_get('Dep_Node_Root')
   end
-
   def make_edges 
     e = Set[]
     n = @nodes.dup

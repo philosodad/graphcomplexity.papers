@@ -1,0 +1,20 @@
+    \begin{tikzpicture}
+%      \draw [help lines] (0,-3) grid (6,3);
+     \path [help lines] (0,-2) grid (4,2);
+      \node [ex] (S1) at (1,2) {$4,8,2,1$};
+      \node [ex] (S2) at (3,2) {$4,8,0$};
+      \node [ex] (S3) at (5,2) {$7,8,0,6$};
+      \node [ex, label={left: $weight=160$}, label={right: $degree=12$}] (S5) at (3,0) {$7,8,2,1$};
+      \node [ex] (S4) at (1,-2) {$7,8,2,6$};
+      \node [ex] (S6) at (5,-2) {$7,8,3$};
+      \node [ex] (S9) at (3,-2) {$5,1$};
+
+			\path[draw]
+			(S5.north) -- node [below left] {3} (S1.south)
+			(S5.north) -- node [left] {1} (S2.south)
+			(S5.north) -- node [below right] {2} (S3.south)
+			(S5.south) -- node [above left] {3} (S4.north)
+			(S5.south) -- node [above right] {2} (S6.north)
+			(S5.south) -- node [below left] {1} (S9.north);
+
+    \end{tikzpicture}

@@ -8,20 +8,23 @@ In this section, we create a new simulator to solve the Maximum Weighted Indepen
 
 \paragraph{Approach}
 
-We start by formulating an algorithm to solve the problem. In this case, we will use the Dependency Graph framework to solve the problem, passing over the question of whether this problem can be solved locally at all.
-
-The steps for Algorithm~\ref{alg:alg-isdg} are as follows.
+We start by formulating an algorithm to solve the problem. In this case, we will use the Dependency Graph framework to solve the problem, passing over the question of whether this problem can be solved locally at all. Because much of our design will be based on a finite state machine model, we begin by defining the needed communication and action steps to move each independent node towards a finished state. Figure~\ref{fig:isdg-alg} shows the steps for Algorithm~\ref{alg:alg-isdg}.
 
 \begin{enumerate}
-\item Each node builds all possible independent sets out to its two hop neighbors.
+\item Each item {\em gathers} (state \cGd) the information for its two-hop neighborhood.
+\item Each node {\em builds} (state \cBd) all possible independent sets out to its two hop neighbors.
 \item Each node ranks its independent sets, first on weight and then by shared nodes with other sets.
-\item Use the sets to determine whether to turn on and off according to these rules:
+\item Use the sets to {\em analyze} whether to turn on and off according to these rules: \label{item:analyze}
 \begin{enumerate}
 \item If a node is in the heaviest local node in the best possible set, it turns on.
 \item If a neighbor turns on, turn off.
 \end{enumerate}
-\item When all algorithms are decided, complete.
+\item If neither on nor off, update the dependency graph (state \cUd) 
+\item Send neighborhood information and repeat from step~\ref{item:analyze}
+\item When all nodes are decided, complete.
 \end{enumerate}
+
+\input{figs/fig-isdg-alg.tex}
 
 In the end, we should end up with an independent set.
 
@@ -48,16 +51,49 @@ The method {\ttfamily construct\_covers} serves as the interface for the other m
 
 \input{exas/exa-is-combinator.tex}
 
+The two referenced modules, {\bf Two-Hop-Star} and {\bf Two-Hop-Complete} (lines \algref{exa:combinator-1}{line:two-star} and \algref{exa:is-combinator}{line:two-complete}), determine specifically which nodes and edges that are passed to the {\ttfamily construct\_covers} method. The node actually calls the method {\ttfamily set\_covers} defined in one of these modules. The module selects a group of nodes and edges, sends them to the {\ttfamily construct\_covers} method, and returns the result.
+
 The new module must be included into the definition of {\bf ISDGRoot} in order to be used, resulting in the definition shown in Example~\ref{exa:isdg-2}. 
 
 \input{exas/exa-isdg-2.tex}  
+
+Finally, because this is a two-hop node and the {\bf neighbors} attribute only extends to one hop, it might be useful to add an attribute to contain the two-hop neighborhood. We extend our definition of {\bf ISGRoot} to a new subclass, {\bf ISGNode}, shown in Example~\ref{exa:isdg-node}. We add a readable attribute in line~\ref{line:attr-neighborhood} and define it as an empty array in the overloaded {\ttfamily initialize} method in line~\ref{line:neighborhood}. The keyword {\bf super} in line~\ref{line:isnode-super} indicates that any arguments passed to this method will be passed to the method of the same name in the super-class. 
+
+\input{exas/exa-isdg-node.tex} 
 
 It makes sense at this time to design the Dependency Graph for Independent Set. The nodes of our dependency graph will be the sets that are built with our modified {\bfseries Combinator} module, and the edges will be determined by the relationships between those nodes. Our first step will be to define the dependency graph itself, with it's constructor, and then we will move on to defining the nodes. Before we design the Dependency Graph for Independent Set, it will be illustrative to look at the root class in Example~\ref{exa:dep-graph-root}.
 
 \input{exas/exa-dep-graph-root.tex}
 
-The {\ttfamily include} statements starting on line~\ref{code:dep-graph-includes} introduce a new module, {\bfseries Cleanable}. Cleanable contains the method {\ttfamily kill\_redundant} called on line~\ref{code:dep-graph-kill}. This method takes the input and deletes any proper subsets. This is useful in our case since every single node in the two-hop neighborhood will be considered an independent set; we would prefer to limit the number of sets to only those sets of maximum size. Figure~\ref{fig:is-graph-1} shows a graph and the independent sets that will be considered for a specific node after the redundant sets have been pruned. We should also notice the call in line~\ref{code:dep-graph-push-node} for the {\ttfamily get\_node\_type} method. This is a call that we will need to override for our own class definition. 
+The {\ttfamily include} statements starting on line~\ref{code:dep-graph-includes} introduce a new module, {\bfseries Cleanable}. Cleanable contains the method {\ttfamily kill\_redundant} called on line~\ref{code:dep-graph-kill}. This method takes the input and deletes any proper subsets. This is useful in our case since every single node in the two-hop neighborhood will be considered an independent set; we would prefer to limit the number of sets to only those sets of maximum size. Figures~\ref{subfig:example-graph} and \ref{subfig:dependency-graph} show a graph and the independent sets that will become nodes in the dependency graph for a specific node after the redundant sets have been pruned. We should also notice the call in line~\ref{code:dep-graph-push-node} for the {\ttfamily get\_node\_type} method. This is a call that we will need to override for our own class definition. 
 
 \input{figs/fig-is-graph-1.tex}
+
+At this point, we can easily define the class for an Independent Set Dependency Graph by inheriting the root class and overriding the {\ttfamily get\_node\_type} method to return an independent set dependency node. This class will create the nodes, set the edges for the graph, and build a neighbor list for each node. Before we can use this class, we will need to create the dependency node for independent set. To do this, we will start by inheriting the root class for dependency nodes. The code for this class is shown in Example~\ref{exa:dep-node-root}. In order to properly rank our dependency nodes, we need to add a {\bfseries degree} attribute to the class. This will allow us to represent not only the cumulative weight of each set as calculated in line~\algref{exa:dep-node-root}{code:dep-node-weight}, but also to capture the strength of the dependencies between a node and its neighbors. We will need to override two methods to accomplish this, the {\ttfamily initialize} method and the {\ttfamily <=>} method, which defines comparisons between nodes. The complete class is shown in Example~\ref{exa:dep-node-isg}.
+
+\input{exas/exa-dep-node-root.tex}
+\input{exas/exa-dep-node-isg.tex}
+
+Setting the degree for each node is best done by the Dependency Graph after edges and neighbors have been set. Each dependency node is a set of nodes from the base graph. A dependency node's neighbors are the dependency nodes which intersect with this set. We define the weight of an edge between two nodes implicitly as the magnitude of this intersection, and the degree of the node as the sum of these weights. Figure~\ref{fig:is-graph-2} shows the neighbors, weights, and degree for the node $\{7,8,2,1\}$. Example~\ref{exa:dep-graph-isg} shows the completed dependency graph class.
+\input{exas/exa-dep-graph-isg.tex} 
+
+To complete the basic structural framework for the new algorithm, we need to create network and simulation generators. Commonly networks are not constructed on their own. In a typical experiment, several algorithms must be run on one network configuration. To this end, most network constructors take a network as their input. This is also the reason that most node types take a node as a constructor argument. In this case, we take advantage of that to write two very short definitions, the Root and Standard classes for IS\_Networks shown in Example~\ref{exa:netgen-isg}.\footnote{It is also important to require the file containing the IS Node definitions in the 'netgen.rb' file.} We also need to add a method to the {\bf Neighborly} module to build the 2-hop neighborhood.
+
+ A similar strategy can be used to create a simulator, simply copying an existing simulator and substituting this network class at the appropriate spot will create a functioning simulator.
+
+At this point, we have defined the basic structure for the framework. We have defined the dependency graph, the relationships between dependency nodes, the nodes themselves, and a network class that will transform a generic network into a network initialized to use this algorithm. Having completed the data structures, we can move on to the algorithm that will use these data structures. 
+
+\input{exas/exa-netgen-isg.tex}
+
+\paragraph{Actions}
+As detailed in Sections~\ref{sec:sim-objects-simulator} and \ref{sec:sim-helpers-simulation}, each simulator has a single graph or network as an attribute, and simulation is accomplished by repeatedly calling the {\ttfamily do\_next} and {\ttfamily send\_status} methods of each node in this network. The {\ttfamily do\_next} method is simply a finite state machine that walks each node through appropriate, synchronized steps. The {send\_status} method usually calls the {\ttfamily receive\_status} method of every neighbor, using the current state of the node to guide what status message is communicated. This information will be used to navigate the dependency graph. 
+
+We must define two automata. One controls the process of the algorithm in the network, the communication of information and the decision making process. The other concerns the internal operation of a node in deciding how to evaluate the nodes on the dependency graph and when to turn on or off. The rules for both are relatively simple. The communication behavior, including the transfer of two hop information, is captured in the module defined in Example~\ref{exa:actions-isg}.  
+\input{exas/exa-actions-isg.tex}
+
+Some explanation may be in order about the notation of the Ruby language. The Ruby {\bfseries case} statement can be interpreted as being similar to a switch in C, and when placed between two sets, as in lines~\algref{exa:actions-isg}{code:union-1} and \ref{code:union-2}, the vertical bar denotes set union. The rules enforce the requirement that nodes be able to collect information from a two-hop neighborhood. The {\bfseries :analyze}, {\bfseries :update}, and {\bfseries :done} states correspond to the states \cAd, \cUd, and \cId/\cOd\ from Figure~\ref{fig:isdg-alg}. 
+
+The three undefined methods in lines~\ref{code:bestchoice-call}, \ref{code:nochoice-call}, and \ref{code:update-call} are shown in Example~\ref{exa:deciders-isg}. The {\ttfamily no\_choice?} method checks to see if any neighbors have decided to join the independent set, which would force a node to decide not to join the set itself. The {\ttfamily best\_choice?} and {\ttfamily update\_dep\_graph} methods require modifications to the Dependency Graph class. In particular, the method {\ttfamily update\_dep\_graph} requires that we define the rules for navigating the dependency graph. 
+\input{exas/exa-deciders-isg.tex}
 
 

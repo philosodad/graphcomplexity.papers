@@ -1,0 +1,38 @@
+\begin{figure}[htp]
+  \begin{center}
+    \begin{tikzpicture}
+     % \draw[help lines] (0, -2) grid (5,2);
+      \path [help lines] (0, -2) grid (5,2);
+      \node [state, initial] (G) {\cGd};
+      \node [state] (B) at (1.5, 0) {\cBd};
+      \node [state] (A) at (3, 0) {\cAd};
+			\node [state] (W) at (4.5, 0) {\cWd};
+			\node [state] (U) at (4.5, 1.5) {\cUd};
+      \node [state, accepting] (I) at (3, 1.5) {\cId};
+      \node [state, accepting] (O) at (3, -1.5) {\cOd};
+
+      \path [->] (G) edge node [above] {2} (B)
+										 edge [loop above] node {1} ()
+                 (B) edge node [above] {b} (A)
+                 (A) edge node [left]{o} (O)
+                     edge node [left]{j} (I)
+										 edge node [below] {w} (W)
+								 (W) edge [bend right] node [right] {s} (U)
+                 (U) edge node [right] {s} (A)
+								 (O) edge [loop right] node {s} ()
+								 (I) edge [loop left] node {s} ();
+      \node [text width=8cm] (key) at (2, -2.25) {
+        $1$: Gathered neighbors once  \hspace{7cm}
+        $2$: Gathered neighbors twice  \hspace{7cm}
+        $b$: Sets built\hspace{7cm}
+        $j$: Best in best cover \hspace{9cm}
+        $w$: Wait for more information\hspace{7cm}
+        $o$: One neighbor on\hspace{7cm}
+        $s$: Share onlist and offlist\hspace{7cm}};
+
+    \end{tikzpicture}
+    \caption{Independent Set Dependency Algorithm}
+
+    \label{fig:isdg-alg}
+  \end{center}
+\end{figure}

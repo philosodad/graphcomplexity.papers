@@ -1,0 +1,48 @@
+\begin{rubyblock}
+module ISG_Acts
+  def do_next
+    @now = @next
+    case @now
+    when :analyze
+      if best_choice? |;\label{code:bestchoice-call};|
+        @on = true
+        @next = :share
+      elsif no_choice? |;\label{code:nochoice-call};|
+        @on = false
+        @next = :share
+      else
+        @next = :wait
+      end
+    when :wait
+      @next = :update
+    when :update
+      update_dep_graph |;\label{code:update-call};|
+      @next = :analyze
+    when :share
+      @next = :done
+    when :done
+      @next = :done
+    end      
+  end
+  def send_status
+    case @next
+    when :share
+      @neighbors.each{|k| k.recieve_status self}
+    when :update, :done
+      @neighbors.each{|k| k.recieve_status @onlist, @offlist}
+    end
+  end
+  def recieve_status *args
+    if args.size == 1 then
+      if args[0].on then
+        @onlist.add(args[0].id)
+      elsif args[0].off?
+        @offlist.add(args[0].id)
+      end
+    elsif args.size == 2 then
+      @onlist = @onlist | args[0] |;\label{code:union-1};|
+      @offlist = @offlist | args[1] |;\label{code:union-2};|
+    end
+  end
+end
+\end{rubyblock}
