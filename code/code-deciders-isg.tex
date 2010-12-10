@@ -1,0 +1,17 @@
+\begin{rubyblock}
+module ISG_Deciders
+  def no_choice?
+    return !@neighbors.select{|k| k.on}.empty?
+  end
+  def best_choice?
+    if no_choice?
+      return false
+    else
+      return (@covers.current_cover.include? @id) and (@neighbors.select{|k| !k.off?}.max < self)
+    end
+  end
+  def update_dep_graph
+    @covers update_dep_graph @onlist, @offlist
+  end
+end
+\end{rubyblock}

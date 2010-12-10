@@ -1,0 +1,12 @@
+\begin{rubyblock}
+class ISGNode < ISDGRoot
+  attr_accessor :neighborhood |; \label{line:attr-neighborhood} ;|
+  def initialize *args
+    super  |; \label{line:isnode-super} ;|
+    @neighborhood = [] |; \label{line:neighborhood} ;|
+  end
+  def get_dep_graph_type
+    return Object.const_get('IS_Graph')
+  end
+end
+\end{rubyblock}

@@ -180,7 +180,7 @@ There are three basic types of objects that make up the platform, Simulators, Gr
 To design and run experiments, it is important to know how to generate a Graph, how to create and run a Simulator and what information wil be returned by the simulation. 
 
 \subsubsection{Simulators}
-
+\label{sec:sim-objects-simulator}
 Simulators are extremely simple. Figure~\ref{fig:sim-class} is the class diagram for the root object in the simulator hierarchy, {\bfseries RandomSimulator}. The root object acts as a specification for simulation. It is the only simulator that can be generated without a preexisting Graph. 
 
 \input{figs/fig-sim-class.tex}
@@ -369,6 +369,6 @@ PCDG using redundancy checking outperforms PCDG with global reshuffle regardless
 When communication costs are accounted for, the performance of DEEPS and PCDG improves when local reorganization using redundancy checking is used in place of global reshuffling. Figures~\ref{plt:deep-cost} and~\ref{plt:pcdg-cost} show how performance is affected by accounting for network maintenance.
 \input{plts/plt-deep-cost.tex}
 \input{plts/plt-pcdg-cost.tex}
-\bibliography{../IPDPS_2010/vertex_bib}
+\bibliography{vertex_bib}
 \end{document}
 % LocalWords:  Koufaganis

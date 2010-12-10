@@ -1,6 +1,7 @@
 \begin{rubyblock}
 module IS_Combinator
   include Combinator
+  include Two_Hop_Complete |; \label{line:two-complete} ;|
   def test_cover? c,e
     e.each{|k| return false if (k-c).empty?}
     return true
