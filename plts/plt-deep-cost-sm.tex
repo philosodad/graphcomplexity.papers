@@ -1,0 +1,26 @@
+\begin{figure}[htp]
+\begin{center}
+\begin{tikzpicture}[scale=.75]
+  \begin{axis}[xlabel=Cost, ylabel=Lifetime, legend style={at={(0.05,0.05)}, font=\footnotesize, anchor=south west},  cycle list name={three}]
+    \addplot+[bls] table [x=cost, y=deeps_step]{\costcompone};
+    \addplot+[bls] table [x=cost, y=deeps_step]{\costcomptwo};
+    \addplot+[bls] table [x=cost, y=deeps_step]{\costcompthree};
+    \addplot+[inv] table [x=cost, y=deeps_run]{\costcompone};
+    \addplot+[inv] table [x=cost, y=deeps_run]{\costcomptwo};
+    \addplot+[inv] table [x=cost, y=deeps_run]{\costcompthree};
+    \legend{DEEPS (20),DEEPS (40),DEEPS (80)}
+  \end{axis}
+  \begin{axis}[axis x line=none, axis y line=none, legend style={at={(0.95,0.95)}, font=\footnotesize, anchor=north east},  cycle list name={three}]
+    \addplot+[inv] table [x=cost, y=deeps_step]{\costcompone};
+    \addplot+[inv] table [x=cost, y=deeps_step]{\costcomptwo};
+    \addplot+[inv] table [x=cost, y=deeps_step]{\costcompthree};
+    \addplot+[grt] table [x=cost, y=deeps_run]{\costcompone};
+    \addplot+[grt] table [x=cost, y=deeps_run]{\costcomptwo};
+    \addplot+[grt] table [x=cost, y=deeps_run]{\costcompthree};
+    \legend{,,,DEEPS+R (20),DEEPS+R (40),DEEPS+R (80)}
+  \end{axis}
+\end{tikzpicture}
+\caption{Deeps with Communication Costs}
+\label{plt:deep-cost}
+\end{center}
+\end{figure}
