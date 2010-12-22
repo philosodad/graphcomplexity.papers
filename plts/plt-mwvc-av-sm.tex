@@ -1,0 +1,30 @@
+\begin{figure}[htp]
+\begin{center}
+\begin{tikzpicture}[scale=.75]
+  \begin{axis}[xlabel=Average Degree, ylabel=Total Weight, legend style={at={(.95,.69)}, label={[font=\footnotesize]left:K/Y+R}, font=\footnotesize, anchor=south east}, legend columns=2, cycle list name={four-1-0}]
+    \addplot+[grt] table  [x=links, y=star-red]{\averageone};
+    \addplot+[grt] table  [x=links, y=star-red]{\averagetwo};
+    \addplot+[grt] table  [x=links, y=star-red]{\averagethree};
+    \addplot+[grt] table  [x=links, y=star-red]{\averagefour};
+    \addplot+[inv] table [x=links, y=mat-red]{\averageone};
+    \addplot+[inv] table [x=links, y=mat-red]{\averagetwo};
+    \addplot+[inv] table [x=links, y=mat-red]{\averagethree};
+    \addplot+[inv] table [x=links, y=mat-red]{\averagefour};
+    \legend{(120),(240),(480),(960)}
+  \end{axis}
+  \begin{axis}[axis x line=none,axis y line=none, legend style={at={(.95,.68)}, label={[font=\footnotesize]left:DGMM+R}, font=\footnotesize, anchor=north east}, legend columns=2, cycle list name={four-0-1}]
+    \addplot+[inv] table  [x=links, y=star-red]{\averageone};
+    \addplot+[inv] table  [x=links, y=star-red]{\averagetwo};
+    \addplot+[inv] table  [x=links, y=star-red]{\averagethree};
+    \addplot+[inv] table  [x=links, y=star-red]{\averagefour};
+    \addplot+[bls] table [x=links, y=mat-red]{\averageone};
+    \addplot+[bls] table [x=links, y=mat-red]{\averagetwo};
+    \addplot+[bls] table [x=links, y=mat-red]{\averagethree};
+    \addplot+[bls] table [x=links, y=mat-red]{\averagefour};
+    \legend{,,,,(120),(240),(480),(960)}
+  \end{axis}
+\end{tikzpicture}
+\caption{Average Weights For MWVC}
+\label{plt:mwvc-av}
+\end{center}
+\end{figure}
