@@ -6,7 +6,7 @@ Algorithm~\ref{alg:dgmm} (DGMM) terminates in $O(log \Delta)$ rounds with high p
 \input{proofs/terms-dgmm-2.tex}
 \input{proofs/assms-dgmm-random.tex}
 
-\begin{IEEEproof}[Proof of Lemma~\ref{lem:dgmm-log}]
+\begin{proof}[Proof of Lemma~\ref{lem:dgmm-log}]
 \begin{lprp}
 \label{prop:dgmm-log-each}
 With high probability, each active node in the graph joins the cover with a minimum probability of $\sfrac{1}{8}$ in each round.
@@ -15,7 +15,7 @@ With high probability, each active node in the graph joins the cover with a mini
 \label{prop:dgmm-log-alpha}
 WHP, $\delta$ decreases by at least $\sfrac{1}{8}$ in each round.
 \end{lprp}
-\begin{IEEEproof}[Proof of Proposition~\ref{prop:dgmm-log-each}]
+\begin{proof}[Proof of Proposition~\ref{prop:dgmm-log-each}]
 Let us assume that there is an active node $w$ in the graph that does not join the cover with a probability of at least $\sfrac{1}{8}$. We know that at the beginning of the round, $w$ will choose to either be a sender or a reciever with equal probability. Let us assume that $w$ chooses to be a reciever.
 
 We know that $w$ has some number of active neighbors, indicated by $\alpha(w)$. Each neighbor of $w$ also has some number of active neighbors. Each active degree is an integer between 1 and $\delta$. Following Assumption~\ref{assm:distribution}, we can consider each node to have approximately the same active degree, which we indicate by $\alpha$. 
@@ -33,8 +33,8 @@ Following Assumption~\ref{assm:likelihood}, which follows directly from Assumpti
 However, we did not account for the possibility that $w$ would choose to be a sender. As we have just demonstrated in the case of the active neighbor $v$, there is some possibility greater than 0 that if $w$ chooses to be a sender, $w$ will also join the cover. If we designate the possibility of a sender being chosen by a reciever as a positive value $\epsilon$, then the odds that a sender will join the cover become $\sfrac{\epsilon}{2}$. Therefore, for the node $w$, the odds that $w$ will join the cover are:\begin{equation*}\frac{1}{8} + \frac{\epsilon}{2} \ge \frac{1}{8}\end{equation*}
 
 This contradicts our initial assumption that $w$ would not join the cover with a probability of at least $\sfrac{1}{8}$, and so Proposition~\ref{prop:dgmm-log-each} is correct.
-\end{IEEEproof}
-\begin{IEEEproof}[Proof of Proposition~\ref{prop:dgmm-log-alpha}]
+\end{proof}
+\begin{proof}[Proof of Proposition~\ref{prop:dgmm-log-alpha}]
 We consider a node $u$, where $\alpha(u) = \delta$. $u$ may choose to be a sender or a receiver in this round, and $u$ may or may not join the matching. We do make the assumption that $u$ does not join the cover in this round.
 
 We add a notation, $\cR_v$ and $\cS_v$, which indicates the neighbors of $v$ that are either recievers or senders, respectively.
@@ -46,8 +46,8 @@ $\forall v \in \cR_u, \alpha(v) = \gamma$, therefore, $\forall v \in \cR_u, |\cS
 Therefore, $\sfrac{\delta}{4}$ of the neighbors of $w$ will both be recievers and recieve an invitation. Each of these joins the cover with a probability of $\sfrac{1}{2}$. Therefore, we can calculate from the magnitude of $\cR_u$ and the behavior of each node $v \in \cR_u$ that in this round, $\sfrac{\delta}{4}\times \sfrac{1}{2}$ of the neighbors of $w$ will join the cover and cover an edge of $w$. Which implies that if $\alpha(w) = \delta$ at the beginning of a round, $\alpha(w) = \delta-\sfrac{\delta}{8}$ at the end of the round.
 
 This decrease will apply to all nodes in the network if degrees and weights are distributed randomly through the graph. Therefore, $\delta$ will decrease by at least $\sfrac{1}{8}$ in each communication round. 
-\end{IEEEproof}
+\end{proof}
 
 Therefore, WHP, the number of communication rounds required to resolve Algorithm~\ref{alg:dgmm} for a random graph is $O(\log\Delta)$.
 
-\end{IEEEproof} 
+\end{proof} 

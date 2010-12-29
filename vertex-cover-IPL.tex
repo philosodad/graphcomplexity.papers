@@ -1,0 +1,38 @@
+\documentclass[review ]{elsarticle}
+\input{preamble.tex}
+\bibliographystyle {elsarticle-num}
+\begin{document}
+\title{A Simple Distributed Algorithm for Minimum Weighted Vertex Cover}
+\author[gsu]{J. Paul Daigle}
+\ead{j.paul.daigle@gmail.com}
+\author[gsu]{Sushil K. Prasad}
+\ead{sushil.prasad@gmail.com}
+\address[gsu]{Department of Computer Science, Georgia State University, P.O. Box 3994, Atlanta, GA  30302-3994}
+\begin{abstract} Vertex cover, a minimal set of nodes to cover all edges in a graph, is an abstraction of coverage problems in sensor networks, transportation networks, etc., and is a well-known NP-hard problem.  Minimum weighted vertex cover (MWVC) problem asks for further minimizing the cumulative weight of a vertex cover.  We present a new distributed 1-hop algorithm for the MWVC problem with theoretical and practical value.  Our first 1-hop approximation algorithm, based on matching a maximal set of non-adjacent edges, is provably 2-optimal with a communication complexity of $O(\log\Delta)$.   It compares very well with the current state-of-art in quality while significantly reducing communication cost.
+\end{abstract}
+
+\begin{keyword}Distributed Algorithms \sep Graph Algorithms \sep Vertex Cover \end{keyword}
+\maketitle
+
+\section{Introduction}
+
+The Minimum Vertex Cover problem and its weighted variant are NP-Complete problems with several known linear time sequential algorithms that provide constant factor approximations. The existence of such algorithms suggests that it should be theoretically possible to discover a distributed or parallel algorithm to provide a constant factor approximation in constant time, however, it has been proven that no such algorithm exists\cite{1011811}. 
+
+Here we present a distributed algorithm that provides a two-approximate solution to Minimum Weighted Vertex Cover in $O(\log\Delta)$ rounds with high probability, where $\Delta$ is the largest degree of the graph. This algorithm, based on Maximal Matchings, is the first distributed algorithm that we are aware of with a performance based on $\Delta$ rather than on the size of the graph. 
+
+\subsection{Problem Definition}
+\input{defs/vertex-cover-def.tex}
+\subsection{Prior Work}
+
+Sequential Linear time algorithms for covering problems are surveyed in detail in \cite{254190}. The seminal paper on Linear Programming techniques for constant ratio approximation of MWVC was published by Bar-Yehuda and Even in 1981 \cite{Bar-Yehuda:1981lr}. Gonzalez created a 2-optimal LP-Free linear time algorithm based on Maximal Matching in 1995 which is the basis of our distributed algorithm \cite{Gonzalez1995129}. 
+
+We are aware of two distributed algorithms for minimum weighted vertex cover. A 2-optimal algorithm based on maximal matching \cite{1435381}, based on \cite{Israel:1986:FSR:5361.5365}, which uses a very similar approach to our own. This algorithm uses $O(\log n + \hat{W})$ communication rounds, where $\hat{W}$ is the average vertex weight. A simpler $O(\log n)$ algorithm is presented in \cite{1582746}, which relies on constructing disjoint trees.
+
+\section{Algorithm}
+\subsection{Description}
+\input{secs/dgmm-descr.tex}
+\subsection{Performance}
+\input{proofs/prf-dgmm-term-log.tex}
+\bibliography{vertex_bib}
+\end{document}
+
