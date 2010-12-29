@@ -7,7 +7,7 @@ In this section, we create a new simulator to solve the Maximum Weighted Indepen
 \input{defs/def-is.tex}
 
 \paragraph{Approach}
-
+\label{par:approach}
 We start by formulating an algorithm to solve the problem. In this case, we will use the Dependency Graph framework to solve the problem, passing over the question of whether this problem can be solved locally at all. Because much of our design will be based on a finite state machine model, we begin by defining the needed communication and action steps to move each independent node towards a finished state. Figure~\ref{fig:isdg-alg} shows the steps for Algorithm~\ref{alg:alg-isdg}.
 
 \begin{enumerate}
@@ -74,7 +74,7 @@ At this point, we can easily define the class for an Independent Set Dependency 
 \input{exas/exa-dep-node-root.tex}
 \input{exas/exa-dep-node-isg.tex}
 
-Setting the degree for each node is best done by the Dependency Graph after edges and neighbors have been set. Each dependency node is a set of nodes from the base graph. A dependency node's neighbors are the dependency nodes which intersect with this set. We define the weight of an edge between two nodes implicitly as the magnitude of this intersection, and the degree of the node as the sum of these weights. Figure~\ref{fig:is-graph-2} shows the neighbors, weights, and degree for the node $\{7,8,2,1\}$. Example~\ref{exa:dep-graph-isg} shows the completed dependency graph class.
+Setting the degree for each node is best done by the Dependency Graph after edges and neighbors have been set. Each dependency node is a set of nodes from the base graph. A dependency node's neighbors are the dependency nodes which intersect with this set. We define the weight of an edge between two nodes implicitly as the magnitude of this intersection, and the degree of the node as the sum of these weights.\footnote{This is an abstraction. Formally, we are simply defining the degree of a node in the hypergraph formed by creating a single edge shared between each node that contains a specific attribute, such as node ID).  Figure~\ref{fig:is-graph-2} shows the neighbors, weights, and degree for the node $\{7,8,2,1\}$. Example~\ref{exa:dep-graph-isg} shows the completed dependency graph class.
 \input{exas/exa-dep-graph-isg.tex} 
 
 To complete the basic structural framework for the new algorithm, we need to create network and simulation generators. Commonly networks are not constructed on their own. In a typical experiment, several algorithms must be run on one network configuration. To this end, most network constructors take a network as their input. This is also the reason that most node types take a node as a constructor argument. In this case, we take advantage of that to write two very short definitions, the Root and Standard classes for IS\_Networks shown in Example~\ref{exa:netgen-isg}.\footnote{It is also important to require the file containing the IS Node definitions in the 'netgen.rb' file.} We also need to add a method to the {\bf Neighborly} module to build the 2-hop neighborhood.
@@ -91,9 +91,9 @@ As detailed in Sections~\ref{sec:sim-objects-simulator} and \ref{sec:sim-helpers
 We must define two automata. One controls the process of the algorithm in the network, the communication of information and the decision making process. The other concerns the internal operation of a node in deciding how to evaluate the nodes on the dependency graph and when to turn on or off. The rules for both are relatively simple. The communication behavior, including the transfer of two hop information, is captured in the module defined in Example~\ref{exa:actions-isg}.  
 \input{exas/exa-actions-isg.tex}
 
-Some explanation may be in order about the notation of the Ruby language. The Ruby {\bfseries case} statement can be interpreted as being similar to a switch in C, and when placed between two sets, as in lines~\algref{exa:actions-isg}{code:union-1} and \ref{code:union-2}, the vertical bar denotes set union. The rules enforce the requirement that nodes be able to collect information from a two-hop neighborhood. The {\bfseries :analyze}, {\bfseries :update}, and {\bfseries :done} states correspond to the states \cAd, \cUd, and \cId/\cOd\ from Figure~\ref{fig:isdg-alg}. 
+Some explanation may be in order about the syntax of the Ruby language. The Ruby {\bfseries case} statement can be interpreted as being similar to a switch in C, and when placed between two sets, as in lines~\algref{exa:actions-isg}{code:union-1} and \ref{code:union-2}, the vertical bar denotes set union. The rules enforce the requirement that nodes be able to collect information from a two-hop neighborhood. The {\bfseries :analyze}, {\bfseries :update}, and {\bfseries :done} states correspond to the states \cAd, \cUd, and \cId/\cOd\ from Figure~\ref{fig:isdg-alg}. 
 
 The three undefined methods in lines~\ref{code:bestchoice-call}, \ref{code:nochoice-call}, and \ref{code:update-call} are shown in Example~\ref{exa:deciders-isg}. The {\ttfamily no\_choice?} method checks to see if any neighbors have decided to join the independent set, which would force a node to decide not to join the set itself. The {\ttfamily best\_choice?} and {\ttfamily update\_dep\_graph} methods require modifications to the Dependency Graph class. In particular, the method {\ttfamily update\_dep\_graph} requires that we define the rules for navigating the dependency graph. 
 \input{exas/exa-deciders-isg.tex}
 
-
+In Paragraph~\ref{par:approach} the rules for the dependency graph are sketched. These rules call for a node to turn on if it is the heaviest node in the "best local set". 
