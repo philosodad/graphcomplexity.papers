@@ -1,6 +1,4 @@
-\begin{figure}[htp]
-\begin{center}
-\begin{tikzpicture}[scale=.75]
+\begin{tikzpicture}[scale=.6]
   \begin{axis}[xlabel=Average Degree, ylabel=Communication Rounds, legend style={at={(0.95,0.95)}, font=\footnotesize, label={[font=\footnotesize]left:K/Y}, anchor=north east}, legend columns=2, cycle list name={four-1-0}]
     \addplot+[grt] table [x=links, y=star-reg]{\runsone};
     \addplot+[grt] table [x=links, y=star-reg]{\runstwo};
@@ -24,7 +22,4 @@
     \legend{,,,,(120),(240),(480),(960)}
   \end{axis}
 \end{tikzpicture}
-\caption{Rounds to resolve MWVC}
-\label{plt:mwvc-rn}
-\end{center}
-\end{figure}
+
