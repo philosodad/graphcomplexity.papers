@@ -32,12 +32,23 @@ We are aware of two distributed algorithms for minimum weighted vertex cover. A 
 \subsection{Description}
 \input{secs/dgmm-descr.tex}
 \subsection{Performance}
+\label{ssb:algorithms-dgmm-performance}
 \input{proofs/prf-dgmm-term-log.tex}
 \section{Experiment and Results}
 
 In order to confirm our performance predictions, we designed a simulator to implement our algorithm (DGMM) and the algorithm of Koufoganiakkis and Young (K/Y). We generated random weighted graphs for $n=120, n=240, n=480, \text{and} n=960$, with average degrees of 3, 6, 12, 24, 48 and 96. 50 graphs were generated for each combination of sizes and average degree, for a total of 1200 graphs. DGMM and K/Y were used to produce a vertex cover for each graph, and the total weight and number of communication rounds were tallied and averaged for each of the 24 graph sizes. Our results showed that DGMM produced covers of approximately the same weight as K/Y in significantly fewer communication rounds in each case. Figures~\ref{plt:dgmm-comp} and \ref{plt:mwvc-rn} show our experimental results.
 
 \input{figs/fig-mwvc-results.tex}
+
+\section{Discussion}
+
+\subsection{Discussion}
+The general approach of this algorithm, that of finding a matching on the graph, can be extended to solve other problems. For instance, it is easy to see how a matching could be used to generate an edge coloring or an independent set. In practical applications, such as in sensor networks, reducing the number of communication rounds necessary to solve covering or coloring problems can have positive results for the lifetime of the network. Algorithms that are applied to such networks must also be scalable. The performance gains for our algorithm are considerable in large graphs, particularly sparse graphs. In applications that require large unit disk graphs, we expect our approach to yield practical results.
+
+\subsection{Conclusion}
+
+We have introduced a new distributed algorithm for the Minimum Weighted Vertex Cover based on maximal matchings. The previous lower bound for this problem was $O(\log n)$ with high probability, we have shown that our algorithm improves this to $O(\log \Delta)$ for random graphs. 
+
 \bibliography{vertex_bib}
 \end{document}
 
