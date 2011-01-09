@@ -1,0 +1,46 @@
+\begin{figure}[htp]
+  \caption{DGMM Automata}
+  \begin{center}
+  \begin{tikzpicture}[shorten >=1pt,node distance=1cm,on grid,auto, bend angle=75, every state/.style={scale=1, minimum size=18pt, inner sep=2pt}]
+    %\draw [help lines] (-1,-4) grid (5,3);
+    \path [help lines] (-1,-4) grid (5,3);
+		\node [ text width = 3cm, right ] at (.75,1.7) {
+		\begin{tabular}{ll}
+		\cCd: Choose & \cLd: Listen \\
+		\cId: Invite & \cRd: Respond \\
+		\cWd: Wait & \cUd: Update \\
+		& \cEd: Exchange \\
+		& \cDd: Done \\
+		\end{tabular}
+}; 
+    \node [state, initial]   (C)          {\cCd};
+    \node [state] (I)            at (1,1) {\cId};
+    \node [state] (L)            at (1,-1) {\cLd};
+    \node [state] (W)            at (2,1)       {\cWd};
+    \node [state] (R)            at (2,-1)       {\cRd};
+    \node [state] (U)            at (3,0) {\cUd};
+    \node [state] (E)            at (3,-1)       {\cEd};
+    \node [state, accepting] (D) at (4,0)   {\cDd};
+
+    \path [->] (C) edge              node {h} (I)
+                   edge              node {t} (L)
+               (L) edge              node {} (R)
+               (I) edge              node {} (W)
+               (W) edge              node {} (U)
+               (R) edge              node {} (U)
+               (U) edge              node {} (E);
+    \path [->] (E) edge [bend right] node [above right] {f} (D);
+    \path [->] (W) edge              node {} (U);
+    \path [->] (E) edge [bend left]  node {c} (C);
+
+
+      \node [right, text width=6cm] (key) at (0, -3.25) {
+	$h$: Choose to Invite \\
+        $t$: Choose to Respond \\
+        $c$: Criteria unmet \\
+	$f$: Criteria met 
+	}; 
+  \end{tikzpicture}
+  \end{center}
+  \label{fig:automata}
+\end{figure}

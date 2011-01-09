@@ -1,0 +1,9 @@
+Given an undirected Graph $G(V,E)$ and a set of colors $C$, an {\em Edge Coloring} of the graph is a mapping   
+	\begin{align*} C \mapsto E \suchthat & \forall e_1(u,v) \in E, c \in C, c_1 \mapsto e \\ 
+														&\implies \\
+														&\nexists e_2(u,w) \vee e_2(w,v) \in E \suchthat c_1 \mapsto e_2 \\ 
+									\intertext{and}
+														& \forall e \in E, \exists c \in C \suchthat c \mapsto e 
+\end{align*} 
+
+Informally, we would say that every edge in the graph is assigned a color, and no two contiguous edges in the graph are assigned the same color. The Minimum Edge Coloring Problem is to find the smallest number of colors that can meet these constraints. This problem is known to be NP-complete.
