@@ -1,0 +1,54 @@
+\begin{algorithm}
+\caption{Distributed Maximal-Matching Based Edge-Coloring Algorithm}
+\begin{algorithmic}[1]
+%\Require {$G(V,E)$: a Communicaton Network}
+\ForAll {$v_u \in V$ in parrallel}
+\State {$live_u \gets C$} \Comment All colors are available \label{alglin:ec-init-color}
+\State {$dlist_u \gets {}$} \Comment No colors are used \label{alglin:ec-init-dict}
+\State {$clist_u \gets []$} \Comment No colors are assigned
+\State state $\leftarrow$ \cCd
+\Repeat
+\If {state = \cCd}
+\State {State $\gets (\cI \lor \cL)$} \Comment Coin toss selects state
+
+\ElsIf {state = \cId}
+\State {Randomly select an uncolored edge, $e_{u,v}$}\label{alglin:ec-issue-invite}
+\State {$c \gets live_u(1)$} \Comment assign first available color to $c$
+\State {Broadcast $I_u^v,c$} \Comment $u$ Invites $v$ to color $e_{u,v} \text{ with } c$ 
+\State {state $\leftarrow$ \cWd}
+
+\ElsIf {state = \cLd}
+\State {Recieve $I_x^y,c$} \Comment all local invites
+\If {$y = u$} \Comment invite is targeted to $v_u$
+\State {store $I_x^y,c$}
+\EndIf
+\State {State $\gets \cR$}
+
+\ElsIf {state = \cRd}
+\State {Randomly Select $I_v^u,c$} \Comment from stored invites \label{alglin:ec-choose-invite}
+\State {Broadcast $R_u^v,c $} \Comment $u$ accepts $v's$ invitation
+\State {Assign $c \mapsto e_{u,v}$} 
+\State {$clist_u \hookleftarrow c$} \Comment Append c to assigned colors
+\State {state $\gets \cC$}
+
+\ElsIf {state = \cWd}
+\State {Recieve $R_x^y,c$} \Comment all local responses
+\If {$y = u$} \Comment response is to $v_u$
+\State {Assign $c \mapsto e_{u,v}$} 
+\State {$clist \hookleftarrow c$} 
+\EndIf
+
+\ElsIf {state = \cUd}
+\State {Broadcast $clist_u$} \Comment Broadcast all assigned edge colors
+\State {Recieve $clist_v$} \Comment Receive neighbors assigned colors
+\State {$dlist_u \hookleftarrow clist_v$} 
+
+\ElsIf {State = \cEd}
+\State {Subtract $clist_u$ from $live_u$} \Comment update usable colors
+\EndIf
+\Until {All edges are assigned a color}\label{alglin:ec-end-while}
+\EndFor
+\end{algorithmic}
+\label{alg:edge-color}
+\end{algorithm}
+
