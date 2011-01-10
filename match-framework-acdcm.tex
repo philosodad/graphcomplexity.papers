@@ -1,4 +1,4 @@
-\documentclass[article, 10pt, letter]{IEEEtran}
+\documentclass[conference, 10pt, letter]{IEEEtran}
 \input{preamble.tex}
 \bibliographystyle{IEEEtranS}
 
@@ -14,7 +14,7 @@ Atlanta, Georgia 30303, USA\\}
 \maketitle
 
 \begin{abstract}
-A consistent problem with distributed algorithms for graph problems is scalability. Here we present a scalable, persistently \(O(\Delta)\) automata that can easily be modified to solve a number of problems. We focus on the Minimum Weighted Vertex Cover problem, showing that our approach improves on the best known algorithm, reducing the number of communication rounds from \( O(\log n) \) to \( O(\log \Delta) \). We then show how our framework can easily be modified to solve for Edge Coloring.
+A consistent problem with distributed algorithms for graph problems is scalability. Here we present a scalable automata that can easily be modified to solve a number of problems. We focus on the Minimum Weighted Vertex Cover problem, showing that our approach improves on the best known algorithm, reducing the number of communication rounds from \( O(\log n) \) to \( O(\log \Delta) \). We then show how our framework can be modified to solve for Edge Coloring and Independent Set.
 \end{abstract}
 
 \section{Introduction}
@@ -22,7 +22,7 @@ A consistent problem with distributed algorithms for graph problems is scalabili
 
 The Minimum Vertex Cover problem and its weighted variant are NP-Complete problems with several known linear time sequential algorithms that provide constant factor approximations. The existence of such algorithms suggests that it should be theoretically possible to discover a distributed or parallel algorithm to provide a constant factor approximation in constant time, however, it has been proven that no such algorithm exists\cite{1011811}. 
 
-Here we present a distributed algorithm that provides a two-approximate solution to Minimum Weighted Vertex Cover in $O(\log\Delta)$ rounds with high probability, where $\Delta$ is the largest degree of the graph. This algorithm, based on Maximal Matchings, is the first distributed algorithm that we are aware of with a performance based on $\Delta$ rather than on the size of the graph. We extend our framework for this algorithm and show how it can be applied to two related problems, the Maximum Weighted Independent Set Problem and the Minimum Edge Coloring problem.
+Here we present a distributed algorithm that provides a two-approximate solution to Minimum Weighted Vertex Cover in $O(\log\Delta)$ rounds with high probability, where $\Delta$ is the largest degree of the graph. This algorithm, based on maximal matchings, is the first distributed algorithm that we are aware of with a performance based on $\Delta$ rather than on the size of the graph. We extend our framework for this algorithm and show how it can be applied to two related problems, the Maximum Weighted Independent Set Problem and the Minimum Edge Coloring problem.
 
 \subsection{Problem Definition}
 \input{defs/vertex-cover-def.tex}
@@ -30,13 +30,24 @@ Here we present a distributed algorithm that provides a two-approximate solution
 
 Sequential Linear time algorithms for covering problems are surveyed in detail in \cite{254190}. The seminal paper on Linear Programming techniques for constant ratio approximation of MWVC was published by Bar-Yehuda and Even in 1981 \cite{Bar-Yehuda:1981lr}. Gonzalez created a 2-optimal LP-Free linear time algorithm based on Maximal Matching in 1995 which is the basis of our distributed algorithm \cite{Gonzalez1995129}. 
 
-We are aware of two distributed algorithms for minimum weighted vertex cover. A 2-optimal algorithm based on maximal matching \cite{1435381}, based on \cite{Israel:1986:FSR:5361.5365}, which uses a very similar approach to our own. This algorithm uses $O(\log n + \hat{W})$ communication rounds, where $\hat{W}$ is the average vertex weight. A simpler $O(\log n)$ algorithm is presented in \cite{1582746}, which relies on constructing disjoint trees.
+We are aware of two prior distributed algorithms for minimum weighted vertex cover. Grandoni et. al present a 2-optimal algorithm based on maximal matching \cite{1435381}, based on Israel and Itai's 1986 paper \cite{Israel:1986:FSR:5361.5365}. This algorithm uses $O(\log n + \hat{W})$ communication rounds, where $\hat{W}$ is the average vertex weight, and $n$ is the number of vertexes. Koufogiannakis and Young present a simpler $O(\log n)$ algorithm in 2009 \cite{1582746}.
 
+\subsection{Organization of this paper}
+Our primary practical result is a new distributed algorithm that reduces the communication complexity for finding a 2-optimal minimum weighted vertex cover from $O(\log n)$ to $O(\log \Delta)$. This algorithm uses a simple framework to convert the sequential algorithm presented in \cite{Gonzalez1995129} to the distributed case. We verify our findings theoretically and through experiment.
+
+The distributed framework is presented in Section~\ref{sec:framework}. In Section~\ref{sub:algorithms-dgmm}we describe the sequential algorithm of Gonzalez. We show how the framework is applied to produce the distributed algorithm in Section~\ref{ssb:algorithms-dgmm-description} and provide a detailed proof of its performance bounds in Section~\ref{ssb:algorithms-dgmm-performance}. Section~\ref{sub:algorithms-other} we apply the framework to the Minimum Weighted Independent Set problem~\ref{ssb:algorithms-other-is} and Maximum Edge Coloring problem~\ref{ssb:algorithms-other-ec}.
+ 
 \section{Algorithmic Framework}
-
-Our framework is based on a simple handshake protocol, shown in Figure~\ref{fig:automata}. Each node begins a decision round in the \cCd, or {\em choose} state, and chooses randomly whether to transition to the \cId\ or \cLd\ state. Nodes in the \cId\ state choose a single neighbor and issue an {\em invitation} to that neighbor to form a pair during this round. And invitation should contain all of the information that the invitee needs to compute the sub-problem for this round. Nodes in the \cLd\ state collect their invitations. In the next step, these position are reversed, each node that was in the \cLd\ state transitions to the \cRd\ state, chooses a single invitation from their collection and responds to that invitation. Nodes in the \cId\ state transition to \cWd\ state filter the local messages, looking for a response to the prior invitation. Responses, like invitations, should contain all the data needed to solve the sub-problem for this round. Finally, all nodes transition to the \cUd\ state and solve their local-subproblem, broadcasting the results in the \cEd state. Nodes with no outstanding problems transition to \cDd, nodes with outstanding sub-problems go back to \cCd.
+\label{sec:framework}.
+Our framework is based on a simple handshake protocol, represented by the state machine in Figure~\ref{fig:automata}. We assume a message-passing model of of distributed computing. Each compute node is assumed to be able to communicate with all of it's neighbors in any communication step. Communication is assumed to be synchronized. We further assume that each node is assigned some unique id.
 
 \input{figs/fig-automata.tex}
+
+Each node begins a decision round in the \cCd, or {\em choose} state, and chooses randomly whether to transition to the \cId\ or \cLd\ state. Nodes in the \cId\ state choose a single neighbor with a shared sub-problem (such as covering or coloring a shared edge) and issue an {\em invitation} to that neighbor to form a pair during this round. An invitation should contain all of the information that the invitee needs to compute the sub-problem for this round. Nodes in the \cLd\ state collect any invitations addressed to them. 
+
+In the next step, each node that was in the \cLd\ state transitions to the \cRd\ state, chooses a single invitation from their collection and responds to that invitation. Nodes in the \cId\ state transition to \cWd\ state and filter incoming messages for the response to the invitation that they sent in the previous step. Responses, like invitations, should contain all the data needed to solve the sub-problem for this round. 
+
+Finally, all nodes transition to the \cUd\ state and solve their local-subproblem, then transition to the \cEd\ state in order to broadcast their solutions. Nodes with no outstanding problems to be solved transition to \cDd, nodes with outstanding sub-problems go back to \cCd.
 
 \subsection{Application to Minimum Weighted Vertex Cover}
 \label{sub:algorithms-dgmm}
@@ -47,27 +58,48 @@ Algorithm~\ref{alg:dgmm} is our distributed implementation of the 2-optimal mini
 
 \input{eqns/eqn-gmm.tex}
 
-So if there are no previously weighted edges incident to either endpoint, the weight of the edge is $min(w(u),w(v))$. A vertex $u$ joins the cover when, for all it's weighted edges, $\sum_i w(e(u,i)) \equiv w(u)$. When ~\eqref{eqn:gmm} is applied to subsequent incident edges of $u$, the result will be 0. The algorithm terminates when each edge has been weighted. 
+So if there are no previously weighted edges incident to either endpoint, the weight of the edge is $min(w(u),w(v))$. A vertex $u$ joins the cover when, for all it's weighted edges: \begin{equation}\sum_i w(e(u,i)) \equiv w(u) \label{eqn:sat} \end{equation} When~\eqref{eqn:gmm} is applied to subsequent unweighted incident edges of $u$, the result will be 0. The algorithm terminates when each edge has been weighted. 
 
-In GMM, every edge is examined exactly one time. If no endpoints of the edge are in the cover, one endpoint will join the cover. Finally, all the edges in a matching can be evaluated in arbitrary order without side effects. We explore this third point further in Section~\ref{ssb:algorithms-dgmm-performance}. 
+This process produces a {\em generalized matching} $G'$ for the vertex weighted input graph $G$. $G'$ is an edge weighted graph that is isomorphic to G, and is a generalized matching for $G$ if: 
+\begin{equation}
+\forall u \in V, \sum_i w(e(u,i)) \le w(u)\end{equation}
 
-The distributed version of the algorithm chooses some disjoint set of edges and assigns weights to those edges according to~\eqref{eqn:gmm}. The framework automata is used to construct the set of disjoint edges. Each invitation contains the current incident weight\footnote{The sum of the edge weights} of the inviting node, and each response contains the incident weight of the responding node. Therefore, during the \cUd\ state, vertex pairs formed during the invitation/acceptance phases are able to assign a weight to the edge between them independently using equation~\ref{eqn:gmm}, which allows each node in the pair to decide whether or not to join the cover. During the \cEd\ state there is some update of unweighted edges, as each node can assign a weight of zero to any edges incident to a vertex which has joined the cover.
+A matching is considered {\em maximal} if increasing the weight of any edge in $G'$ causes $G'$ to no longer be a generalized matching for $G$.
+
+The property of a generalized maximal matching that Gonzalez proves is that the vertexes that satisfy~\eqref{eqn:sat} for $G'$ are a 2-optimal vertex cover for G.
+
+In GMM, every edge is examined exactly once. If no endpoints of the edge are in the cover, one endpoint will join the cover. Finally, all the edges are be evaluated in arbitrary order. We explore this third point further in Section~\ref{ssb:algorithms-dgmm-performance}. 
+
+Our distributed version of the algorithm chooses some disjoint set of edges (a matching) and assigns weights to those edges according to~\eqref{eqn:gmm}. The framework automata is used to construct the set of disjoint edges in the follow manner. For the following description, we will substitute the symbol $\varpi(u)$ for the term $\sum_i w(e(u,i))$ in~\eqref{eqn:gmm}.
+
+Each node begins in the \cCd\ state. In the first step, each node chooses to transition to state \cId\ or \cLd\ with equal probability. Each node $u$ in the \cId\ state chooses an unweighted edge $e(u,v)$ at random, and broadcasts an invitation containing its incident edge weight ($\varpi(u)$) and the edge it wants to weight. Each node $v$ in the \cLd\ state collects the invitations that contain an edge $e(i,v)$.
+
+For the next step, nodes in the \cLd\ state transition to the \cRd\ state, and nodes in the \cId\ state transition to the \cWd\ state. Each node $v$ in the \cLd\ state chooses an invitation it collected in the prior step and issues a response containing $\varpi(v)$ and the edge $e(u,v)$ that it agrees to weight. Each node in the \cWd\ state filters these responses for the one containing an edge $e(u,i)$ (that is, a response to the invitation it sent in the prior round). 
+
+At this point, there are a number of node pairs in the graph, every node $u$ that sent an invitation to weight an edge $e(u,v)$ forms a pair with $v$ if $v$ responds with an agreement to weight $e(u,v)$. The edges that will be weighted in this round are a matching.
+
+Every node now transitions to the \cUd\ state. Those that have formed node pairs weight the edge $e(u,v)$ according to~\eqref{eqn:gmm}. One of $u,v$ will join the cover at this point. For brevity, in Algorithm~\ref{alg:dgmm}, the \cUd\ state is implied in lines~\algref{alg:dgmm}{alglin:dgmm-update-weight-R} and \algref{alg:dgmm}{alglin:dgmm-update-weight-W}.
+
+Every node now transitions to the \cEd\ state, and broadcasts its current status to its neighbors. If a node $v$ receives a message that a neighbor $u$ has joined the cover will assign a weight of 0 to $e(u,v)$ and remove $e(u,v)$ from its list of unweighted edges. Again for brevity, the \cEd\ state is executed by implication in lines~\algref{alg:dgmm}{alglin:dgmm-state-E-W} and \algref{alg:dgmm}{alglin:dgmm-state-E}.
+
+Every node that is in the cover now transitions to the \cDd\ state, as does any node that has no unweighted edges remaining. Nodes that still have unweighted edges go back to the \cCd\ state and repeat the process. 
 
 \input{alg/alg-dgmm.tex}
 
-\subsection{Performance}
+\subsubsection{Performance}
 
 \label{ssb:algorithms-dgmm-performance}
 
-Despite its overall simplicity, Algorithm~\ref{alg:dgmm} has a running time of $O(\log \Delta)$, which improves on the previous best result of $O(\log n)$ in \cite{1582746} without sacrificing the performance boundary of two-optimality. A formal proof of our performance claims follows.
+Despite its overall simplicity, Algorithm~\ref{alg:dgmm} has a running time of $O(\log \Delta)$, which improves on the previous best result of $O(\log n)$ in \cite{1582746} without sacrificing the performance bound of two-optimality. A formal proof of our performance claims follows.
 
 \input{proofs/prf-dgmm-term-log.tex}
 
 \subsection{Application to other problems}
-
-Any problem that can be solved by computations over matchings can be solved in a distributed fashion using this framework approach. In this section we briefly examine two such problems, the Independent Set problem and the Edge Coloring problem.
+\label{sub:algorithms-other}
+Any problem that can be solved by computations over matchings can be tackled in a distributed fashion using this framework approach. In this section we briefly examine two such problems, the Independent Set problem and the Edge Coloring problem.
 
 \subsubsection{Independent Set Problem}
+\label{ssb:algorithms-other-is}
 \paragraph{Definition}
 \input{defs/def-is.tex}
 \paragraph{Application of the Framework}
@@ -82,31 +114,32 @@ The application of the framework to the Maximum Weighted Independent Set problem
 If we examine Algorithm~\ref{alg:dgmm}, the MWIS problem can be solved with this automata by replacing all incidences of $True$ with $False$ and vice-versa. While this implies that the number of communication rounds for MWIS would be $O(\log \Delta)$ as well, a formal proof of the quality of this approach is outside the scope of this paper.
 
 \subsubsection{Edge Coloring}
+\label{ssb:algorithms-other-ec}
 \paragraph{Definition}
 \input{defs/def-edge-color.tex}
 \paragraph{Application of the Framework}
 \label{par:apply-edge-color}
 
-Algorithm~\ref{alg:edge-color} shows the application of the framework to the Edge Coloring problem. The primary changes concern the maintenance of the open color lists and the content of broadcast messages. Of particular concern is the maintenance of usable color lists--the requires the maintenance of a dictionary, initiliazed in Line~\algref{alg:edge-color}{alglin:ec-init-dict}, which maintains a separate list of used colors for each neighbor.
+Algorithm~\ref{alg:edge-color} shows the application of the framework to the Edge Coloring problem. The primary changes concern the maintenance of the open color lists and the content of broadcast messages. Of particular concern is the maintenance of usable color lists. This requires the maintenance of a dictionary, initiliazed in Line~\algref{alg:edge-color}{alglin:ec-init-dict}, which maintains a separate list of used colors for each neighbor.
 
 
 \input{alg/alg-edge-color.tex}
 
-Algorithm~\ref{alg:edge-color} uses a simple greedy approach. Each node keeps track of what colors each of it's neighbors have used (shared during the \cEd stage). Colors are taken from an ordered list which is part of the initialization process (Line~\algref{alg:edge-color}{alglin:ec-init-color}). When sending an invitation to a neighbor to set the color for an edge, the node chooses the lowest indexed color that doesn't appear either on its own list of used colors or the neighbor's list of used colors.
+Algorithm~\ref{alg:edge-color} uses a simple greedy approach. Each node keeps track of what colors each of it's neighbors have used (shared during the \cEd\ stage). Colors are taken from an ordered list which is part of the initialization process (Line~\algref{alg:edge-color}{alglin:ec-init-color}). When sending an invitation to a neighbor to set the color for an edge, the node chooses the lowest indexed color that doesn't appear either on its own list of used colors or the neighbor's list of used colors.
 
-Intuitively, we can see that the algorithm will be correct from the process. We know from Section~\ref{ssb:algorithms-dgmm-performance} that no two contiguous edges can be decided in a single round, so in order for two contiguous edges, $e(u,v), e(u,w)$ to have the same color, node $u$ would have to invite a neighbor to share a color that $u$ is already using. We have also shown the automata will not terminate before it reaches it's end condition, so as long as two nodes share an uncolored edge, they will continue to attempt to form a partnership and color the edge. 
+Intuitively, we can see that the algorithm will be correct from the process. We know from Section~\ref{ssb:algorithms-dgmm-performance} that no two incident edges can be decided in a single round, so in order for two incident edges, $e(u,v), e(u,w)$ to have the same color, node $u$ would have to invite a neighbor to share a color that $u$ is already using. We have also shown the automata will not terminate before it reaches it's end condition, so as long as two nodes share an uncolored edge, they will continue to attempt to form a partnership and color the edge. 
 
-A formal proof of Algorithm~\ref{alg:edge-color} is beyond the scope of this paper, however, in limited experiments, we had a running time of $O{\Delta}$ with quality between $\Delta$ and $\Delta+2$. This is detailed in Section~{sec:experiment}.
+A formal proof of Algorithm~\ref{alg:edge-color} is beyond the scope of this paper, however, in limited experiments, we had a running time of $O(\Delta)$ with quality between $\Delta$ and $\Delta+2$. This is detailed in Section~\ref{sec:experiment}.
 
 
 \section{Experiment and Results}
-
-In order to confirm our performance predictions, we designed a simulator to implement our algorithm (DGMM) and the algorithm of Koufoganiakkis and Young (K/Y). We generated random weighted graphs for $n=120, n=240, n=480, \text{and} n=960$, with average degrees of 3, 6, 12, 24, 48 and 96. 50 graphs were generated for each combination of sizes and average degree, for a total of 1200 graphs. DGMM and K/Y were used to produce a vertex cover for each graph, and the total weight and number of communication rounds were tallied and averaged for each of the 24 graph sizes. Our results showed that DGMM produced covers of approximately the same weight as K/Y in significantly fewer communication rounds in each case. Figures~\ref{plt:dgmm-comp} and \ref{plt:mwvc-rn} show our experimental results.
+\label{sec:experiment}
+In order to confirm our performance predictions, we designed a simulator to implement our algorithm (DGMM) and the algorithm of Koufoganiakkis and Young (K/Y). We generated random weighted graphs for $n=120, n=240, n=480, \text{and } n=960$, with average degrees of 3, 6, 12, 24, 48 and 96. 50 graphs were generated for each combination of sizes and average degree, for a total of 1200 graphs. DGMM and K/Y were used to produce a vertex cover for each graph, and the total weight and number of communication rounds were tallied and averaged for each of the 24 graph sizes. Our results showed that DGMM produced covers of approximately the same weight as K/Y in significantly fewer communication rounds in each case. Figures~\ref{plt:dgmm-comp} and \ref{plt:mwvc-rn} show our experimental results.
 
 \input{figs/fig-plt-mwvc-rn.tex}
 \input{figs/fig-plt-dgmm-comp.tex}
 
-In Figure~\ref{plt:dgmm-comp}, the results for both algorithms are nearly identical, indicating that both algorithms found essentially the same covers for the input graphs. In Figure~\ref{plt:mwvc-rn}, the lower 4 lines indicate the number of rounds required to resolve DGMM, and the upper four the number of rounds required to resolve K/Y. The logarithmic growth confirms our experimental predictions, while the minor differences between different input sizes are accounted for by the variation in degree between larger and smaller random graphs.
+In Figure~\ref{plt:dgmm-comp}, the results for both algorithms are nearly identical, indicating that both algorithms found essentially the same covers for the input graphs. In Figure~\ref{plt:mwvc-rn}, the lower 4 curves indicate the number of rounds required to resolve DGMM, and the upper four the number of rounds required to resolve K/Y. The logarithmic growth confirms our experimental predictions, while the minor differences between different input sizes are accounted for by the variation in degree between larger and smaller random graphs.
 
 In the case of the Edge Color Algorithm, we only ran a small set of experiments, 10 experiments for with an no of 200 or 400 and average degrees of 8 and 24. Our small sample confirmed our expectation of $O(\Delta)$ running time, and in no individual case did the number of colors used exceed $\Delta + 2$.
 

@@ -19,16 +19,8 @@
   If these propositions are true, Lemma~\ref{lem:dgmm-edge} is also true. 
   
   \begin{proof}[Proof of Proposition~\ref{prop:dgmm-edge-order}]
-    Equation~\ref{eqn:gmm} for weighting an edge $e(u,v)$ is 
-    \begin{equation*}
-      weight(e(u,v)) = min
-      \begin{dcases}
-        weight(u) - \sum_{i \ne v} weight(e(u,i))\\
-        weight(v) - \sum_{i \ne u} weight(e(v,i))
-      \end{dcases}
-    \end{equation*}
     By definition of a matching, no two edges in a matching share a vertex. Therefore, if an edge $e(u,v)$ is in the matching, no edge $e(u,i)$ is in the matching. 
-    Take a matching \bMd\ in a Graph $G(V,E)$, composed of edges $\{e_0, e_1, ..., e_n\}$. If we use the sequential algorithm to weight the edges in \bMd\ one after the other, it is obvious that no edge outside of \bMd\ will change. Since only edges outside of \bMd\ are used to assign weights to edges inside \bMd\, it does not matter what order the weights are assigned in, or whether the weight assignment occurs to all edges in \bMd\ simultaneously.
+    Take a matching \bMd\ in a Graph $G(V,E)$, composed of edges $\{e_0, e_1, ..., e_n\}$. If we use the sequential algorithm to weight the edges in \bMd\ one after the other according to~\eqref{eqn:gmm} (page~\pageref{eqn:gmm}), it is obvious that no edge outside of \bMd\ will change. Since only edges outside of \bMd\ are used to assign weights to edges inside \bMd\, it does not matter what order the weights are assigned in, or whether the weight assignment occurs to all edges in \bMd\ simultaneously.
     
     Therefore Proposition~\ref{prop:dgmm-edge-order} is true.
   \end{proof}
@@ -43,7 +35,7 @@ At the beginning of every communication round, each node makes an equally weight
 
     Responses are issued by nodes in the \cRd\ state. Each node in this state chooses a single invitation from its received invitations and responds to it. Since $v$ gets two responses, therefore, $v$ must have invited two separate nodes in this round. But $v$ only issues one invitation, so this is a contradiction.
 
-    Case Two: Assume that $v$ receives invitations. A node which recieves invitations updates the edge corresponding to the invitation it recieved. Since $v$ is weighting two edges, $v$ must respond to multiple invitations in this round. However, $v$ only sends a single response message (Line~\algref{alg:dgmm}{alglin:dgmm-choose-invite}., which is a contradiction as well.
+    Case Two: Assume that $v$ receives invitations. A node which recieves invitations updates the edge corresponding to the invitation it recieved. Since $v$ is weighting two edges, $v$ must respond to multiple invitations in this round. However, $v$ only sends a single response message (Line~\algref{alg:dgmm}{alglin:dgmm-choose-invite}), which is a contradiction as well.
     Therefore, Proposition~\ref{prop:dgmm-edge-match} is true.
   \end{proof}
   \begin{proof}[Proof of Proposition~\ref{prop:dgmm-edge-once}]
@@ -51,10 +43,11 @@ At the beginning of every communication round, each node makes an equally weight
     For an edge to be unweighted, both endpoints of the edge would have to halt (enter the \cDd\ state) before the edge is weighted. Nodes halt under two circumstances:
     \begin{enumerate}
     \item The node has joined the cover.
-    \item A nodes neighbors have all joined the cover.
+    \item A node's neighbors have all joined the cover.
     \end{enumerate}
     In the first case, the node will weight all of its unweighted edges to 0. In the second case, the node weights its own edges to 0 if the other endpoint is in the cover.
     Therefore, if the algorithm halts, all edges have been weighted once.
   \end{proof}
-  Therefore, Lemma~\ref{lem:dgmm-edge}: our algorithm weights edges equivalently to the GMM algorithm. As we have indicated, prior work by Gonzalez has shown GMM to be 2-optimal, therefore DGMM is two optimal as well.
+  Therefore, Lemma~\ref{lem:dgmm-edge}: our algorithm weights edges equivalently to the GMM algorithm. As we have indicated, prior work by Gonzalez has shown GMM to be 2-optimal, therefore we have the following corallary.
+\begin{cor}\label{cor:dgmm-two}DGMM is two optimal.\end{cor}
 \end{proof}

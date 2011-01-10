@@ -1,8 +1,8 @@
 \begin{note}[Communication Model]
 \label{not:com-model}
-We assume a message passing model of distributed computing. In each communication round, it is assumed that every node can communicate with its neighbors. Communication is assumed to be synchronous and symetric: if node $a$ is a neighbor of node $b$, node $b$ is a neighbor of node $a$, and if node $a$ has counted $x$ communication steps, so has node $b$.
+We assume a message passing model of distributed computing. In each communication round, it is assumed that every node can communicate with its neighbors. Communication is assumed to be synchronous and symmetric: if node $a$ is a neighbor of node $b$, node $b$ is a neighbor of node $a$, and if node $a$ has counted $x$ communication steps, so has node $b$.
 
-A ``communication round'' is actually three steps: an invitation sending step, an information response step, and an exchange step where neighbors share changes in status.\footnote{It should be noted that the K/Y algorithm also requires three communication events per round.} 
+A ``communication round'' is actually three steps: an invitation sending step, an information response step, and an exchange step where neighbors share changes in status.\footnote{It should be noted that the prior algorithms in the literature also require three communication events per round.} 
 \end{note}
 \begin{note}[Local Information]
 \label{not:dgmm-local-info}
