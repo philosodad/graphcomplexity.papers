@@ -4,8 +4,8 @@
 %\Require {$G(V,E)$: a Communicaton Network}
 \ForAll {$v_u \in V$ in parrallel}
 \State {$live_u \gets C$} \Comment All colors are available \label{alglin:ec-init-color}
-\State {$dlist_u \gets {}$} \Comment No colors are used \label{alglin:ec-init-dict}
-\State {$clist_u \gets []$} \Comment No colors are assigned
+\State {$dlist_u \gets \{\}$} \Comment No colors are used \label{alglin:ec-init-dict}
+\State {$clist_u \gets [\,]$} \Comment No colors are assigned
 \State state $\leftarrow$ \cCd
 \Repeat
 \If {state = \cCd}
