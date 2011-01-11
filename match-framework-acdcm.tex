@@ -35,7 +35,7 @@ We are aware of two prior distributed algorithms for minimum weighted vertex cov
 \subsection{Organization of this paper}
 Our primary practical result is a new distributed algorithm that reduces the communication complexity for finding a 2-optimal minimum weighted vertex cover from $O(\log n)$ to $O(\log \Delta)$. This algorithm uses a simple framework to convert the sequential algorithm presented in \cite{Gonzalez1995129} to the distributed case. We verify our findings theoretically and through experiment.
 
-The distributed framework is presented in Section~\ref{sec:framework}. In Section~\ref{sub:algorithms-dgmm}we describe the sequential algorithm of Gonzalez. We show how the framework is applied to produce the distributed algorithm in Section~\ref{ssb:algorithms-dgmm-description} and provide a detailed proof of its performance bounds in Section~\ref{ssb:algorithms-dgmm-performance}. Section~\ref{sub:algorithms-other} we apply the framework to the Minimum Weighted Independent Set problem~\ref{ssb:algorithms-other-is} and Maximum Edge Coloring problem~\ref{ssb:algorithms-other-ec}.
+The distributed framework is presented in Section~\ref{sec:framework}. In Section~\ref{sub:algorithms-dgmm}we describe the sequential algorithm of Gonzalez. We show how the framework is applied to produce the distributed algorithm in Section~\ref{ssb:algorithms-dgmm-description} and provide a detailed proof of its performance bounds in Section~\ref{ssb:algorithms-dgmm-performance}. Section~\ref{sub:algorithms-other} we apply the framework to the Minimum Weighted Independent Set problem~\ref{ssb:algorithms-other-is} and Maximum Edge Coloring problem~\ref{ssb:algorithms-other-ec}. We provide descriptions of our experiments and results in Section~\ref{sec:experiment}. 
  
 \section{Algorithmic Framework}
 \label{sec:framework}.
@@ -141,7 +141,14 @@ In order to confirm our performance predictions, we designed a simulator to impl
 
 In Figure~\ref{plt:dgmm-comp}, the results for both algorithms are nearly identical, indicating that both algorithms found essentially the same covers for the input graphs. In Figure~\ref{plt:mwvc-rn}, the lower 4 curves indicate the number of rounds required to resolve DGMM, and the upper four the number of rounds required to resolve K/Y. The logarithmic growth confirms our experimental predictions, while the minor differences between different input sizes are accounted for by the variation in degree between larger and smaller random graphs.
 
-In the case of the Edge Color Algorithm, we only ran a small set of experiments, 10 experiments for with an no of 200 or 400 and average degrees of 8 and 24. Our small sample confirmed our expectation of $O(\Delta)$ running time, and in no individual case did the number of colors used exceed $\Delta + 2$.
+In the case of Algorithms~\ref{alg:edge-color} we only ran a small set of experiments, 10 experiments for with an $n$ of 200 or 400 and average degrees of 8 and 24. Our small sample confirmed our expectation of $O(\Delta)$ running time, and in no individual case did the number of colors used exceed $\Delta + 2$.
+
+\section{Discussion}
+
+In sequential algorithms, there are a number of techniques--such as divide and conquer, linear programming, dynamic programming--that can be generalized to tackle a large number of problems. Distributed algorithms have a shorter history and a shorter list of such general techniques. In this paper, we have presented a general framework that can be used to tackle any problem that can be mapped to matchings on a graph. We have applied this framework to three separate problems in graph theory, but the framework could be extended to any problem that be divided and conquered in a like fashion. 
+
+Our application of the framework resulted in a new distributed algorithm for the Minimum Weighted Vertex Cover based on maximal matchings. The previous lower bound for this problem was $O(\log n)$ with high probability, we have shown that our algorithm improves this to $O(\log \Delta)$ for random graphs. 
+
 
 \bibliography{vertex_bib}
 \end{document}
