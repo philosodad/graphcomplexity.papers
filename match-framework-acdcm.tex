@@ -3,7 +3,7 @@
 \bibliographystyle{IEEEtranS}
 
 \begin{document}
-\title{A General Purpose Automata for Distributed Graph Algorithms}
+\title{A Matching Based Automata for Distributed Graph Algorithms}
 
 \author{\IEEEauthorblockN{J. Paul Daigle and Sushil K. Prasad}
 \IEEEauthorblockA{Department of Computer Science\\
@@ -22,7 +22,7 @@ A consistent problem with distributed algorithms for graph problems is scalabili
 
 The Minimum Vertex Cover problem and its weighted variant are NP-Complete problems with several known linear time sequential algorithms that provide constant factor approximations. The existence of such algorithms suggests that it should be theoretically possible to discover a distributed or parallel algorithm to provide a constant factor approximation in constant time, however, it has been proven that no such algorithm exists\cite{1011811}. 
 
-Here we present a distributed algorithm that provides a two-approximate solution to Minimum Weighted Vertex Cover in $O(\log\Delta)$ rounds with high probability, where $\Delta$ is the largest degree of the graph. This algorithm, based on maximal matchings, is the first distributed algorithm that we are aware of with a performance based on $\Delta$ rather than on the size of the graph. We extend our framework for this algorithm and show how it can be applied to two related problems, the Maximum Weighted Independent Set Problem and the Minimum Edge Coloring problem.
+Here we present a distributed algorithm that provides a 2-optimal solution to Minimum Weighted Vertex Cover in $O(\log\Delta)$ rounds with high probability, where $\Delta$ is the largest degree of the graph. This algorithm, based on maximal matchings, is the first distributed algorithm that we are aware of with a performance based on $\Delta$ rather than on the size of the graph. We extend our framework for this algorithm and show how it can be applied to two related problems, the Maximum Weighted Independent Set Problem and the Minimum Edge Coloring problem.
 
 \subsection{Problem Definition}
 \input{defs/vertex-cover-def.tex}
@@ -30,16 +30,16 @@ Here we present a distributed algorithm that provides a two-approximate solution
 
 Sequential Linear time algorithms for covering problems are surveyed in detail in \cite{254190}. The seminal paper on Linear Programming techniques for constant ratio approximation of MWVC was published by Bar-Yehuda and Even in 1981 \cite{Bar-Yehuda:1981lr}. Gonzalez created a 2-optimal LP-Free linear time algorithm based on Maximal Matching in 1995 which is the basis of our distributed algorithm \cite{Gonzalez1995129}. 
 
-We are aware of two prior distributed algorithms for minimum weighted vertex cover. Grandoni et. al present a 2-optimal algorithm based on maximal matching \cite{1435381}, based on Israel and Itai's 1986 paper \cite{Israel:1986:FSR:5361.5365}. This algorithm uses $O(\log n + \hat{W})$ communication rounds, where $\hat{W}$ is the average vertex weight, and $n$ is the number of vertexes. Koufogiannakis and Young present a simpler $O(\log n)$ algorithm in 2009 \cite{1582746}.
+We are aware of two prior distributed algorithms for minimum weighted vertex cover. Grandoni et. al present a 2-optimal algorithm based on maximal matching in 2008\cite{1435381}. This algorithm uses $O(\log n + \hat{W})$ communication rounds, where $\hat{W}$ is the average vertex weight, and $n$ is the number of vertexes. Koufogiannakis and Young present a simpler $O(\log n)$ algorithm in 2009 \cite{1582746}.
 
 \subsection{Organization of this paper}
 Our primary practical result is a new distributed algorithm that reduces the communication complexity for finding a 2-optimal minimum weighted vertex cover from $O(\log n)$ to $O(\log \Delta)$. This algorithm uses a simple framework to convert the sequential algorithm presented in \cite{Gonzalez1995129} to the distributed case. We verify our findings theoretically and through experiment.
 
-The distributed framework is presented in Section~\ref{sec:framework}. In Section~\ref{sub:algorithms-dgmm}we describe the sequential algorithm of Gonzalez. We show how the framework is applied to produce the distributed algorithm in Section~\ref{ssb:algorithms-dgmm-description} and provide a detailed proof of its performance bounds in Section~\ref{ssb:algorithms-dgmm-performance}. Section~\ref{sub:algorithms-other} we apply the framework to the Minimum Weighted Independent Set problem~\ref{ssb:algorithms-other-is} and Maximum Edge Coloring problem~\ref{ssb:algorithms-other-ec}. We provide descriptions of our experiments and results in Section~\ref{sec:experiment}. 
+The distributed framework is presented in Section~\ref{sec:framework}. In Section~\ref{sub:algorithms-dgmm} we describe the sequential algorithm of Gonzalez. We show how the framework is applied to produce the distributed algorithm in Section~\ref{ssb:algorithms-dgmm-description} and provide a detailed proof of its performance bounds in Section~\ref{ssb:algorithms-dgmm-performance}. Section~\ref{sub:algorithms-other} we apply the framework to the Minimum Weighted Independent Set problem~\ref{ssb:algorithms-other-is} and Maximum Edge Coloring problem~\ref{ssb:algorithms-other-ec}. We provide descriptions of our experiments and results in Section~\ref{sec:experiment}. 
  
 \section{Algorithmic Framework}
-\label{sec:framework}.
-Our framework is based on a simple handshake protocol, represented by the state machine in Figure~\ref{fig:automata}. We assume a message-passing model of of distributed computing. Each compute node is assumed to be able to communicate with all of it's neighbors in any communication step. Communication is assumed to be synchronized. We further assume that each node is assigned some unique id.
+\label{sec:framework}
+Our framework is based on a simple handshake protocol, represented by the state machine in Figure~\ref{fig:automata}. We assume a message-passing model of distributed computing. Each compute node is assumed to be able to communicate with all of it's neighbors in any communication step. Communication is assumed to be synchronized. We further assume that each node is assigned some unique id.
 
 \input{figs/fig-automata.tex}
 
@@ -58,21 +58,13 @@ Algorithm~\ref{alg:dgmm} is our distributed implementation of the 2-optimal mini
 
 \input{eqns/eqn-gmm.tex}
 
-So if there are no previously weighted edges incident to either endpoint, the weight of the edge is $min(w(u),w(v))$. A vertex $u$ joins the cover when, for all it's weighted edges: \begin{equation}\sum_i w(e(u,i)) \equiv w(u) \label{eqn:sat} \end{equation} When~\eqref{eqn:gmm} is applied to subsequent unweighted incident edges of $u$, the result will be 0. The algorithm terminates when each edge has been weighted. 
+So if there are no previously weighted edges incident to either endpoint, the weight of the edge is $min(w(u),w(v))$. A vertex $u$ joins the cover when, for all it's weighted edges: \begin{equation}\sum_i w(e(u,i)) = w(u) \label{eqn:sat} \end{equation} When~\eqref{eqn:gmm} is applied to subsequent unweighted incident edges of $u$, the result will be 0. The algorithm terminates when each edge has been weighted. 
 
-This process produces a {\em generalized matching} $G'$ for the vertex weighted input graph $G$. $G'$ is an edge weighted graph that is isomorphic to G, and is a generalized matching for $G$ if: 
-\begin{equation}
-\forall u \in V, \sum_i w(e(u,i)) \le w(u)\end{equation}
+In GMM, every edge is examined exactly once. If no endpoints of the edge are in the cover, one endpoint will join the cover. Finally, all the edges are evaluated in arbitrary order. We explore this third point further in Section~\ref{ssb:algorithms-dgmm-performance}. 
 
-A matching is considered {\em maximal} if increasing the weight of any edge in $G'$ causes $G'$ to no longer be a generalized matching for $G$.
+Our distributed version of the algorithm chooses some disjoint set of edges (a matching) and assigns weights to those edges according to~\eqref{eqn:gmm}. The framework automata is used to construct the set of disjoint edges in the following manner.\footnote{For the following description, we will substitute the symbol $\varpi(u)$ for the term $\sum_i w(e(u,i))$ in~\eqref{eqn:gmm}.\label{fn:varpi}}
 
-The property of a generalized maximal matching that Gonzalez proves is that the vertexes that satisfy~\eqref{eqn:sat} for $G'$ are a 2-optimal vertex cover for G.
-
-In GMM, every edge is examined exactly once. If no endpoints of the edge are in the cover, one endpoint will join the cover. Finally, all the edges are be evaluated in arbitrary order. We explore this third point further in Section~\ref{ssb:algorithms-dgmm-performance}. 
-
-Our distributed version of the algorithm chooses some disjoint set of edges (a matching) and assigns weights to those edges according to~\eqref{eqn:gmm}. The framework automata is used to construct the set of disjoint edges in the follow manner. For the following description, we will substitute the symbol $\varpi(u)$ for the term $\sum_i w(e(u,i))$ in~\eqref{eqn:gmm}.
-
-Each node begins in the \cCd\ state. In the first step, each node chooses to transition to state \cId\ or \cLd\ with equal probability. Each node $u$ in the \cId\ state chooses an unweighted edge $e(u,v)$ at random, and broadcasts an invitation containing its incident edge weight ($\varpi(u)$) and the edge it wants to weight. Each node $v$ in the \cLd\ state collects the invitations that contain an edge $e(i,v)$.
+Each node begins in the \cCd\ state. In the first step, each node chooses to transition to state \cId\ or \cLd\ with equal probability. Each node $u$ in the \cId\ state chooses an unweighted edge $e(u,v)$ at random, and broadcasts an invitation containing its incident edge weight ($\varpi(u)$)\footnotemark[\value{footnote}] and the edge it wants to weight. Each node $v$ in the \cLd\ state collects the invitations that contain an edge $e(i,v)$.
 
 For the next step, nodes in the \cLd\ state transition to the \cRd\ state, and nodes in the \cId\ state transition to the \cWd\ state. Each node $v$ in the \cLd\ state chooses an invitation it collected in the prior step and issues a response containing $\varpi(v)$ and the edge $e(u,v)$ that it agrees to weight. Each node in the \cWd\ state filters these responses for the one containing an edge $e(u,i)$ (that is, a response to the invitation it sent in the prior round). 
 
@@ -80,7 +72,7 @@ At this point, there are a number of node pairs in the graph, every node $u$ tha
 
 Every node now transitions to the \cUd\ state. Those that have formed node pairs weight the edge $e(u,v)$ according to~\eqref{eqn:gmm}. One of $u,v$ will join the cover at this point. For brevity, in Algorithm~\ref{alg:dgmm}, the \cUd\ state is implied in lines~\algref{alg:dgmm}{alglin:dgmm-update-weight-R} and \algref{alg:dgmm}{alglin:dgmm-update-weight-W}.
 
-Every node now transitions to the \cEd\ state, and broadcasts its current status to its neighbors. If a node $v$ receives a message that a neighbor $u$ has joined the cover will assign a weight of 0 to $e(u,v)$ and remove $e(u,v)$ from its list of unweighted edges. Again for brevity, the \cEd\ state is executed by implication in lines~\algref{alg:dgmm}{alglin:dgmm-state-E-W} and \algref{alg:dgmm}{alglin:dgmm-state-E}.
+Every node now transitions to the \cEd\ state, and broadcasts its current status to its neighbors. If a node $v$ receives a message that a neighbor $u$ has joined the cover $v$ will assign a weight of 0 to $e(u,v)$ and remove $e(u,v)$ from its list of unweighted edges. Again for brevity, the \cEd\ state is executed by implication in lines~\algref{alg:dgmm}{alglin:dgmm-state-E-W} and \algref{alg:dgmm}{alglin:dgmm-state-E}.
 
 Every node that is in the cover now transitions to the \cDd\ state, as does any node that has no unweighted edges remaining. Nodes that still have unweighted edges go back to the \cCd\ state and repeat the process. 
 
@@ -145,7 +137,7 @@ In the case of Algorithms~\ref{alg:edge-color} we only ran a small set of experi
 
 \section{Discussion}
 
-In sequential algorithms, there are a number of techniques--such as divide and conquer, linear programming, dynamic programming--that can be generalized to tackle a large number of problems. Distributed algorithms have a shorter history and a shorter list of such general techniques. In this paper, we have presented a general framework that can be used to tackle any problem that can be mapped to matchings on a graph. We have applied this framework to three separate problems in graph theory, but the framework could be extended to any problem that be divided and conquered in a like fashion. 
+In sequential algorithms, there are a number of techniques--such as divide and conquer, linear programming, dynamic programming--that can be generalized to tackle a large number of problems. Distributed algorithms have a shorter history and a shorter list of such general techniques. In this paper, we have presented a general framework that can be used to tackle problems that can be mapped to matchings on a graph. We have applied this framework to three separate problems in graph theory.
 
 Our application of the framework resulted in a new distributed algorithm for the Minimum Weighted Vertex Cover based on maximal matchings. The previous lower bound for this problem was $O(\log n)$ with high probability, we have shown that our algorithm improves this to $O(\log \Delta)$ for random graphs. 
 
